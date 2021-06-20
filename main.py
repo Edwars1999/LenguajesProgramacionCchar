@@ -10,29 +10,31 @@ import ply.lex as lex
 
 # List of token names.   This is always required
 tokens = (
-    'NUMBER',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
-    'LPAREN',
-    'RPAREN',
+    'COMILLA',
+    'NUMERO',
+    'CARACTERES', 
+    'LLAVEAB',
+    'LLAVECE', 
+    'INTERPOLACION',
+    'MAS',
+    'VARIABLE',
+    'PUNTOCOMA'
 )
 
 # Regular expression rules for simple tokens
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
+t_COMILLA = r'\"'
+t_NUMERO = r'-?\d+(\.\d+)?'
+t_CARACTERES = r'[\w]+'
+t_LLAVEAB = r'\{'
+t_LLAVECE= r'\}'
+t_INTERPOLACION = r'\$'
+t_MAS = r'\+'
+t_VARIABLE = r'\[a-zA-Z]+\w*'
+t_PUNTOCOMA = r'\;'
 
 
 # A regular expression rule with some action code
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+
 
 
 # Define a rule so we can track line numbers
@@ -61,11 +63,22 @@ data = '''
  '''
 
 # Give the lexer some input
-lexer.input(data)
+
+#lexer.input(data)
 
 # Tokenize
-while True:
-    tok = lexer.token()
-    if not tok:
-        break  # No more input
-    print(tok)
+def getTokens(lexer):
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break  # No more input
+        print(tok)
+
+linea =  " "
+
+while linea!="":
+    linea = input(">>")
+    lexer.input(linea)
+    getTokens(lexer)
+
+print("Susscesfull")
