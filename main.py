@@ -1,71 +1,78 @@
-# De entrada
-
 # ------------------------------------------------------------
-# calclex.py
-#
-# tokenizer for a simple expression evaluator for
-# numbers and +,-,*,/
+# Tokenizer para comparar palabras, numeros y valores de verdad
 # ------------------------------------------------------------
 import ply.lex as lex
 
-# List of token names.   This is always required
+# --------- Comienzo de Trabajo por: Edwars Sabando --------
+
+# Lista de tokens
 tokens = (
-    'NUMBER',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
-    'LPAREN',
-    'RPAREN',
+    'DOBLECOMILLA',
+    'VALORVERDAD',
+    'ID',
+    'NUMERO',
+    'IGUALDAD',
+    'DESIGUALDAD',
+    'MAYORQUE',
+    'MENORQUE',
+    'MAYORIGUAL',
+    'MENORIGUAL',
+    'FINSENTENCIA'
 )
 
-# Regular expression rules for simple tokens
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
 
+# Reglas de expresiones regulares para tokens simples
+t_DOBLECOMILLA  = r'\"'
+t_VALORVERDAD   = r'((T|t)rue|(F|f)alse)'
+t_ID            = r'[a-zA-Z]\w*'
+t_NUMERO        = r'-?\d+(.\d+)?'
+t_IGUALDAD      = r'=='
+t_DESIGUALDAD   = r'!='
+t_MAYORIGUAL    = r'>='
+t_MENORIGUAL    = r'<='
+t_MAYORQUE      = r'>'
+t_MENORQUE      = r'<'
+t_FINSENTENCIA  = r';'
 
-# A regular expression rule with some action code
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+# --------- Fin de Trabajo por: Edwars Sabando --------
 
-
-# Define a rule so we can track line numbers
+# Regla para seguir los números de línea
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
 
-# A string containing ignored characters (spaces and tabs)
+# Permite ignorar si en la cadena existen espacios vacíos o tabulaciones
 t_ignore = ' \t'
 
 
-# Error handling rule
+# Regla de manejo de errores
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print("Elemento no válido: '%s'" % t.value[0])
     t.lexer.skip(1)
 
 
-# Build the lexer
+# Completar el lexer luego de definir las reglas
 lexer = lex.lex()
 
-# Test it out
-data = '''
- 3 + 4 * 10
-   + -20 *2
+
+# -------------------------------- SECCIÓN DEDICADA A PRUEBAS -------------------------------------
+datos = '''
+ 3 >= false;
+ True == Genial;
+ Truebolic = ironico;
+ -3.02 != False;
+ assd <= true;
+ -40 > 0.2
+ falselogic < asdas
  '''
 
-# Give the lexer some input
-lexer.input(data)
+# La librería lex recibe la información a evaluar
+lexer.input(datos)
 
-# Tokenize
+# Compara con las tokens
 while True:
     tok = lexer.token()
     if not tok:
-        break  # No more input
+        break  # No existen más entradas
     print(tok)
