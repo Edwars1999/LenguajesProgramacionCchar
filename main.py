@@ -20,9 +20,9 @@ tokens = [
     'MENORIGUAL',
     'FINSENTENCIA',
     #----JORGE PITA AGREGO ESTO--##
-    'PUNTOYCOMA',
     'CADENA',
-    'AGRUPACION'
+    'AGRUPACION',
+    'LLAVE'
 ]
 
 
@@ -39,9 +39,9 @@ t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
 t_FINSENTENCIA  = r';'
-t_PUNTOYCOMA    = r'\;' #JORGE PITA
 t_CADENA        = r'\".*\"$' #JORGE AGREGO ESTA EXPRESION REGULAR
 t_AGRUPACION    = r'[\(\)]'
+t_LLAVE         = r'[\{\}]'
 
 
 # --------- Fin de Trabajo por: Edwars Sabando --------
@@ -86,7 +86,6 @@ lexer = lex.lex()
 
 
 # -------------------------------- SECCIÓN DEDICADA A PRUEBAS -------------------------------------
-
 
 # La librería lex recibe la información a evaluar
 #lexer.input(datos)
