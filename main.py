@@ -7,7 +7,6 @@ import ply.lex as lex
 
 # Lista de tokens
 tokens = [
-    #'DOBLECOMILLA',
     'VALORVERDAD',
     'VARIABLE',
     'NUMERO',
@@ -19,17 +18,18 @@ tokens = [
     'MAYORIGUAL',
     'MENORIGUAL',
     'FINSENTENCIA',
-    #----JORGE PITA AGREGO ESTO--##
+    #----JORGE PITA AGREGÓ ESTO----
     'CADENA',
-    'AGRUPACION',
-    'LLAVE'
+    'AGRUPASTART',
+    'AGRUPAEND',
+    'LLAVESTART',
+    'LLAVEEND'
 ]
 
 
 # Reglas de expresiones regulares para tokens simples
-#t_DOBLECOMILLA  = r'\"'
-t_VALORVERDAD   = r'((T|t)rue|(F|f)alse)'
-#t_ID            = r'[a-zA-Z_]\w*'
+t_VALORVERDAD   = r'(true|false)'
+t_VARIABLE      = r'^[a-zA-Z]\w*'
 t_NUMERO        = r'-?\d+(.\d+)?'
 t_IGUALDAD      = r'=='
 t_DESIGUALDAD   = r'!='
@@ -39,9 +39,11 @@ t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
 t_FINSENTENCIA  = r';'
-t_CADENA        = r'\".*\"$' #JORGE AGREGO ESTA EXPRESION REGULAR
-t_AGRUPACION    = r'[\(\)]'
-t_LLAVE         = r'[\{\}]'
+t_CADENA        = r'\".*\"$' #JORGE AGREGÓ ESTA EXPRESION REGULAR
+t_AGRUPASTART   = r'\('
+t_AGRUPAEND     = r'\)'
+t_LLAVESTART    = r'\{'
+t_LLAVEEND      = r'\}'
 
 
 # --------- Fin de Trabajo por: Edwars Sabando --------
@@ -56,6 +58,7 @@ reserved = {
     'switch' : 'SWITCH',
     'double' : 'DOUBLE',
     'float' : 'FLOAT',
+
 # --------- Comienzo de trabajo de Luis ------------#
     'break': 'BREAK',
     'bool': 'BOOL',
@@ -78,7 +81,7 @@ reserved = {
     'uint': 'UINT',
     'ulong': 'ULONG',
     'ushort': 'USHORT'
-    # ----------- FIN DE TRABAJO DE LUIS------#
+# ----------- FIN DE TRABAJO DE LUIS------#
 }
 
 tokens = tokens + list(reserved.values())
@@ -88,6 +91,7 @@ def t_ID(t):
      t.type = reserved.get(t.value,'VARIABLE')    # Check for reserved words
      return t
 # ----------- FIN DE TRABAJO DE JORGE------#
+
 # Regla para seguir los números de línea
 def t_newline(t):
     r'\n+'
@@ -110,9 +114,6 @@ lexer = lex.lex()
 
 # -------------------------------- SECCIÓN DEDICADA A PRUEBAS -------------------------------------
 
-# La librería lex recibe la información a evaluar
-#lexer.input(datos)
-
 # Compara con las tokens
 def getTokens(lexer):
     while True:
@@ -127,4 +128,3 @@ while line != "" :
     line = input(">>")
     lexer.input(line);
     getTokens(lexer)
-
