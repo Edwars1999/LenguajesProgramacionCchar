@@ -55,7 +55,30 @@ reserved = {
     'int' : 'INT',
     'switch' : 'SWITCH',
     'double' : 'DOUBLE',
-    'float' : 'FLOAT'
+    'float' : 'FLOAT',
+# --------- Comienzo de trabajo de Luis ------------#
+    'break': 'BREAK',
+    'bool': 'BOOL',
+    'byte': 'BYTE',
+    'case': 'CASE',
+    'char': 'CHAR',
+    'continue': 'CONTINUE',
+    'default': 'DEFAULT',
+    'do': 'DO',
+    'for': 'FOR',
+    'foreach': 'FOREACH',
+    'in': 'IN',
+    'long': 'LONG',
+    'new': 'NEW',
+    'null': 'NULL',
+    'return': 'RETURN',
+    'sbyte': 'SBYTE',
+    'short': 'SHORT',
+    'this': 'THIS',
+    'uint': 'UINT',
+    'ulong': 'ULONG',
+    'ushort': 'USHORT'
+    # ----------- FIN DE TRABAJO DE LUIS------#
 }
 
 tokens = tokens + list(reserved.values())
