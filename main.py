@@ -3,65 +3,62 @@
 # ------------------------------------------------------------
 import ply.lex as lex
 
-# --------- Comienzo de Trabajo por: Edwars Sabando --------
-
 # Lista de tokens
 tokens = [
-   # 'VALORVERDAD',
     'VARIABLE',
-    'NUMERO',
+    'ENTERO',
+    'DECIMAL',
     'IGUALDAD',
-    'ASIGNACION', #JORGE
     'DESIGUALDAD',
-    'MAYORQUE',
-    'MENORQUE',
+    'ASIGNACION',
     'MAYORIGUAL',
     'MENORIGUAL',
+    'MAYORQUE',
+    'MENORQUE',
     'FINSENTENCIA',
-    #----JORGE PITA AGREGÓ ESTO----
     'CADENA',
-    'AGRUPASTART',
-    'AGRUPAEND',
     'LLAVESTART',
     'LLAVEEND',
+    'PARENSTART',
+    'PARENEND',
     'SUMA',
     'RESTA',
-    'MULTIPLICACION',
+    'MULTIPLICA',
     'DIVISION',
     'MODULO',
-    'PARAPE',
-    'PARCIR'
+    'AND',
+    'OR',
+    'COMMENT'
 ]
 
 
 # Reglas de expresiones regulares para tokens simples
-#t_VALORVERDAD   = r'(true|false)'
 t_VARIABLE      = r'^[a-zA-Z]\w*'
-t_NUMERO        = r'-?\d+(.\d+)?'
+t_ENTERO        = r'\-?\d+'
+t_DECIMAL       = r'\-?\d+\.\d+'
 t_IGUALDAD      = r'=='
 t_DESIGUALDAD   = r'!='
-t_ASIGNACION    = r'\='
+t_ASIGNACION    = r'='
 t_MAYORIGUAL    = r'>='
 t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
 t_FINSENTENCIA  = r';'
-t_CADENA        = r'\".*\"$' #JORGE AGREGÓ ESTA EXPRESION REGULAR
-t_AGRUPASTART   = r'\('
-t_AGRUPAEND     = r'\)'
+t_CADENA        = r'^".*\"$'
 t_LLAVESTART    = r'\{'
 t_LLAVEEND      = r'\}'
+t_PARENSTART    = r'\('
+t_PARENEND      = r'\)'
 t_SUMA          = r'\+'
 t_RESTA         = r'\-'
-t_MULTIPLICACION= r'\*'
-t_DIVISION      = r'\/'
+t_MULTIPLICA    = r'\*'
+t_DIVISION      = r'/'
 t_MODULO        = r'\%'
-t_PARAPE        = r'\('
-t_PARCIR        = r'\)'
+t_AND           = r'&&'
+t_OR            = r'\|\|'
+t_COMMENT       = r'(^//.*$|^///.*$|^/\*.*\*/$)'
 
-# --------- Fin de Trabajo por: Edwars Sabando --------
 
-# --------- Comienzo de trabajo de Jorge ------------#
 reserved = {
     'if' : 'IF',
     'else' : 'ELSE',
@@ -73,13 +70,13 @@ reserved = {
     'float' : 'FLOAT',
     'true'  : 'TRUE',
     'false' : 'FALSE',
-# --------- Comienzo de trabajo de Luis ------------#
     'break': 'BREAK',
     'bool': 'BOOL',
     'byte': 'BYTE',
     'case': 'CASE',
     'char': 'CHAR',
     'continue': 'CONTINUE',
+    'const': 'CONST',
     'default': 'DEFAULT',
     'do': 'DO',
     'for': 'FOR',
@@ -94,17 +91,23 @@ reserved = {
     'this': 'THIS',
     'uint': 'UINT',
     'ulong': 'ULONG',
-    'ushort': 'USHORT'
-# ----------- FIN DE TRABAJO DE LUIS------#
+    'ushort': 'USHORT',
+    'public': 'PUBLIC',
+    'private': 'PRIVATE',
+    'protected': 'PROTECTED',
+    'void': 'VOID',
+    'static': 'STATIC',
+    'async': 'ASYNC',
+    'unsafe': 'UNSAFE',
+    'extern': 'EXTERN'
 }
 
 tokens = tokens + list(reserved.values())
 
 def t_ID(t):
      r'[a-zA-Z_]\w*'
-     t.type = reserved.get(t.value,'VARIABLE')    # Check for reserved words
+     t.type = reserved.get(t.value, 'VARIABLE')    # Check for reserved words
      return t
-# ----------- FIN DE TRABAJO DE JORGE------#
 
 # Regla para seguir los números de línea
 def t_newline(t):
