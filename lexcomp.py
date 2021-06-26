@@ -28,7 +28,6 @@ tokens = [
     'MODULO',
     'AND',
     'OR',
-    'COMMENT'
 ]
 
 
@@ -56,7 +55,6 @@ t_DIVISION      = r'/'
 t_MODULO        = r'\%'
 t_AND           = r'&&'
 t_OR            = r'\|\|'
-t_COMMENT       = r'(^//.*$|^///.*$|^/\*.*\*/$)'
 
 
 reserved = {
@@ -117,6 +115,12 @@ def t_newline(t):
 
 # Permite ignorar si en la cadena existen espacios vacíos o tabulaciones
 t_ignore = ' \t'
+
+
+# Permite pasar los comentarios
+def t_COMMENT(t):
+    r'(^//.*$|^///.*$|^/\*.*\*/$)'
+    pass
 
 
 # Regla de manejo de errores
