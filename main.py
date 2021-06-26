@@ -7,7 +7,7 @@ import ply.lex as lex
 
 # Lista de tokens
 tokens = [
-    'VALORVERDAD',
+   # 'VALORVERDAD',
     'VARIABLE',
     'NUMERO',
     'IGUALDAD',
@@ -23,12 +23,19 @@ tokens = [
     'AGRUPASTART',
     'AGRUPAEND',
     'LLAVESTART',
-    'LLAVEEND'
+    'LLAVEEND',
+    'SUMA',
+    'RESTA',
+    'MULTIPLICACION',
+    'DIVISION',
+    'MODULO',
+    'PARAPE',
+    'PARCIR'
 ]
 
 
 # Reglas de expresiones regulares para tokens simples
-t_VALORVERDAD   = r'(true|false)'
+#t_VALORVERDAD   = r'(true|false)'
 t_VARIABLE      = r'^[a-zA-Z]\w*'
 t_NUMERO        = r'-?\d+(.\d+)?'
 t_IGUALDAD      = r'=='
@@ -44,7 +51,13 @@ t_AGRUPASTART   = r'\('
 t_AGRUPAEND     = r'\)'
 t_LLAVESTART    = r'\{'
 t_LLAVEEND      = r'\}'
-
+t_SUMA          = r'\+'
+t_RESTA         = r'\-'
+t_MULTIPLICACION= r'\*'
+t_DIVISION      = r'\/'
+t_MODULO        = r'\%'
+t_PARAPE        = r'\('
+t_PARCIR        = r'\)'
 
 # --------- Fin de Trabajo por: Edwars Sabando --------
 
@@ -58,7 +71,8 @@ reserved = {
     'switch' : 'SWITCH',
     'double' : 'DOUBLE',
     'float' : 'FLOAT',
-
+    'true'  : 'TRUE',
+    'false' : 'FALSE',
 # --------- Comienzo de trabajo de Luis ------------#
     'break': 'BREAK',
     'bool': 'BOOL',
