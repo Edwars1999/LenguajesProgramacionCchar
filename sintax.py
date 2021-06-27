@@ -10,6 +10,8 @@ def p_sentencias(p):### se agrega las instrucciones del programa
     '''sentencias : condicionales 
                   | inicializacion '''
 
+
+
 def p_condicionales(p):
     '''condicionales : opIF'''
 
@@ -73,7 +75,8 @@ def p_tipoDato(p):
                 | SBYTE
                 | UINT
                 | USHORT
-                | ULONG'''
+                | ULONG
+                | BOOL'''
             
 def p_boleano(p):
     '''boleano : TRUE
