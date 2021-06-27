@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ASIGNACION ASYNC BOOL BREAK BYTE CADENA CASE CHAR CONST CONTINUE DECIMAL DEFAULT DESIGUALDAD DIVISION DO DOUBLE ELSE ENTERO EXTERN FALSE FINSENTENCIA FLOAT FOR FOREACH IF IGUALDAD IN INT LLAVEEND LLAVESTART LONG MAYORIGUAL MAYORQUE MENORIGUAL MENORQUE MODULO MULTIPLICA NEW NULL OR PARENEND PARENSTART PRIVATE PROTECTED PUBLIC RESTA RETURN SBYTE SHORT STATIC STRING SUMA SWITCH THIS TRUE UINT ULONG UNSAFE USHORT VARIABLE VOID WHILEinicializacion : declaracion\n                      | asignacion\n                      | operacionesdeclaracion : tipoDato VARIABLE ASIGNACION dato FINSENTENCIA\n                   | tipoDato VARIABLE FINSENTENCIA\n                   | tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIAasignacion : VARIABLE ASIGNACION dato FINSENTENCIA\n                  | VARIABLE ASIGNACION operaciones FINSENTENCIAdato : VARIABLE \n            | numero\n            | CADENA \n            | boleanotipoDato : INT\n                | FLOAT\n                | DOUBLE\n                | STRING\n                | LONG\n                | CHAR\n                | SHORT\n                | BYTE\n                | SBYTE\n                | UINT\n                | USHORT\n                | ULONGboleano : TRUE\n                | FALSE numero : ENTERO\n             | DECIMALoperaciones :  expresion repOp repOp : operador expresion \n            | operador expresion repOpexpresion : numero\n                 | VARIABLE\n                 | PARENSTART  operaciones PARENENDoperador : SUMA\n                | RESTA\n                | MULTIPLICA\n                | DIVISION\n                | MODULO '
+_lr_signature = 'AND ASIGNACION ASYNC BOOL BREAK BYTE CADENA CASE CHAR CONST CONTINUE DECIMAL DEFAULT DESIGUALDAD DIVISION DO DOUBLE ELSE ENTERO EXTERN FALSE FINSENTENCIA FLOAT FOR FOREACH IF IGUALDAD IN INT LLAVEEND LLAVESTART LONG MAYORIGUAL MAYORQUE MENORIGUAL MENORQUE MODULO MULTIPLICA NEGACION NEW NULL OR PARENEND PARENSTART PRIVATE PROTECTED PUBLIC RESTA RETURN SBYTE SHORT STATIC STRING SUMA SWITCH THIS TRUE UINT ULONG UNSAFE USHORT VARIABLE VOID WHILEsentencias : condicionales \n                  | inicializacion condicionales : opIFopIF : IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND\n            | IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND ELSE opIF\n            | IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND ELSE LLAVESTART  LLAVEEND\n            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND\n            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND ELSE opIF\n            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND ELSE LLAVESTART  LLAVEEND condicion : dato exComparadora dato\n                 | dato exComparadora condicion\n                 | PARENSTART condicion PARENEND exComparadora  condicion \n                 | PARENSTART condicion PARENEND\n                 | boleano\n                 | NEGACION boleano\n                 | NEGACION VARIABLE\n                 | VARIABLEexComparadora : AND\n                     | OR\n                     | MAYORQUE\n                     | MENORQUE\n                     | MAYORIGUAL\n                     | MENORIGUAL\n                     | IGUALDAD\n                     | DESIGUALDADinicializacion : declaracion\n                      | asignacion\n                      | operacionesdeclaracion : tipoDato VARIABLE ASIGNACION dato FINSENTENCIA\n                   | tipoDato VARIABLE FINSENTENCIA\n                   | tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIAasignacion : VARIABLE ASIGNACION dato FINSENTENCIA\n                  | VARIABLE ASIGNACION boleano FINSENTENCIA\n                  | VARIABLE ASIGNACION operaciones FINSENTENCIAdato : VARIABLE \n            | numero\n            | CADENA tipoDato : INT\n                | FLOAT\n                | DOUBLE\n                | STRING\n                | LONG\n                | CHAR\n                | SHORT\n                | BYTE\n                | SBYTE\n                | UINT\n                | USHORT\n                | ULONGboleano : TRUE\n                | FALSE numero : ENTERO\n             | DECIMALoperaciones :  expresion repOp \n                   | expresion repOp : operador expresion \n            | operador expresion repOpexpresion : numero\n                 | VARIABLE\n                 | PARENSTART  operaciones PARENEND\n                 | PARENSTART  VARIABLE PARENEND\n                 | PARENSTART  numero PARENENDoperador : SUMA\n                | RESTA\n                | MULTIPLICA\n                | DIVISION\n                | MODULO '
     
-_lr_action_items = {'VARIABLE':([0,5,8,9,10,11,12,13,14,15,16,17,18,19,21,25,27,28,29,30,31,32,35,],[6,24,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,34,37,34,-35,-36,-37,-38,-39,37,]),'INT':([0,],[8,]),'FLOAT':([0,],[9,]),'DOUBLE':([0,],[10,]),'STRING':([0,],[11,]),'LONG':([0,],[12,]),'CHAR':([0,],[13,]),'SHORT':([0,],[14,]),'BYTE':([0,],[15,]),'SBYTE':([0,],[16,]),'UINT':([0,],[17,]),'USHORT':([0,],[18,]),'ULONG':([0,],[19,]),'PARENSTART':([0,21,25,27,28,29,30,31,32,35,],[21,21,21,21,-35,-36,-37,-38,-39,21,]),'ENTERO':([0,21,25,27,28,29,30,31,32,35,],[22,22,22,22,-35,-36,-37,-38,-39,22,]),'DECIMAL':([0,21,25,27,28,29,30,31,32,35,],[23,23,23,23,-35,-36,-37,-38,-39,23,]),'$end':([1,2,3,4,20,22,23,26,34,36,45,46,49,50,51,52,53,],[0,-1,-2,-3,-32,-27,-28,-29,-33,-5,-30,-34,-7,-8,-31,-4,-6,]),'ASIGNACION':([6,24,],[25,35,]),'SUMA':([6,7,20,22,23,34,37,40,45,46,],[-33,28,-32,-27,-28,-33,-33,-32,28,-34,]),'RESTA':([6,7,20,22,23,34,37,40,45,46,],[-33,29,-32,-27,-28,-33,-33,-32,29,-34,]),'MULTIPLICA':([6,7,20,22,23,34,37,40,45,46,],[-33,30,-32,-27,-28,-33,-33,-32,30,-34,]),'DIVISION':([6,7,20,22,23,34,37,40,45,46,],[-33,31,-32,-27,-28,-33,-33,-32,31,-34,]),'MODULO':([6,7,20,22,23,34,37,40,45,46,],[-33,32,-32,-27,-28,-33,-33,-32,32,-34,]),'PARENEND':([20,22,23,26,33,34,45,46,51,],[-32,-27,-28,-29,46,-33,-30,-34,-31,]),'FINSENTENCIA':([20,22,23,24,26,34,37,38,39,40,41,42,43,44,45,46,47,48,51,],[-32,-27,-28,36,-29,-33,-9,49,50,-10,-11,-12,-25,-26,-30,-34,52,53,-31,]),'CADENA':([25,35,],[41,41,]),'TRUE':([25,35,],[43,43,]),'FALSE':([25,35,],[44,44,]),}
+_lr_action_items = {'IF':([0,83,93,97,],[8,8,8,8,]),'VARIABLE':([0,9,10,13,14,15,16,17,18,19,20,21,22,23,24,28,33,35,36,37,38,39,40,41,45,54,65,66,67,68,69,70,71,72,73,83,89,],[11,30,32,-38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,-49,46,56,62,-63,-64,-65,-66,-67,46,75,56,86,-18,-19,-20,-21,-22,-23,-24,-25,11,46,]),'INT':([0,83,],[13,13,]),'FLOAT':([0,83,],[14,14,]),'DOUBLE':([0,83,],[15,15,]),'STRING':([0,83,],[16,16,]),'LONG':([0,83,],[17,17,]),'CHAR':([0,83,],[18,18,]),'SHORT':([0,83,],[19,19,]),'BYTE':([0,83,],[20,20,]),'SBYTE':([0,83,],[21,21,]),'UINT':([0,83,],[22,22,]),'USHORT':([0,83,],[23,23,]),'ULONG':([0,83,],[24,24,]),'PARENSTART':([0,8,9,28,33,35,36,37,38,39,40,41,54,65,66,67,68,69,70,71,72,73,83,89,],[9,28,9,41,9,9,-63,-64,-65,-66,-67,41,9,41,-18,-19,-20,-21,-22,-23,-24,-25,9,41,]),'ENTERO':([0,9,28,33,35,36,37,38,39,40,41,54,65,66,67,68,69,70,71,72,73,83,89,],[26,26,26,26,26,-63,-64,-65,-66,-67,26,26,26,-18,-19,-20,-21,-22,-23,-24,-25,26,26,]),'DECIMAL':([0,9,28,33,35,36,37,38,39,40,41,54,65,66,67,68,69,70,71,72,73,83,89,],[27,27,27,27,27,-63,-64,-65,-66,-67,27,27,27,-18,-19,-20,-21,-22,-23,-24,-25,27,27,]),'$end':([1,2,3,4,5,6,7,11,12,25,26,27,34,51,52,53,55,61,62,78,79,80,81,87,88,90,94,96,98,100,101,],[0,-1,-2,-3,-26,-27,-28,-59,-55,-58,-52,-53,-54,-60,-61,-62,-30,-56,-59,-32,-33,-34,-57,-29,-31,-4,-7,-5,-6,-8,-9,]),'LLAVEEND':([2,3,4,5,6,7,11,12,25,26,27,34,51,52,53,55,61,62,78,79,80,81,83,87,88,90,91,94,95,96,98,99,100,101,],[-1,-2,-3,-26,-27,-28,-59,-55,-58,-52,-53,-54,-60,-61,-62,-30,-56,-59,-32,-33,-34,-57,90,-29,-31,-4,94,-7,98,-5,-6,101,-8,-9,]),'ASIGNACION':([11,32,],[33,54,]),'SUMA':([11,12,25,26,27,30,31,51,52,53,56,60,61,62,],[-59,36,-58,-52,-53,-59,-58,-60,-61,-62,-59,-58,36,-59,]),'RESTA':([11,12,25,26,27,30,31,51,52,53,56,60,61,62,],[-59,37,-58,-52,-53,-59,-58,-60,-61,-62,-59,-58,37,-59,]),'MULTIPLICA':([11,12,25,26,27,30,31,51,52,53,56,60,61,62,],[-59,38,-58,-52,-53,-59,-58,-60,-61,-62,-59,-58,38,-59,]),'DIVISION':([11,12,25,26,27,30,31,51,52,53,56,60,61,62,],[-59,39,-58,-52,-53,-59,-58,-60,-61,-62,-59,-58,39,-59,]),'MODULO':([11,12,25,26,27,30,31,51,52,53,56,60,61,62,],[-59,40,-58,-52,-53,-59,-58,-60,-61,-62,-59,-58,40,-59,]),'PARENEND':([12,25,26,27,29,30,31,34,42,44,46,47,48,49,50,51,52,53,61,62,63,74,75,81,82,84,85,86,92,],[-55,-58,-52,-53,51,52,53,-54,64,-14,-17,-36,-37,-50,-51,-60,-61,-62,-56,-59,82,-15,-16,-57,-13,-10,-11,-17,-12,]),'FINSENTENCIA':([12,25,26,27,32,34,48,49,50,51,52,53,56,57,58,59,60,61,62,76,77,81,],[-55,-58,-52,-53,55,-54,-37,-50,-51,-60,-61,-62,-35,78,79,80,-36,-56,-59,87,88,-57,]),'AND':([26,27,43,46,47,48,82,84,86,],[-52,-53,66,-35,-36,-37,66,66,-35,]),'OR':([26,27,43,46,47,48,82,84,86,],[-52,-53,67,-35,-36,-37,67,67,-35,]),'MAYORQUE':([26,27,43,46,47,48,82,84,86,],[-52,-53,68,-35,-36,-37,68,68,-35,]),'MENORQUE':([26,27,43,46,47,48,82,84,86,],[-52,-53,69,-35,-36,-37,69,69,-35,]),'MAYORIGUAL':([26,27,43,46,47,48,82,84,86,],[-52,-53,70,-35,-36,-37,70,70,-35,]),'MENORIGUAL':([26,27,43,46,47,48,82,84,86,],[-52,-53,71,-35,-36,-37,71,71,-35,]),'IGUALDAD':([26,27,43,46,47,48,82,84,86,],[-52,-53,72,-35,-36,-37,72,72,-35,]),'DESIGUALDAD':([26,27,43,46,47,48,82,84,86,],[-52,-53,73,-35,-36,-37,73,73,-35,]),'NEGACION':([28,41,65,66,67,68,69,70,71,72,73,89,],[45,45,45,-18,-19,-20,-21,-22,-23,-24,-25,45,]),'CADENA':([28,33,41,54,65,66,67,68,69,70,71,72,73,89,],[48,48,48,48,48,-18,-19,-20,-21,-22,-23,-24,-25,48,]),'TRUE':([28,33,41,45,65,66,67,68,69,70,71,72,73,89,],[49,49,49,49,49,-18,-19,-20,-21,-22,-23,-24,-25,49,]),'FALSE':([28,33,41,45,65,66,67,68,69,70,71,72,73,89,],[50,50,50,50,50,-18,-19,-20,-21,-22,-23,-24,-25,50,]),'LLAVESTART':([64,93,97,],[83,95,99,]),'ELSE':([90,94,],[93,97,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'inicializacion':([0,],[1,]),'declaracion':([0,],[2,]),'asignacion':([0,],[3,]),'operaciones':([0,21,25,35,],[4,33,39,48,]),'tipoDato':([0,],[5,]),'expresion':([0,21,25,27,35,],[7,7,7,45,7,]),'numero':([0,21,25,27,35,],[20,20,40,20,40,]),'repOp':([7,45,],[26,51,]),'operador':([7,45,],[27,27,]),'dato':([25,35,],[38,47,]),'boleano':([25,35,],[42,42,]),}
+_lr_goto_items = {'sentencias':([0,83,],[1,91,]),'condicionales':([0,83,],[2,2,]),'inicializacion':([0,83,],[3,3,]),'opIF':([0,83,93,97,],[4,4,96,100,]),'declaracion':([0,83,],[5,5,]),'asignacion':([0,83,],[6,6,]),'operaciones':([0,9,33,54,83,],[7,29,59,77,7,]),'tipoDato':([0,83,],[10,10,]),'expresion':([0,9,33,35,54,83,],[12,12,12,61,12,12,]),'numero':([0,9,28,33,35,41,54,65,83,89,],[25,31,47,60,25,47,60,47,25,47,]),'repOp':([12,61,],[34,81,]),'operador':([12,61,],[35,35,]),'condicion':([28,41,65,89,],[42,63,85,92,]),'dato':([28,33,41,54,65,89,],[43,57,43,76,84,43,]),'boleano':([28,33,41,45,65,89,],[44,58,44,74,44,44,]),'exComparadora':([43,82,84,],[65,89,65,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,44 +26,72 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> inicializacion","S'",1,None,None,None),
-  ('inicializacion -> declaracion','inicializacion',1,'p_inicializacion','sintax.py',11),
-  ('inicializacion -> asignacion','inicializacion',1,'p_inicializacion','sintax.py',12),
-  ('inicializacion -> operaciones','inicializacion',1,'p_inicializacion','sintax.py',13),
-  ('declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA','declaracion',5,'p_declaracion','sintax.py',16),
-  ('declaracion -> tipoDato VARIABLE FINSENTENCIA','declaracion',3,'p_declaracion','sintax.py',17),
-  ('declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA','declaracion',5,'p_declaracion','sintax.py',18),
-  ('asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA','asignacion',4,'p_asignacion','sintax.py',21),
-  ('asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA','asignacion',4,'p_asignacion','sintax.py',22),
-  ('dato -> VARIABLE','dato',1,'p_dato','sintax.py',25),
-  ('dato -> numero','dato',1,'p_dato','sintax.py',26),
-  ('dato -> CADENA','dato',1,'p_dato','sintax.py',27),
-  ('dato -> boleano','dato',1,'p_dato','sintax.py',28),
-  ('tipoDato -> INT','tipoDato',1,'p_tipoDato','sintax.py',31),
-  ('tipoDato -> FLOAT','tipoDato',1,'p_tipoDato','sintax.py',32),
-  ('tipoDato -> DOUBLE','tipoDato',1,'p_tipoDato','sintax.py',33),
-  ('tipoDato -> STRING','tipoDato',1,'p_tipoDato','sintax.py',34),
-  ('tipoDato -> LONG','tipoDato',1,'p_tipoDato','sintax.py',35),
-  ('tipoDato -> CHAR','tipoDato',1,'p_tipoDato','sintax.py',36),
-  ('tipoDato -> SHORT','tipoDato',1,'p_tipoDato','sintax.py',37),
-  ('tipoDato -> BYTE','tipoDato',1,'p_tipoDato','sintax.py',38),
-  ('tipoDato -> SBYTE','tipoDato',1,'p_tipoDato','sintax.py',39),
-  ('tipoDato -> UINT','tipoDato',1,'p_tipoDato','sintax.py',40),
-  ('tipoDato -> USHORT','tipoDato',1,'p_tipoDato','sintax.py',41),
-  ('tipoDato -> ULONG','tipoDato',1,'p_tipoDato','sintax.py',42),
-  ('boleano -> TRUE','boleano',1,'p_boleano','sintax.py',45),
-  ('boleano -> FALSE','boleano',1,'p_boleano','sintax.py',46),
-  ('numero -> ENTERO','numero',1,'p_numero','sintax.py',49),
-  ('numero -> DECIMAL','numero',1,'p_numero','sintax.py',50),
-  ('operaciones -> expresion repOp','operaciones',2,'p_operaciones','sintax.py',53),
-  ('repOp -> operador expresion','repOp',2,'p_repOpe','sintax.py',56),
-  ('repOp -> operador expresion repOp','repOp',3,'p_repOpe','sintax.py',57),
-  ('expresion -> numero','expresion',1,'p_expresion','sintax.py',60),
-  ('expresion -> VARIABLE','expresion',1,'p_expresion','sintax.py',61),
-  ('expresion -> PARENSTART operaciones PARENEND','expresion',3,'p_expresion','sintax.py',62),
-  ('operador -> SUMA','operador',1,'p_operador','sintax.py',65),
-  ('operador -> RESTA','operador',1,'p_operador','sintax.py',66),
-  ('operador -> MULTIPLICA','operador',1,'p_operador','sintax.py',67),
-  ('operador -> DIVISION','operador',1,'p_operador','sintax.py',68),
-  ('operador -> MODULO','operador',1,'p_operador','sintax.py',69),
+  ("S' -> sentencias","S'",1,None,None,None),
+  ('sentencias -> condicionales','sentencias',1,'p_sentencias','sintax.py',10),
+  ('sentencias -> inicializacion','sentencias',1,'p_sentencias','sintax.py',11),
+  ('condicionales -> opIF','condicionales',1,'p_condicionales','sintax.py',14),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND','opIF',6,'p_opIf','sintax.py',17),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF','opIF',8,'p_opIf','sintax.py',18),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND','opIF',9,'p_opIf','sintax.py',19),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND','opIF',7,'p_opIf','sintax.py',20),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF','opIF',9,'p_opIf','sintax.py',21),
+  ('opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND','opIF',10,'p_opIf','sintax.py',22),
+  ('condicion -> dato exComparadora dato','condicion',3,'p_condicion','sintax.py',25),
+  ('condicion -> dato exComparadora condicion','condicion',3,'p_condicion','sintax.py',26),
+  ('condicion -> PARENSTART condicion PARENEND exComparadora condicion','condicion',5,'p_condicion','sintax.py',27),
+  ('condicion -> PARENSTART condicion PARENEND','condicion',3,'p_condicion','sintax.py',28),
+  ('condicion -> boleano','condicion',1,'p_condicion','sintax.py',29),
+  ('condicion -> NEGACION boleano','condicion',2,'p_condicion','sintax.py',30),
+  ('condicion -> NEGACION VARIABLE','condicion',2,'p_condicion','sintax.py',31),
+  ('condicion -> VARIABLE','condicion',1,'p_condicion','sintax.py',32),
+  ('exComparadora -> AND','exComparadora',1,'p_exComparadora','sintax.py',35),
+  ('exComparadora -> OR','exComparadora',1,'p_exComparadora','sintax.py',36),
+  ('exComparadora -> MAYORQUE','exComparadora',1,'p_exComparadora','sintax.py',37),
+  ('exComparadora -> MENORQUE','exComparadora',1,'p_exComparadora','sintax.py',38),
+  ('exComparadora -> MAYORIGUAL','exComparadora',1,'p_exComparadora','sintax.py',39),
+  ('exComparadora -> MENORIGUAL','exComparadora',1,'p_exComparadora','sintax.py',40),
+  ('exComparadora -> IGUALDAD','exComparadora',1,'p_exComparadora','sintax.py',41),
+  ('exComparadora -> DESIGUALDAD','exComparadora',1,'p_exComparadora','sintax.py',42),
+  ('inicializacion -> declaracion','inicializacion',1,'p_inicializacion','sintax.py',45),
+  ('inicializacion -> asignacion','inicializacion',1,'p_inicializacion','sintax.py',46),
+  ('inicializacion -> operaciones','inicializacion',1,'p_inicializacion','sintax.py',47),
+  ('declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA','declaracion',5,'p_declaracion','sintax.py',50),
+  ('declaracion -> tipoDato VARIABLE FINSENTENCIA','declaracion',3,'p_declaracion','sintax.py',51),
+  ('declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA','declaracion',5,'p_declaracion','sintax.py',52),
+  ('asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA','asignacion',4,'p_asignacion','sintax.py',55),
+  ('asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA','asignacion',4,'p_asignacion','sintax.py',56),
+  ('asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA','asignacion',4,'p_asignacion','sintax.py',57),
+  ('dato -> VARIABLE','dato',1,'p_dato','sintax.py',60),
+  ('dato -> numero','dato',1,'p_dato','sintax.py',61),
+  ('dato -> CADENA','dato',1,'p_dato','sintax.py',62),
+  ('tipoDato -> INT','tipoDato',1,'p_tipoDato','sintax.py',65),
+  ('tipoDato -> FLOAT','tipoDato',1,'p_tipoDato','sintax.py',66),
+  ('tipoDato -> DOUBLE','tipoDato',1,'p_tipoDato','sintax.py',67),
+  ('tipoDato -> STRING','tipoDato',1,'p_tipoDato','sintax.py',68),
+  ('tipoDato -> LONG','tipoDato',1,'p_tipoDato','sintax.py',69),
+  ('tipoDato -> CHAR','tipoDato',1,'p_tipoDato','sintax.py',70),
+  ('tipoDato -> SHORT','tipoDato',1,'p_tipoDato','sintax.py',71),
+  ('tipoDato -> BYTE','tipoDato',1,'p_tipoDato','sintax.py',72),
+  ('tipoDato -> SBYTE','tipoDato',1,'p_tipoDato','sintax.py',73),
+  ('tipoDato -> UINT','tipoDato',1,'p_tipoDato','sintax.py',74),
+  ('tipoDato -> USHORT','tipoDato',1,'p_tipoDato','sintax.py',75),
+  ('tipoDato -> ULONG','tipoDato',1,'p_tipoDato','sintax.py',76),
+  ('boleano -> TRUE','boleano',1,'p_boleano','sintax.py',79),
+  ('boleano -> FALSE','boleano',1,'p_boleano','sintax.py',80),
+  ('numero -> ENTERO','numero',1,'p_numero','sintax.py',83),
+  ('numero -> DECIMAL','numero',1,'p_numero','sintax.py',84),
+  ('operaciones -> expresion repOp','operaciones',2,'p_operaciones','sintax.py',87),
+  ('operaciones -> expresion','operaciones',1,'p_operaciones','sintax.py',88),
+  ('repOp -> operador expresion','repOp',2,'p_repOpe','sintax.py',91),
+  ('repOp -> operador expresion repOp','repOp',3,'p_repOpe','sintax.py',92),
+  ('expresion -> numero','expresion',1,'p_expresion','sintax.py',95),
+  ('expresion -> VARIABLE','expresion',1,'p_expresion','sintax.py',96),
+  ('expresion -> PARENSTART operaciones PARENEND','expresion',3,'p_expresion','sintax.py',97),
+  ('expresion -> PARENSTART VARIABLE PARENEND','expresion',3,'p_expresion','sintax.py',98),
+  ('expresion -> PARENSTART numero PARENEND','expresion',3,'p_expresion','sintax.py',99),
+  ('operador -> SUMA','operador',1,'p_operador','sintax.py',102),
+  ('operador -> RESTA','operador',1,'p_operador','sintax.py',103),
+  ('operador -> MULTIPLICA','operador',1,'p_operador','sintax.py',104),
+  ('operador -> DIVISION','operador',1,'p_operador','sintax.py',105),
+  ('operador -> MODULO','operador',1,'p_operador','sintax.py',106),
 ]

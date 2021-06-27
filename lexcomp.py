@@ -28,6 +28,7 @@ tokens = [
     'MODULO',
     'AND',
     'OR',
+    'NEGACION'
 ]
 
 
@@ -54,6 +55,7 @@ t_DIVISION      = r'\/'
 t_MODULO        = r'\%'
 t_AND           = r'&&'
 t_OR            = r'\|\|'
+t_NEGACION      = r'\!'
 
 
 reserved = {

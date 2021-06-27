@@ -5,7 +5,41 @@ import ply.yacc as yacc
 # Get the token map from the lexer.  This is required.
 
 from lexcomp import tokens
- 
+ ###----AQUI COMIENZA EL TRABAJO DE JORGE----###
+def p_sentencias(p):### se agrega las instrucciones del programa
+    '''sentencias : condicionales 
+                  | inicializacion '''
+
+def p_condicionales(p):
+    '''condicionales : opIF'''
+
+def p_opIf(p): 
+    '''opIF : IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND
+            | IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND ELSE opIF
+            | IF  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND ELSE LLAVESTART  LLAVEEND
+            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND
+            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND ELSE opIF
+            | IF  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND ELSE LLAVESTART  LLAVEEND '''
+
+def p_condicion(p):
+    '''condicion : dato exComparadora dato
+                 | dato exComparadora condicion
+                 | PARENSTART condicion PARENEND exComparadora  condicion 
+                 | PARENSTART condicion PARENEND
+                 | boleano
+                 | NEGACION boleano
+                 | NEGACION VARIABLE
+                 | VARIABLE'''
+
+def p_exComparadora(p):
+    '''exComparadora : AND
+                     | OR
+                     | MAYORQUE
+                     | MENORQUE
+                     | MAYORIGUAL
+                     | MENORIGUAL
+                     | IGUALDAD
+                     | DESIGUALDAD'''
 
 def p_inicializacion(p):
     '''inicializacion : declaracion
@@ -19,13 +53,13 @@ def p_declaracion(p):
 
 def p_asignacion(p):
     '''asignacion : VARIABLE ASIGNACION dato FINSENTENCIA
+                  | VARIABLE ASIGNACION boleano FINSENTENCIA
                   | VARIABLE ASIGNACION operaciones FINSENTENCIA'''
 
 def p_dato(p):
     '''dato : VARIABLE 
             | numero
-            | CADENA 
-            | boleano'''
+            | CADENA '''
 
 def p_tipoDato(p):
     '''tipoDato : INT
@@ -50,7 +84,8 @@ def p_numero(p):
              | DECIMAL'''
 
 def p_operaciones(p):
-    'operaciones :  expresion repOp '
+    '''operaciones :  expresion repOp 
+                   | expresion '''
 
 def p_repOpe(p):
     '''repOp : operador expresion 
@@ -59,7 +94,9 @@ def p_repOpe(p):
 def p_expresion(p):
     '''expresion : numero
                  | VARIABLE
-                 | PARENSTART  operaciones PARENEND'''
+                 | PARENSTART  operaciones PARENEND
+                 | PARENSTART  VARIABLE PARENEND
+                 | PARENSTART  numero PARENEND'''
 
 def p_operador(p):
     '''operador : SUMA
@@ -67,56 +104,8 @@ def p_operador(p):
                 | MULTIPLICA
                 | DIVISION
                 | MODULO ''' 
+ ###----AQUI TERMINA EL TRABAJO DEL PROFE----#
 
-'''def p_expression_suma(p):
-    'expression : expression SUMA term'
-    p[0] = p[1] + p[3]
-
-
-def p_expression_resta(p):
-    'expression : expression RESTA term'
-    p[0] = p[1] - p[3]
-
-
-def p_expression_term(p):
-    'expression : term'
-    p[0] = p[1]
-
-
-def p_term_mult(p):
-    'term : term MULTIPLICA factor'
-    p[0] = p[1] * p[3]
-
-
-def p_term_division(p):
-    'term : term DIVISION factor'
-    p[0] = p[1] / p[3]
-
-
-def p_term_modulo(p):
-    'term : term MODULO factor'
-    p[0] = p[1] % p[3]
-
-
-def p_term_factor(p):
-    'term : factor'
-    p[0] = p[1]
-
-
-def p_factor_entero(p):
-    'factor : ENTERO'
-    p[0] = p[1]
-
-def p_factor_decimal(p):
-    'factor : DECIMAL'
-    p[0] = p[1]
-
-
-def p_factor_expr(p):
-    'factor : PARENSTART expression PARENEND'
-    p[0] = p[2]
-
-'''
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")

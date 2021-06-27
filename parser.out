@@ -2,7 +2,6 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    AND
     ASYNC
     BOOL
     BREAK
@@ -10,24 +9,13 @@ Unused terminals:
     CONST
     CONTINUE
     DEFAULT
-    DESIGUALDAD
     DO
-    ELSE
     EXTERN
     FOR
     FOREACH
-    IF
-    IGUALDAD
     IN
-    LLAVEEND
-    LLAVESTART
-    MAYORIGUAL
-    MAYORQUE
-    MENORIGUAL
-    MENORQUE
     NEW
     NULL
-    OR
     PRIVATE
     PROTECTED
     PUBLIC
@@ -41,730 +29,1605 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> inicializacion
-Rule 1     inicializacion -> declaracion
-Rule 2     inicializacion -> asignacion
-Rule 3     inicializacion -> operaciones
-Rule 4     declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
-Rule 5     declaracion -> tipoDato VARIABLE FINSENTENCIA
-Rule 6     declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
-Rule 7     asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA
-Rule 8     asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA
-Rule 9     dato -> VARIABLE
-Rule 10    dato -> numero
-Rule 11    dato -> CADENA
-Rule 12    dato -> boleano
-Rule 13    tipoDato -> INT
-Rule 14    tipoDato -> FLOAT
-Rule 15    tipoDato -> DOUBLE
-Rule 16    tipoDato -> STRING
-Rule 17    tipoDato -> LONG
-Rule 18    tipoDato -> CHAR
-Rule 19    tipoDato -> SHORT
-Rule 20    tipoDato -> BYTE
-Rule 21    tipoDato -> SBYTE
-Rule 22    tipoDato -> UINT
-Rule 23    tipoDato -> USHORT
-Rule 24    tipoDato -> ULONG
-Rule 25    boleano -> TRUE
-Rule 26    boleano -> FALSE
-Rule 27    numero -> ENTERO
-Rule 28    numero -> DECIMAL
-Rule 29    operaciones -> expresion repOp
-Rule 30    repOp -> operador expresion
-Rule 31    repOp -> operador expresion repOp
-Rule 32    expresion -> numero
-Rule 33    expresion -> VARIABLE
-Rule 34    expresion -> PARENSTART operaciones PARENEND
-Rule 35    operador -> SUMA
-Rule 36    operador -> RESTA
-Rule 37    operador -> MULTIPLICA
-Rule 38    operador -> DIVISION
-Rule 39    operador -> MODULO
+Rule 0     S' -> sentencias
+Rule 1     sentencias -> condicionales
+Rule 2     sentencias -> inicializacion
+Rule 3     condicionales -> opIF
+Rule 4     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+Rule 5     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+Rule 6     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+Rule 7     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+Rule 8     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+Rule 9     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+Rule 10    condicion -> dato exComparadora dato
+Rule 11    condicion -> dato exComparadora condicion
+Rule 12    condicion -> PARENSTART condicion PARENEND exComparadora condicion
+Rule 13    condicion -> PARENSTART condicion PARENEND
+Rule 14    condicion -> boleano
+Rule 15    condicion -> NEGACION boleano
+Rule 16    condicion -> NEGACION VARIABLE
+Rule 17    condicion -> VARIABLE
+Rule 18    exComparadora -> AND
+Rule 19    exComparadora -> OR
+Rule 20    exComparadora -> MAYORQUE
+Rule 21    exComparadora -> MENORQUE
+Rule 22    exComparadora -> MAYORIGUAL
+Rule 23    exComparadora -> MENORIGUAL
+Rule 24    exComparadora -> IGUALDAD
+Rule 25    exComparadora -> DESIGUALDAD
+Rule 26    inicializacion -> declaracion
+Rule 27    inicializacion -> asignacion
+Rule 28    inicializacion -> operaciones
+Rule 29    declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+Rule 30    declaracion -> tipoDato VARIABLE FINSENTENCIA
+Rule 31    declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+Rule 32    asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA
+Rule 33    asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA
+Rule 34    asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA
+Rule 35    dato -> VARIABLE
+Rule 36    dato -> numero
+Rule 37    dato -> CADENA
+Rule 38    tipoDato -> INT
+Rule 39    tipoDato -> FLOAT
+Rule 40    tipoDato -> DOUBLE
+Rule 41    tipoDato -> STRING
+Rule 42    tipoDato -> LONG
+Rule 43    tipoDato -> CHAR
+Rule 44    tipoDato -> SHORT
+Rule 45    tipoDato -> BYTE
+Rule 46    tipoDato -> SBYTE
+Rule 47    tipoDato -> UINT
+Rule 48    tipoDato -> USHORT
+Rule 49    tipoDato -> ULONG
+Rule 50    boleano -> TRUE
+Rule 51    boleano -> FALSE
+Rule 52    numero -> ENTERO
+Rule 53    numero -> DECIMAL
+Rule 54    operaciones -> expresion repOp
+Rule 55    operaciones -> expresion
+Rule 56    repOp -> operador expresion
+Rule 57    repOp -> operador expresion repOp
+Rule 58    expresion -> numero
+Rule 59    expresion -> VARIABLE
+Rule 60    expresion -> PARENSTART operaciones PARENEND
+Rule 61    expresion -> PARENSTART VARIABLE PARENEND
+Rule 62    expresion -> PARENSTART numero PARENEND
+Rule 63    operador -> SUMA
+Rule 64    operador -> RESTA
+Rule 65    operador -> MULTIPLICA
+Rule 66    operador -> DIVISION
+Rule 67    operador -> MODULO
 
 Terminals, with rules where they appear
 
-AND                  : 
-ASIGNACION           : 4 6 7 8
+AND                  : 18
+ASIGNACION           : 29 31 32 33 34
 ASYNC                : 
 BOOL                 : 
 BREAK                : 
-BYTE                 : 20
-CADENA               : 11
+BYTE                 : 45
+CADENA               : 37
 CASE                 : 
-CHAR                 : 18
+CHAR                 : 43
 CONST                : 
 CONTINUE             : 
-DECIMAL              : 28
+DECIMAL              : 53
 DEFAULT              : 
-DESIGUALDAD          : 
-DIVISION             : 38
+DESIGUALDAD          : 25
+DIVISION             : 66
 DO                   : 
-DOUBLE               : 15
-ELSE                 : 
-ENTERO               : 27
+DOUBLE               : 40
+ELSE                 : 5 6 8 9
+ENTERO               : 52
 EXTERN               : 
-FALSE                : 26
-FINSENTENCIA         : 4 5 6 7 8
-FLOAT                : 14
+FALSE                : 51
+FINSENTENCIA         : 29 30 31 32 33 34
+FLOAT                : 39
 FOR                  : 
 FOREACH              : 
-IF                   : 
-IGUALDAD             : 
+IF                   : 4 5 6 7 8 9
+IGUALDAD             : 24
 IN                   : 
-INT                  : 13
-LLAVEEND             : 
-LLAVESTART           : 
-LONG                 : 17
-MAYORIGUAL           : 
-MAYORQUE             : 
-MENORIGUAL           : 
-MENORQUE             : 
-MODULO               : 39
-MULTIPLICA           : 37
+INT                  : 38
+LLAVEEND             : 4 5 6 6 7 8 9 9
+LLAVESTART           : 4 5 6 6 7 8 9 9
+LONG                 : 42
+MAYORIGUAL           : 22
+MAYORQUE             : 20
+MENORIGUAL           : 23
+MENORQUE             : 21
+MODULO               : 67
+MULTIPLICA           : 65
+NEGACION             : 15 16
 NEW                  : 
 NULL                 : 
-OR                   : 
-PARENEND             : 34
-PARENSTART           : 34
+OR                   : 19
+PARENEND             : 4 5 6 7 8 9 12 13 60 61 62
+PARENSTART           : 4 5 6 7 8 9 12 13 60 61 62
 PRIVATE              : 
 PROTECTED            : 
 PUBLIC               : 
-RESTA                : 36
+RESTA                : 64
 RETURN               : 
-SBYTE                : 21
-SHORT                : 19
+SBYTE                : 46
+SHORT                : 44
 STATIC               : 
-STRING               : 16
-SUMA                 : 35
+STRING               : 41
+SUMA                 : 63
 SWITCH               : 
 THIS                 : 
-TRUE                 : 25
-UINT                 : 22
-ULONG                : 24
+TRUE                 : 50
+UINT                 : 47
+ULONG                : 49
 UNSAFE               : 
-USHORT               : 23
-VARIABLE             : 4 5 6 7 8 9 33
+USHORT               : 48
+VARIABLE             : 16 17 29 30 31 32 33 34 35 59 61
 VOID                 : 
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-asignacion           : 2
-boleano              : 12
-dato                 : 4 7
-declaracion          : 1
-expresion            : 29 30 31
-inicializacion       : 0
-numero               : 10 32
-operaciones          : 3 6 8 34
-operador             : 30 31
-repOp                : 29 31
-tipoDato             : 4 5 6
+asignacion           : 27
+boleano              : 14 15 33
+condicion            : 4 5 6 7 8 9 11 12 12 13
+condicionales        : 1
+dato                 : 10 10 11 29 32
+declaracion          : 26
+exComparadora        : 10 11 12
+expresion            : 54 55 56 57
+inicializacion       : 2
+numero               : 36 58 62
+opIF                 : 3 5 8
+operaciones          : 28 31 34 60
+operador             : 56 57
+repOp                : 54 57
+sentencias           : 7 8 9 0
+tipoDato             : 29 30 31
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . inicializacion
-    (1) inicializacion -> . declaracion
-    (2) inicializacion -> . asignacion
-    (3) inicializacion -> . operaciones
-    (4) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
-    (5) declaracion -> . tipoDato VARIABLE FINSENTENCIA
-    (6) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (7) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
-    (8) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (29) operaciones -> . expresion repOp
-    (13) tipoDato -> . INT
-    (14) tipoDato -> . FLOAT
-    (15) tipoDato -> . DOUBLE
-    (16) tipoDato -> . STRING
-    (17) tipoDato -> . LONG
-    (18) tipoDato -> . CHAR
-    (19) tipoDato -> . SHORT
-    (20) tipoDato -> . BYTE
-    (21) tipoDato -> . SBYTE
-    (22) tipoDato -> . UINT
-    (23) tipoDato -> . USHORT
-    (24) tipoDato -> . ULONG
-    (32) expresion -> . numero
-    (33) expresion -> . VARIABLE
-    (34) expresion -> . PARENSTART operaciones PARENEND
-    (27) numero -> . ENTERO
-    (28) numero -> . DECIMAL
+    (0) S' -> . sentencias
+    (1) sentencias -> . condicionales
+    (2) sentencias -> . inicializacion
+    (3) condicionales -> . opIF
+    (26) inicializacion -> . declaracion
+    (27) inicializacion -> . asignacion
+    (28) inicializacion -> . operaciones
+    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (29) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+    (30) declaracion -> . tipoDato VARIABLE FINSENTENCIA
+    (31) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (32) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
+    (34) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (54) operaciones -> . expresion repOp
+    (55) operaciones -> . expresion
+    (38) tipoDato -> . INT
+    (39) tipoDato -> . FLOAT
+    (40) tipoDato -> . DOUBLE
+    (41) tipoDato -> . STRING
+    (42) tipoDato -> . LONG
+    (43) tipoDato -> . CHAR
+    (44) tipoDato -> . SHORT
+    (45) tipoDato -> . BYTE
+    (46) tipoDato -> . SBYTE
+    (47) tipoDato -> . UINT
+    (48) tipoDato -> . USHORT
+    (49) tipoDato -> . ULONG
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
 
-    VARIABLE        shift and go to state 6
-    INT             shift and go to state 8
-    FLOAT           shift and go to state 9
-    DOUBLE          shift and go to state 10
-    STRING          shift and go to state 11
-    LONG            shift and go to state 12
-    CHAR            shift and go to state 13
-    SHORT           shift and go to state 14
-    BYTE            shift and go to state 15
-    SBYTE           shift and go to state 16
-    UINT            shift and go to state 17
-    USHORT          shift and go to state 18
-    ULONG           shift and go to state 19
-    PARENSTART      shift and go to state 21
-    ENTERO          shift and go to state 22
-    DECIMAL         shift and go to state 23
+    IF              shift and go to state 8
+    VARIABLE        shift and go to state 11
+    INT             shift and go to state 13
+    FLOAT           shift and go to state 14
+    DOUBLE          shift and go to state 15
+    STRING          shift and go to state 16
+    LONG            shift and go to state 17
+    CHAR            shift and go to state 18
+    SHORT           shift and go to state 19
+    BYTE            shift and go to state 20
+    SBYTE           shift and go to state 21
+    UINT            shift and go to state 22
+    USHORT          shift and go to state 23
+    ULONG           shift and go to state 24
+    PARENSTART      shift and go to state 9
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
 
-    inicializacion                 shift and go to state 1
-    declaracion                    shift and go to state 2
-    asignacion                     shift and go to state 3
-    operaciones                    shift and go to state 4
-    tipoDato                       shift and go to state 5
-    expresion                      shift and go to state 7
-    numero                         shift and go to state 20
+    sentencias                     shift and go to state 1
+    condicionales                  shift and go to state 2
+    inicializacion                 shift and go to state 3
+    opIF                           shift and go to state 4
+    declaracion                    shift and go to state 5
+    asignacion                     shift and go to state 6
+    operaciones                    shift and go to state 7
+    tipoDato                       shift and go to state 10
+    expresion                      shift and go to state 12
+    numero                         shift and go to state 25
 
 state 1
 
-    (0) S' -> inicializacion .
+    (0) S' -> sentencias .
 
 
 
 state 2
 
-    (1) inicializacion -> declaracion .
+    (1) sentencias -> condicionales .
 
-    $end            reduce using rule 1 (inicializacion -> declaracion .)
+    $end            reduce using rule 1 (sentencias -> condicionales .)
+    LLAVEEND        reduce using rule 1 (sentencias -> condicionales .)
 
 
 state 3
 
-    (2) inicializacion -> asignacion .
+    (2) sentencias -> inicializacion .
 
-    $end            reduce using rule 2 (inicializacion -> asignacion .)
+    $end            reduce using rule 2 (sentencias -> inicializacion .)
+    LLAVEEND        reduce using rule 2 (sentencias -> inicializacion .)
 
 
 state 4
 
-    (3) inicializacion -> operaciones .
+    (3) condicionales -> opIF .
 
-    $end            reduce using rule 3 (inicializacion -> operaciones .)
+    $end            reduce using rule 3 (condicionales -> opIF .)
+    LLAVEEND        reduce using rule 3 (condicionales -> opIF .)
 
 
 state 5
 
-    (4) declaracion -> tipoDato . VARIABLE ASIGNACION dato FINSENTENCIA
-    (5) declaracion -> tipoDato . VARIABLE FINSENTENCIA
-    (6) declaracion -> tipoDato . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (26) inicializacion -> declaracion .
 
-    VARIABLE        shift and go to state 24
+    $end            reduce using rule 26 (inicializacion -> declaracion .)
+    LLAVEEND        reduce using rule 26 (inicializacion -> declaracion .)
 
 
 state 6
 
-    (7) asignacion -> VARIABLE . ASIGNACION dato FINSENTENCIA
-    (8) asignacion -> VARIABLE . ASIGNACION operaciones FINSENTENCIA
-    (33) expresion -> VARIABLE .
+    (27) inicializacion -> asignacion .
 
-    ASIGNACION      shift and go to state 25
-    SUMA            reduce using rule 33 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 33 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 33 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 33 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 33 (expresion -> VARIABLE .)
+    $end            reduce using rule 27 (inicializacion -> asignacion .)
+    LLAVEEND        reduce using rule 27 (inicializacion -> asignacion .)
 
 
 state 7
 
-    (29) operaciones -> expresion . repOp
-    (30) repOp -> . operador expresion
-    (31) repOp -> . operador expresion repOp
-    (35) operador -> . SUMA
-    (36) operador -> . RESTA
-    (37) operador -> . MULTIPLICA
-    (38) operador -> . DIVISION
-    (39) operador -> . MODULO
+    (28) inicializacion -> operaciones .
 
-    SUMA            shift and go to state 28
-    RESTA           shift and go to state 29
-    MULTIPLICA      shift and go to state 30
-    DIVISION        shift and go to state 31
-    MODULO          shift and go to state 32
+    $end            reduce using rule 28 (inicializacion -> operaciones .)
+    LLAVEEND        reduce using rule 28 (inicializacion -> operaciones .)
 
-    repOp                          shift and go to state 26
-    operador                       shift and go to state 27
 
 state 8
 
-    (13) tipoDato -> INT .
+    (4) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    VARIABLE        reduce using rule 13 (tipoDato -> INT .)
+    PARENSTART      shift and go to state 28
 
 
 state 9
 
-    (14) tipoDato -> FLOAT .
+    (60) expresion -> PARENSTART . operaciones PARENEND
+    (61) expresion -> PARENSTART . VARIABLE PARENEND
+    (62) expresion -> PARENSTART . numero PARENEND
+    (54) operaciones -> . expresion repOp
+    (55) operaciones -> . expresion
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
 
-    VARIABLE        reduce using rule 14 (tipoDato -> FLOAT .)
+    VARIABLE        shift and go to state 30
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+    PARENSTART      shift and go to state 9
 
+    operaciones                    shift and go to state 29
+    numero                         shift and go to state 31
+    expresion                      shift and go to state 12
 
 state 10
 
-    (15) tipoDato -> DOUBLE .
+    (29) declaracion -> tipoDato . VARIABLE ASIGNACION dato FINSENTENCIA
+    (30) declaracion -> tipoDato . VARIABLE FINSENTENCIA
+    (31) declaracion -> tipoDato . VARIABLE ASIGNACION operaciones FINSENTENCIA
 
-    VARIABLE        reduce using rule 15 (tipoDato -> DOUBLE .)
+    VARIABLE        shift and go to state 32
 
 
 state 11
 
-    (16) tipoDato -> STRING .
+    (32) asignacion -> VARIABLE . ASIGNACION dato FINSENTENCIA
+    (33) asignacion -> VARIABLE . ASIGNACION boleano FINSENTENCIA
+    (34) asignacion -> VARIABLE . ASIGNACION operaciones FINSENTENCIA
+    (59) expresion -> VARIABLE .
 
-    VARIABLE        reduce using rule 16 (tipoDato -> STRING .)
+    ASIGNACION      shift and go to state 33
+    SUMA            reduce using rule 59 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 59 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 59 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 59 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 59 (expresion -> VARIABLE .)
+    $end            reduce using rule 59 (expresion -> VARIABLE .)
+    LLAVEEND        reduce using rule 59 (expresion -> VARIABLE .)
 
 
 state 12
 
-    (17) tipoDato -> LONG .
+    (54) operaciones -> expresion . repOp
+    (55) operaciones -> expresion .
+    (56) repOp -> . operador expresion
+    (57) repOp -> . operador expresion repOp
+    (63) operador -> . SUMA
+    (64) operador -> . RESTA
+    (65) operador -> . MULTIPLICA
+    (66) operador -> . DIVISION
+    (67) operador -> . MODULO
 
-    VARIABLE        reduce using rule 17 (tipoDato -> LONG .)
+    $end            reduce using rule 55 (operaciones -> expresion .)
+    PARENEND        reduce using rule 55 (operaciones -> expresion .)
+    FINSENTENCIA    reduce using rule 55 (operaciones -> expresion .)
+    LLAVEEND        reduce using rule 55 (operaciones -> expresion .)
+    SUMA            shift and go to state 36
+    RESTA           shift and go to state 37
+    MULTIPLICA      shift and go to state 38
+    DIVISION        shift and go to state 39
+    MODULO          shift and go to state 40
 
+    repOp                          shift and go to state 34
+    operador                       shift and go to state 35
 
 state 13
 
-    (18) tipoDato -> CHAR .
+    (38) tipoDato -> INT .
 
-    VARIABLE        reduce using rule 18 (tipoDato -> CHAR .)
+    VARIABLE        reduce using rule 38 (tipoDato -> INT .)
 
 
 state 14
 
-    (19) tipoDato -> SHORT .
+    (39) tipoDato -> FLOAT .
 
-    VARIABLE        reduce using rule 19 (tipoDato -> SHORT .)
+    VARIABLE        reduce using rule 39 (tipoDato -> FLOAT .)
 
 
 state 15
 
-    (20) tipoDato -> BYTE .
+    (40) tipoDato -> DOUBLE .
 
-    VARIABLE        reduce using rule 20 (tipoDato -> BYTE .)
+    VARIABLE        reduce using rule 40 (tipoDato -> DOUBLE .)
 
 
 state 16
 
-    (21) tipoDato -> SBYTE .
+    (41) tipoDato -> STRING .
 
-    VARIABLE        reduce using rule 21 (tipoDato -> SBYTE .)
+    VARIABLE        reduce using rule 41 (tipoDato -> STRING .)
 
 
 state 17
 
-    (22) tipoDato -> UINT .
+    (42) tipoDato -> LONG .
 
-    VARIABLE        reduce using rule 22 (tipoDato -> UINT .)
+    VARIABLE        reduce using rule 42 (tipoDato -> LONG .)
 
 
 state 18
 
-    (23) tipoDato -> USHORT .
+    (43) tipoDato -> CHAR .
 
-    VARIABLE        reduce using rule 23 (tipoDato -> USHORT .)
+    VARIABLE        reduce using rule 43 (tipoDato -> CHAR .)
 
 
 state 19
 
-    (24) tipoDato -> ULONG .
+    (44) tipoDato -> SHORT .
 
-    VARIABLE        reduce using rule 24 (tipoDato -> ULONG .)
+    VARIABLE        reduce using rule 44 (tipoDato -> SHORT .)
 
 
 state 20
 
-    (32) expresion -> numero .
+    (45) tipoDato -> BYTE .
 
-    SUMA            reduce using rule 32 (expresion -> numero .)
-    RESTA           reduce using rule 32 (expresion -> numero .)
-    MULTIPLICA      reduce using rule 32 (expresion -> numero .)
-    DIVISION        reduce using rule 32 (expresion -> numero .)
-    MODULO          reduce using rule 32 (expresion -> numero .)
-    $end            reduce using rule 32 (expresion -> numero .)
-    PARENEND        reduce using rule 32 (expresion -> numero .)
-    FINSENTENCIA    reduce using rule 32 (expresion -> numero .)
+    VARIABLE        reduce using rule 45 (tipoDato -> BYTE .)
 
 
 state 21
 
-    (34) expresion -> PARENSTART . operaciones PARENEND
-    (29) operaciones -> . expresion repOp
-    (32) expresion -> . numero
-    (33) expresion -> . VARIABLE
-    (34) expresion -> . PARENSTART operaciones PARENEND
-    (27) numero -> . ENTERO
-    (28) numero -> . DECIMAL
+    (46) tipoDato -> SBYTE .
 
-    VARIABLE        shift and go to state 34
-    PARENSTART      shift and go to state 21
-    ENTERO          shift and go to state 22
-    DECIMAL         shift and go to state 23
+    VARIABLE        reduce using rule 46 (tipoDato -> SBYTE .)
 
-    operaciones                    shift and go to state 33
-    expresion                      shift and go to state 7
-    numero                         shift and go to state 20
 
 state 22
 
-    (27) numero -> ENTERO .
+    (47) tipoDato -> UINT .
 
-    SUMA            reduce using rule 27 (numero -> ENTERO .)
-    RESTA           reduce using rule 27 (numero -> ENTERO .)
-    MULTIPLICA      reduce using rule 27 (numero -> ENTERO .)
-    DIVISION        reduce using rule 27 (numero -> ENTERO .)
-    MODULO          reduce using rule 27 (numero -> ENTERO .)
-    FINSENTENCIA    reduce using rule 27 (numero -> ENTERO .)
-    $end            reduce using rule 27 (numero -> ENTERO .)
-    PARENEND        reduce using rule 27 (numero -> ENTERO .)
+    VARIABLE        reduce using rule 47 (tipoDato -> UINT .)
 
 
 state 23
 
-    (28) numero -> DECIMAL .
+    (48) tipoDato -> USHORT .
 
-    SUMA            reduce using rule 28 (numero -> DECIMAL .)
-    RESTA           reduce using rule 28 (numero -> DECIMAL .)
-    MULTIPLICA      reduce using rule 28 (numero -> DECIMAL .)
-    DIVISION        reduce using rule 28 (numero -> DECIMAL .)
-    MODULO          reduce using rule 28 (numero -> DECIMAL .)
-    FINSENTENCIA    reduce using rule 28 (numero -> DECIMAL .)
-    $end            reduce using rule 28 (numero -> DECIMAL .)
-    PARENEND        reduce using rule 28 (numero -> DECIMAL .)
+    VARIABLE        reduce using rule 48 (tipoDato -> USHORT .)
 
 
 state 24
 
-    (4) declaracion -> tipoDato VARIABLE . ASIGNACION dato FINSENTENCIA
-    (5) declaracion -> tipoDato VARIABLE . FINSENTENCIA
-    (6) declaracion -> tipoDato VARIABLE . ASIGNACION operaciones FINSENTENCIA
+    (49) tipoDato -> ULONG .
 
-    ASIGNACION      shift and go to state 35
-    FINSENTENCIA    shift and go to state 36
+    VARIABLE        reduce using rule 49 (tipoDato -> ULONG .)
 
 
 state 25
 
-    (7) asignacion -> VARIABLE ASIGNACION . dato FINSENTENCIA
-    (8) asignacion -> VARIABLE ASIGNACION . operaciones FINSENTENCIA
-    (9) dato -> . VARIABLE
-    (10) dato -> . numero
-    (11) dato -> . CADENA
-    (12) dato -> . boleano
-    (29) operaciones -> . expresion repOp
-    (27) numero -> . ENTERO
-    (28) numero -> . DECIMAL
-    (25) boleano -> . TRUE
-    (26) boleano -> . FALSE
-    (32) expresion -> . numero
-    (33) expresion -> . VARIABLE
-    (34) expresion -> . PARENSTART operaciones PARENEND
+    (58) expresion -> numero .
 
-    VARIABLE        shift and go to state 37
-    CADENA          shift and go to state 41
-    ENTERO          shift and go to state 22
-    DECIMAL         shift and go to state 23
-    TRUE            shift and go to state 43
-    FALSE           shift and go to state 44
-    PARENSTART      shift and go to state 21
+    SUMA            reduce using rule 58 (expresion -> numero .)
+    RESTA           reduce using rule 58 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 58 (expresion -> numero .)
+    DIVISION        reduce using rule 58 (expresion -> numero .)
+    MODULO          reduce using rule 58 (expresion -> numero .)
+    $end            reduce using rule 58 (expresion -> numero .)
+    PARENEND        reduce using rule 58 (expresion -> numero .)
+    FINSENTENCIA    reduce using rule 58 (expresion -> numero .)
+    LLAVEEND        reduce using rule 58 (expresion -> numero .)
 
-    dato                           shift and go to state 38
-    operaciones                    shift and go to state 39
-    numero                         shift and go to state 40
-    boleano                        shift and go to state 42
-    expresion                      shift and go to state 7
 
 state 26
 
-    (29) operaciones -> expresion repOp .
+    (52) numero -> ENTERO .
 
-    $end            reduce using rule 29 (operaciones -> expresion repOp .)
-    PARENEND        reduce using rule 29 (operaciones -> expresion repOp .)
-    FINSENTENCIA    reduce using rule 29 (operaciones -> expresion repOp .)
+    SUMA            reduce using rule 52 (numero -> ENTERO .)
+    RESTA           reduce using rule 52 (numero -> ENTERO .)
+    MULTIPLICA      reduce using rule 52 (numero -> ENTERO .)
+    DIVISION        reduce using rule 52 (numero -> ENTERO .)
+    MODULO          reduce using rule 52 (numero -> ENTERO .)
+    $end            reduce using rule 52 (numero -> ENTERO .)
+    PARENEND        reduce using rule 52 (numero -> ENTERO .)
+    AND             reduce using rule 52 (numero -> ENTERO .)
+    OR              reduce using rule 52 (numero -> ENTERO .)
+    MAYORQUE        reduce using rule 52 (numero -> ENTERO .)
+    MENORQUE        reduce using rule 52 (numero -> ENTERO .)
+    MAYORIGUAL      reduce using rule 52 (numero -> ENTERO .)
+    MENORIGUAL      reduce using rule 52 (numero -> ENTERO .)
+    IGUALDAD        reduce using rule 52 (numero -> ENTERO .)
+    DESIGUALDAD     reduce using rule 52 (numero -> ENTERO .)
+    FINSENTENCIA    reduce using rule 52 (numero -> ENTERO .)
+    LLAVEEND        reduce using rule 52 (numero -> ENTERO .)
 
 
 state 27
 
-    (30) repOp -> operador . expresion
-    (31) repOp -> operador . expresion repOp
-    (32) expresion -> . numero
-    (33) expresion -> . VARIABLE
-    (34) expresion -> . PARENSTART operaciones PARENEND
-    (27) numero -> . ENTERO
-    (28) numero -> . DECIMAL
+    (53) numero -> DECIMAL .
 
-    VARIABLE        shift and go to state 34
-    PARENSTART      shift and go to state 21
-    ENTERO          shift and go to state 22
-    DECIMAL         shift and go to state 23
+    SUMA            reduce using rule 53 (numero -> DECIMAL .)
+    RESTA           reduce using rule 53 (numero -> DECIMAL .)
+    MULTIPLICA      reduce using rule 53 (numero -> DECIMAL .)
+    DIVISION        reduce using rule 53 (numero -> DECIMAL .)
+    MODULO          reduce using rule 53 (numero -> DECIMAL .)
+    $end            reduce using rule 53 (numero -> DECIMAL .)
+    PARENEND        reduce using rule 53 (numero -> DECIMAL .)
+    AND             reduce using rule 53 (numero -> DECIMAL .)
+    OR              reduce using rule 53 (numero -> DECIMAL .)
+    MAYORQUE        reduce using rule 53 (numero -> DECIMAL .)
+    MENORQUE        reduce using rule 53 (numero -> DECIMAL .)
+    MAYORIGUAL      reduce using rule 53 (numero -> DECIMAL .)
+    MENORIGUAL      reduce using rule 53 (numero -> DECIMAL .)
+    IGUALDAD        reduce using rule 53 (numero -> DECIMAL .)
+    DESIGUALDAD     reduce using rule 53 (numero -> DECIMAL .)
+    FINSENTENCIA    reduce using rule 53 (numero -> DECIMAL .)
+    LLAVEEND        reduce using rule 53 (numero -> DECIMAL .)
 
-    expresion                      shift and go to state 45
-    numero                         shift and go to state 20
 
 state 28
 
-    (35) operador -> SUMA .
+    (4) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (10) condicion -> . dato exComparadora dato
+    (11) condicion -> . dato exComparadora condicion
+    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (13) condicion -> . PARENSTART condicion PARENEND
+    (14) condicion -> . boleano
+    (15) condicion -> . NEGACION boleano
+    (16) condicion -> . NEGACION VARIABLE
+    (17) condicion -> . VARIABLE
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
 
-    VARIABLE        reduce using rule 35 (operador -> SUMA .)
-    PARENSTART      reduce using rule 35 (operador -> SUMA .)
-    ENTERO          reduce using rule 35 (operador -> SUMA .)
-    DECIMAL         reduce using rule 35 (operador -> SUMA .)
+    PARENSTART      shift and go to state 41
+    NEGACION        shift and go to state 45
+    VARIABLE        shift and go to state 46
+    CADENA          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
 
+    condicion                      shift and go to state 42
+    dato                           shift and go to state 43
+    boleano                        shift and go to state 44
+    numero                         shift and go to state 47
 
 state 29
 
-    (36) operador -> RESTA .
+    (60) expresion -> PARENSTART operaciones . PARENEND
 
-    VARIABLE        reduce using rule 36 (operador -> RESTA .)
-    PARENSTART      reduce using rule 36 (operador -> RESTA .)
-    ENTERO          reduce using rule 36 (operador -> RESTA .)
-    DECIMAL         reduce using rule 36 (operador -> RESTA .)
+    PARENEND        shift and go to state 51
 
 
 state 30
 
-    (37) operador -> MULTIPLICA .
+    (61) expresion -> PARENSTART VARIABLE . PARENEND
+    (59) expresion -> VARIABLE .
 
-    VARIABLE        reduce using rule 37 (operador -> MULTIPLICA .)
-    PARENSTART      reduce using rule 37 (operador -> MULTIPLICA .)
-    ENTERO          reduce using rule 37 (operador -> MULTIPLICA .)
-    DECIMAL         reduce using rule 37 (operador -> MULTIPLICA .)
+  ! shift/reduce conflict for PARENEND resolved as shift
+    PARENEND        shift and go to state 52
+    SUMA            reduce using rule 59 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 59 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 59 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 59 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 59 (expresion -> VARIABLE .)
+
+  ! PARENEND        [ reduce using rule 59 (expresion -> VARIABLE .) ]
 
 
 state 31
 
-    (38) operador -> DIVISION .
+    (62) expresion -> PARENSTART numero . PARENEND
+    (58) expresion -> numero .
 
-    VARIABLE        reduce using rule 38 (operador -> DIVISION .)
-    PARENSTART      reduce using rule 38 (operador -> DIVISION .)
-    ENTERO          reduce using rule 38 (operador -> DIVISION .)
-    DECIMAL         reduce using rule 38 (operador -> DIVISION .)
+  ! shift/reduce conflict for PARENEND resolved as shift
+    PARENEND        shift and go to state 53
+    SUMA            reduce using rule 58 (expresion -> numero .)
+    RESTA           reduce using rule 58 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 58 (expresion -> numero .)
+    DIVISION        reduce using rule 58 (expresion -> numero .)
+    MODULO          reduce using rule 58 (expresion -> numero .)
+
+  ! PARENEND        [ reduce using rule 58 (expresion -> numero .) ]
 
 
 state 32
 
-    (39) operador -> MODULO .
+    (29) declaracion -> tipoDato VARIABLE . ASIGNACION dato FINSENTENCIA
+    (30) declaracion -> tipoDato VARIABLE . FINSENTENCIA
+    (31) declaracion -> tipoDato VARIABLE . ASIGNACION operaciones FINSENTENCIA
 
-    VARIABLE        reduce using rule 39 (operador -> MODULO .)
-    PARENSTART      reduce using rule 39 (operador -> MODULO .)
-    ENTERO          reduce using rule 39 (operador -> MODULO .)
-    DECIMAL         reduce using rule 39 (operador -> MODULO .)
+    ASIGNACION      shift and go to state 54
+    FINSENTENCIA    shift and go to state 55
 
 
 state 33
 
-    (34) expresion -> PARENSTART operaciones . PARENEND
+    (32) asignacion -> VARIABLE ASIGNACION . dato FINSENTENCIA
+    (33) asignacion -> VARIABLE ASIGNACION . boleano FINSENTENCIA
+    (34) asignacion -> VARIABLE ASIGNACION . operaciones FINSENTENCIA
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
+    (54) operaciones -> . expresion repOp
+    (55) operaciones -> . expresion
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
 
-    PARENEND        shift and go to state 46
+    VARIABLE        shift and go to state 56
+    CADENA          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+    PARENSTART      shift and go to state 9
 
+    dato                           shift and go to state 57
+    boleano                        shift and go to state 58
+    operaciones                    shift and go to state 59
+    numero                         shift and go to state 60
+    expresion                      shift and go to state 12
 
 state 34
 
-    (33) expresion -> VARIABLE .
+    (54) operaciones -> expresion repOp .
 
-    SUMA            reduce using rule 33 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 33 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 33 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 33 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 33 (expresion -> VARIABLE .)
-    $end            reduce using rule 33 (expresion -> VARIABLE .)
-    PARENEND        reduce using rule 33 (expresion -> VARIABLE .)
-    FINSENTENCIA    reduce using rule 33 (expresion -> VARIABLE .)
+    $end            reduce using rule 54 (operaciones -> expresion repOp .)
+    PARENEND        reduce using rule 54 (operaciones -> expresion repOp .)
+    FINSENTENCIA    reduce using rule 54 (operaciones -> expresion repOp .)
+    LLAVEEND        reduce using rule 54 (operaciones -> expresion repOp .)
 
 
 state 35
 
-    (4) declaracion -> tipoDato VARIABLE ASIGNACION . dato FINSENTENCIA
-    (6) declaracion -> tipoDato VARIABLE ASIGNACION . operaciones FINSENTENCIA
-    (9) dato -> . VARIABLE
-    (10) dato -> . numero
-    (11) dato -> . CADENA
-    (12) dato -> . boleano
-    (29) operaciones -> . expresion repOp
-    (27) numero -> . ENTERO
-    (28) numero -> . DECIMAL
-    (25) boleano -> . TRUE
-    (26) boleano -> . FALSE
-    (32) expresion -> . numero
-    (33) expresion -> . VARIABLE
-    (34) expresion -> . PARENSTART operaciones PARENEND
+    (56) repOp -> operador . expresion
+    (57) repOp -> operador . expresion repOp
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
 
-    VARIABLE        shift and go to state 37
-    CADENA          shift and go to state 41
-    ENTERO          shift and go to state 22
-    DECIMAL         shift and go to state 23
-    TRUE            shift and go to state 43
-    FALSE           shift and go to state 44
-    PARENSTART      shift and go to state 21
+    VARIABLE        shift and go to state 62
+    PARENSTART      shift and go to state 9
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
 
-    dato                           shift and go to state 47
-    operaciones                    shift and go to state 48
-    numero                         shift and go to state 40
-    boleano                        shift and go to state 42
-    expresion                      shift and go to state 7
+    expresion                      shift and go to state 61
+    numero                         shift and go to state 25
 
 state 36
 
-    (5) declaracion -> tipoDato VARIABLE FINSENTENCIA .
+    (63) operador -> SUMA .
 
-    $end            reduce using rule 5 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
+    VARIABLE        reduce using rule 63 (operador -> SUMA .)
+    PARENSTART      reduce using rule 63 (operador -> SUMA .)
+    ENTERO          reduce using rule 63 (operador -> SUMA .)
+    DECIMAL         reduce using rule 63 (operador -> SUMA .)
 
 
 state 37
 
-    (9) dato -> VARIABLE .
-    (33) expresion -> VARIABLE .
+    (64) operador -> RESTA .
 
-    FINSENTENCIA    reduce using rule 9 (dato -> VARIABLE .)
-    SUMA            reduce using rule 33 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 33 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 33 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 33 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 33 (expresion -> VARIABLE .)
+    VARIABLE        reduce using rule 64 (operador -> RESTA .)
+    PARENSTART      reduce using rule 64 (operador -> RESTA .)
+    ENTERO          reduce using rule 64 (operador -> RESTA .)
+    DECIMAL         reduce using rule 64 (operador -> RESTA .)
 
 
 state 38
 
-    (7) asignacion -> VARIABLE ASIGNACION dato . FINSENTENCIA
+    (65) operador -> MULTIPLICA .
 
-    FINSENTENCIA    shift and go to state 49
+    VARIABLE        reduce using rule 65 (operador -> MULTIPLICA .)
+    PARENSTART      reduce using rule 65 (operador -> MULTIPLICA .)
+    ENTERO          reduce using rule 65 (operador -> MULTIPLICA .)
+    DECIMAL         reduce using rule 65 (operador -> MULTIPLICA .)
 
 
 state 39
 
-    (8) asignacion -> VARIABLE ASIGNACION operaciones . FINSENTENCIA
+    (66) operador -> DIVISION .
 
-    FINSENTENCIA    shift and go to state 50
+    VARIABLE        reduce using rule 66 (operador -> DIVISION .)
+    PARENSTART      reduce using rule 66 (operador -> DIVISION .)
+    ENTERO          reduce using rule 66 (operador -> DIVISION .)
+    DECIMAL         reduce using rule 66 (operador -> DIVISION .)
 
 
 state 40
 
-    (10) dato -> numero .
-    (32) expresion -> numero .
+    (67) operador -> MODULO .
 
-    FINSENTENCIA    reduce using rule 10 (dato -> numero .)
-    SUMA            reduce using rule 32 (expresion -> numero .)
-    RESTA           reduce using rule 32 (expresion -> numero .)
-    MULTIPLICA      reduce using rule 32 (expresion -> numero .)
-    DIVISION        reduce using rule 32 (expresion -> numero .)
-    MODULO          reduce using rule 32 (expresion -> numero .)
+    VARIABLE        reduce using rule 67 (operador -> MODULO .)
+    PARENSTART      reduce using rule 67 (operador -> MODULO .)
+    ENTERO          reduce using rule 67 (operador -> MODULO .)
+    DECIMAL         reduce using rule 67 (operador -> MODULO .)
 
 
 state 41
 
-    (11) dato -> CADENA .
+    (12) condicion -> PARENSTART . condicion PARENEND exComparadora condicion
+    (13) condicion -> PARENSTART . condicion PARENEND
+    (10) condicion -> . dato exComparadora dato
+    (11) condicion -> . dato exComparadora condicion
+    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (13) condicion -> . PARENSTART condicion PARENEND
+    (14) condicion -> . boleano
+    (15) condicion -> . NEGACION boleano
+    (16) condicion -> . NEGACION VARIABLE
+    (17) condicion -> . VARIABLE
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
 
-    FINSENTENCIA    reduce using rule 11 (dato -> CADENA .)
+    PARENSTART      shift and go to state 41
+    NEGACION        shift and go to state 45
+    VARIABLE        shift and go to state 46
+    CADENA          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
 
+    condicion                      shift and go to state 63
+    dato                           shift and go to state 43
+    boleano                        shift and go to state 44
+    numero                         shift and go to state 47
 
 state 42
 
-    (12) dato -> boleano .
+    (4) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    FINSENTENCIA    reduce using rule 12 (dato -> boleano .)
+    PARENEND        shift and go to state 64
 
 
 state 43
 
-    (25) boleano -> TRUE .
+    (10) condicion -> dato . exComparadora dato
+    (11) condicion -> dato . exComparadora condicion
+    (18) exComparadora -> . AND
+    (19) exComparadora -> . OR
+    (20) exComparadora -> . MAYORQUE
+    (21) exComparadora -> . MENORQUE
+    (22) exComparadora -> . MAYORIGUAL
+    (23) exComparadora -> . MENORIGUAL
+    (24) exComparadora -> . IGUALDAD
+    (25) exComparadora -> . DESIGUALDAD
 
-    FINSENTENCIA    reduce using rule 25 (boleano -> TRUE .)
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+    MAYORQUE        shift and go to state 68
+    MENORQUE        shift and go to state 69
+    MAYORIGUAL      shift and go to state 70
+    MENORIGUAL      shift and go to state 71
+    IGUALDAD        shift and go to state 72
+    DESIGUALDAD     shift and go to state 73
 
+    exComparadora                  shift and go to state 65
 
 state 44
 
-    (26) boleano -> FALSE .
+    (14) condicion -> boleano .
 
-    FINSENTENCIA    reduce using rule 26 (boleano -> FALSE .)
+    PARENEND        reduce using rule 14 (condicion -> boleano .)
 
 
 state 45
 
-    (30) repOp -> operador expresion .
-    (31) repOp -> operador expresion . repOp
-    (30) repOp -> . operador expresion
-    (31) repOp -> . operador expresion repOp
-    (35) operador -> . SUMA
-    (36) operador -> . RESTA
-    (37) operador -> . MULTIPLICA
-    (38) operador -> . DIVISION
-    (39) operador -> . MODULO
+    (15) condicion -> NEGACION . boleano
+    (16) condicion -> NEGACION . VARIABLE
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
 
-    $end            reduce using rule 30 (repOp -> operador expresion .)
-    PARENEND        reduce using rule 30 (repOp -> operador expresion .)
-    FINSENTENCIA    reduce using rule 30 (repOp -> operador expresion .)
-    SUMA            shift and go to state 28
-    RESTA           shift and go to state 29
-    MULTIPLICA      shift and go to state 30
-    DIVISION        shift and go to state 31
-    MODULO          shift and go to state 32
+    VARIABLE        shift and go to state 75
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
 
-    operador                       shift and go to state 27
-    repOp                          shift and go to state 51
+    boleano                        shift and go to state 74
 
 state 46
 
-    (34) expresion -> PARENSTART operaciones PARENEND .
+    (17) condicion -> VARIABLE .
+    (35) dato -> VARIABLE .
 
-    SUMA            reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    RESTA           reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    MULTIPLICA      reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    DIVISION        reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    MODULO          reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    $end            reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    PARENEND        reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
-    FINSENTENCIA    reduce using rule 34 (expresion -> PARENSTART operaciones PARENEND .)
+    PARENEND        reduce using rule 17 (condicion -> VARIABLE .)
+    AND             reduce using rule 35 (dato -> VARIABLE .)
+    OR              reduce using rule 35 (dato -> VARIABLE .)
+    MAYORQUE        reduce using rule 35 (dato -> VARIABLE .)
+    MENORQUE        reduce using rule 35 (dato -> VARIABLE .)
+    MAYORIGUAL      reduce using rule 35 (dato -> VARIABLE .)
+    MENORIGUAL      reduce using rule 35 (dato -> VARIABLE .)
+    IGUALDAD        reduce using rule 35 (dato -> VARIABLE .)
+    DESIGUALDAD     reduce using rule 35 (dato -> VARIABLE .)
 
 
 state 47
 
-    (4) declaracion -> tipoDato VARIABLE ASIGNACION dato . FINSENTENCIA
+    (36) dato -> numero .
 
-    FINSENTENCIA    shift and go to state 52
+    AND             reduce using rule 36 (dato -> numero .)
+    OR              reduce using rule 36 (dato -> numero .)
+    MAYORQUE        reduce using rule 36 (dato -> numero .)
+    MENORQUE        reduce using rule 36 (dato -> numero .)
+    MAYORIGUAL      reduce using rule 36 (dato -> numero .)
+    MENORIGUAL      reduce using rule 36 (dato -> numero .)
+    IGUALDAD        reduce using rule 36 (dato -> numero .)
+    DESIGUALDAD     reduce using rule 36 (dato -> numero .)
+    PARENEND        reduce using rule 36 (dato -> numero .)
 
 
 state 48
 
-    (6) declaracion -> tipoDato VARIABLE ASIGNACION operaciones . FINSENTENCIA
+    (37) dato -> CADENA .
 
-    FINSENTENCIA    shift and go to state 53
+    AND             reduce using rule 37 (dato -> CADENA .)
+    OR              reduce using rule 37 (dato -> CADENA .)
+    MAYORQUE        reduce using rule 37 (dato -> CADENA .)
+    MENORQUE        reduce using rule 37 (dato -> CADENA .)
+    MAYORIGUAL      reduce using rule 37 (dato -> CADENA .)
+    MENORIGUAL      reduce using rule 37 (dato -> CADENA .)
+    IGUALDAD        reduce using rule 37 (dato -> CADENA .)
+    DESIGUALDAD     reduce using rule 37 (dato -> CADENA .)
+    FINSENTENCIA    reduce using rule 37 (dato -> CADENA .)
+    PARENEND        reduce using rule 37 (dato -> CADENA .)
 
 
 state 49
 
-    (7) asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .
+    (50) boleano -> TRUE .
 
-    $end            reduce using rule 7 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
+    PARENEND        reduce using rule 50 (boleano -> TRUE .)
+    FINSENTENCIA    reduce using rule 50 (boleano -> TRUE .)
 
 
 state 50
 
-    (8) asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .
+    (51) boleano -> FALSE .
 
-    $end            reduce using rule 8 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    PARENEND        reduce using rule 51 (boleano -> FALSE .)
+    FINSENTENCIA    reduce using rule 51 (boleano -> FALSE .)
 
 
 state 51
 
-    (31) repOp -> operador expresion repOp .
+    (60) expresion -> PARENSTART operaciones PARENEND .
 
-    $end            reduce using rule 31 (repOp -> operador expresion repOp .)
-    PARENEND        reduce using rule 31 (repOp -> operador expresion repOp .)
-    FINSENTENCIA    reduce using rule 31 (repOp -> operador expresion repOp .)
+    SUMA            reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    RESTA           reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    MULTIPLICA      reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    DIVISION        reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    MODULO          reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    $end            reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    PARENEND        reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    FINSENTENCIA    reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
+    LLAVEEND        reduce using rule 60 (expresion -> PARENSTART operaciones PARENEND .)
 
 
 state 52
 
-    (4) declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .
+    (61) expresion -> PARENSTART VARIABLE PARENEND .
 
-    $end            reduce using rule 4 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
+    SUMA            reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    RESTA           reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    MULTIPLICA      reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    DIVISION        reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    MODULO          reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    $end            reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    PARENEND        reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    FINSENTENCIA    reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
+    LLAVEEND        reduce using rule 61 (expresion -> PARENSTART VARIABLE PARENEND .)
 
 
 state 53
 
-    (6) declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .
+    (62) expresion -> PARENSTART numero PARENEND .
 
-    $end            reduce using rule 6 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    SUMA            reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    RESTA           reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    MULTIPLICA      reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    DIVISION        reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    MODULO          reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    $end            reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    PARENEND        reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    FINSENTENCIA    reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
+    LLAVEEND        reduce using rule 62 (expresion -> PARENSTART numero PARENEND .)
 
+
+state 54
+
+    (29) declaracion -> tipoDato VARIABLE ASIGNACION . dato FINSENTENCIA
+    (31) declaracion -> tipoDato VARIABLE ASIGNACION . operaciones FINSENTENCIA
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (54) operaciones -> . expresion repOp
+    (55) operaciones -> . expresion
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
+
+    VARIABLE        shift and go to state 56
+    CADENA          shift and go to state 48
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+    PARENSTART      shift and go to state 9
+
+    dato                           shift and go to state 76
+    operaciones                    shift and go to state 77
+    numero                         shift and go to state 60
+    expresion                      shift and go to state 12
+
+state 55
+
+    (30) declaracion -> tipoDato VARIABLE FINSENTENCIA .
+
+    $end            reduce using rule 30 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
+    LLAVEEND        reduce using rule 30 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
+
+
+state 56
+
+    (35) dato -> VARIABLE .
+    (59) expresion -> VARIABLE .
+
+  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 35 (dato -> VARIABLE .)
+    FINSENTENCIA    reduce using rule 35 (dato -> VARIABLE .)
+    SUMA            reduce using rule 59 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 59 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 59 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 59 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 59 (expresion -> VARIABLE .)
+
+  ! FINSENTENCIA    [ reduce using rule 59 (expresion -> VARIABLE .) ]
+
+
+state 57
+
+    (32) asignacion -> VARIABLE ASIGNACION dato . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 78
+
+
+state 58
+
+    (33) asignacion -> VARIABLE ASIGNACION boleano . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 79
+
+
+state 59
+
+    (34) asignacion -> VARIABLE ASIGNACION operaciones . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 80
+
+
+state 60
+
+    (36) dato -> numero .
+    (58) expresion -> numero .
+
+  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 36 (dato -> numero .)
+    FINSENTENCIA    reduce using rule 36 (dato -> numero .)
+    SUMA            reduce using rule 58 (expresion -> numero .)
+    RESTA           reduce using rule 58 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 58 (expresion -> numero .)
+    DIVISION        reduce using rule 58 (expresion -> numero .)
+    MODULO          reduce using rule 58 (expresion -> numero .)
+
+  ! FINSENTENCIA    [ reduce using rule 58 (expresion -> numero .) ]
+
+
+state 61
+
+    (56) repOp -> operador expresion .
+    (57) repOp -> operador expresion . repOp
+    (56) repOp -> . operador expresion
+    (57) repOp -> . operador expresion repOp
+    (63) operador -> . SUMA
+    (64) operador -> . RESTA
+    (65) operador -> . MULTIPLICA
+    (66) operador -> . DIVISION
+    (67) operador -> . MODULO
+
+    $end            reduce using rule 56 (repOp -> operador expresion .)
+    PARENEND        reduce using rule 56 (repOp -> operador expresion .)
+    FINSENTENCIA    reduce using rule 56 (repOp -> operador expresion .)
+    LLAVEEND        reduce using rule 56 (repOp -> operador expresion .)
+    SUMA            shift and go to state 36
+    RESTA           shift and go to state 37
+    MULTIPLICA      shift and go to state 38
+    DIVISION        shift and go to state 39
+    MODULO          shift and go to state 40
+
+    operador                       shift and go to state 35
+    repOp                          shift and go to state 81
+
+state 62
+
+    (59) expresion -> VARIABLE .
+
+    SUMA            reduce using rule 59 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 59 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 59 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 59 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 59 (expresion -> VARIABLE .)
+    $end            reduce using rule 59 (expresion -> VARIABLE .)
+    PARENEND        reduce using rule 59 (expresion -> VARIABLE .)
+    FINSENTENCIA    reduce using rule 59 (expresion -> VARIABLE .)
+    LLAVEEND        reduce using rule 59 (expresion -> VARIABLE .)
+
+
+state 63
+
+    (12) condicion -> PARENSTART condicion . PARENEND exComparadora condicion
+    (13) condicion -> PARENSTART condicion . PARENEND
+
+    PARENEND        shift and go to state 82
+
+
+state 64
+
+    (4) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND
+    (5) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND
+    (8) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVESTART      shift and go to state 83
+
+
+state 65
+
+    (10) condicion -> dato exComparadora . dato
+    (11) condicion -> dato exComparadora . condicion
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (10) condicion -> . dato exComparadora dato
+    (11) condicion -> . dato exComparadora condicion
+    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (13) condicion -> . PARENSTART condicion PARENEND
+    (14) condicion -> . boleano
+    (15) condicion -> . NEGACION boleano
+    (16) condicion -> . NEGACION VARIABLE
+    (17) condicion -> . VARIABLE
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
+
+    VARIABLE        shift and go to state 86
+    CADENA          shift and go to state 48
+    PARENSTART      shift and go to state 41
+    NEGACION        shift and go to state 45
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+
+    dato                           shift and go to state 84
+    condicion                      shift and go to state 85
+    numero                         shift and go to state 47
+    boleano                        shift and go to state 44
+
+state 66
+
+    (18) exComparadora -> AND .
+
+    VARIABLE        reduce using rule 18 (exComparadora -> AND .)
+    CADENA          reduce using rule 18 (exComparadora -> AND .)
+    PARENSTART      reduce using rule 18 (exComparadora -> AND .)
+    NEGACION        reduce using rule 18 (exComparadora -> AND .)
+    ENTERO          reduce using rule 18 (exComparadora -> AND .)
+    DECIMAL         reduce using rule 18 (exComparadora -> AND .)
+    TRUE            reduce using rule 18 (exComparadora -> AND .)
+    FALSE           reduce using rule 18 (exComparadora -> AND .)
+
+
+state 67
+
+    (19) exComparadora -> OR .
+
+    VARIABLE        reduce using rule 19 (exComparadora -> OR .)
+    CADENA          reduce using rule 19 (exComparadora -> OR .)
+    PARENSTART      reduce using rule 19 (exComparadora -> OR .)
+    NEGACION        reduce using rule 19 (exComparadora -> OR .)
+    ENTERO          reduce using rule 19 (exComparadora -> OR .)
+    DECIMAL         reduce using rule 19 (exComparadora -> OR .)
+    TRUE            reduce using rule 19 (exComparadora -> OR .)
+    FALSE           reduce using rule 19 (exComparadora -> OR .)
+
+
+state 68
+
+    (20) exComparadora -> MAYORQUE .
+
+    VARIABLE        reduce using rule 20 (exComparadora -> MAYORQUE .)
+    CADENA          reduce using rule 20 (exComparadora -> MAYORQUE .)
+    PARENSTART      reduce using rule 20 (exComparadora -> MAYORQUE .)
+    NEGACION        reduce using rule 20 (exComparadora -> MAYORQUE .)
+    ENTERO          reduce using rule 20 (exComparadora -> MAYORQUE .)
+    DECIMAL         reduce using rule 20 (exComparadora -> MAYORQUE .)
+    TRUE            reduce using rule 20 (exComparadora -> MAYORQUE .)
+    FALSE           reduce using rule 20 (exComparadora -> MAYORQUE .)
+
+
+state 69
+
+    (21) exComparadora -> MENORQUE .
+
+    VARIABLE        reduce using rule 21 (exComparadora -> MENORQUE .)
+    CADENA          reduce using rule 21 (exComparadora -> MENORQUE .)
+    PARENSTART      reduce using rule 21 (exComparadora -> MENORQUE .)
+    NEGACION        reduce using rule 21 (exComparadora -> MENORQUE .)
+    ENTERO          reduce using rule 21 (exComparadora -> MENORQUE .)
+    DECIMAL         reduce using rule 21 (exComparadora -> MENORQUE .)
+    TRUE            reduce using rule 21 (exComparadora -> MENORQUE .)
+    FALSE           reduce using rule 21 (exComparadora -> MENORQUE .)
+
+
+state 70
+
+    (22) exComparadora -> MAYORIGUAL .
+
+    VARIABLE        reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    CADENA          reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    PARENSTART      reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    NEGACION        reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    ENTERO          reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    DECIMAL         reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    TRUE            reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+    FALSE           reduce using rule 22 (exComparadora -> MAYORIGUAL .)
+
+
+state 71
+
+    (23) exComparadora -> MENORIGUAL .
+
+    VARIABLE        reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    CADENA          reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    PARENSTART      reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    NEGACION        reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    ENTERO          reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    DECIMAL         reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    TRUE            reduce using rule 23 (exComparadora -> MENORIGUAL .)
+    FALSE           reduce using rule 23 (exComparadora -> MENORIGUAL .)
+
+
+state 72
+
+    (24) exComparadora -> IGUALDAD .
+
+    VARIABLE        reduce using rule 24 (exComparadora -> IGUALDAD .)
+    CADENA          reduce using rule 24 (exComparadora -> IGUALDAD .)
+    PARENSTART      reduce using rule 24 (exComparadora -> IGUALDAD .)
+    NEGACION        reduce using rule 24 (exComparadora -> IGUALDAD .)
+    ENTERO          reduce using rule 24 (exComparadora -> IGUALDAD .)
+    DECIMAL         reduce using rule 24 (exComparadora -> IGUALDAD .)
+    TRUE            reduce using rule 24 (exComparadora -> IGUALDAD .)
+    FALSE           reduce using rule 24 (exComparadora -> IGUALDAD .)
+
+
+state 73
+
+    (25) exComparadora -> DESIGUALDAD .
+
+    VARIABLE        reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    CADENA          reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    PARENSTART      reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    NEGACION        reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    ENTERO          reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    DECIMAL         reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    TRUE            reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+    FALSE           reduce using rule 25 (exComparadora -> DESIGUALDAD .)
+
+
+state 74
+
+    (15) condicion -> NEGACION boleano .
+
+    PARENEND        reduce using rule 15 (condicion -> NEGACION boleano .)
+
+
+state 75
+
+    (16) condicion -> NEGACION VARIABLE .
+
+    PARENEND        reduce using rule 16 (condicion -> NEGACION VARIABLE .)
+
+
+state 76
+
+    (29) declaracion -> tipoDato VARIABLE ASIGNACION dato . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 87
+
+
+state 77
+
+    (31) declaracion -> tipoDato VARIABLE ASIGNACION operaciones . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 88
+
+
+state 78
+
+    (32) asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .
+
+    $end            reduce using rule 32 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
+    LLAVEEND        reduce using rule 32 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
+
+
+state 79
+
+    (33) asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .
+
+    $end            reduce using rule 33 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
+    LLAVEEND        reduce using rule 33 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
+
+
+state 80
+
+    (34) asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .
+
+    $end            reduce using rule 34 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    LLAVEEND        reduce using rule 34 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+
+
+state 81
+
+    (57) repOp -> operador expresion repOp .
+
+    $end            reduce using rule 57 (repOp -> operador expresion repOp .)
+    PARENEND        reduce using rule 57 (repOp -> operador expresion repOp .)
+    FINSENTENCIA    reduce using rule 57 (repOp -> operador expresion repOp .)
+    LLAVEEND        reduce using rule 57 (repOp -> operador expresion repOp .)
+
+
+state 82
+
+    (12) condicion -> PARENSTART condicion PARENEND . exComparadora condicion
+    (13) condicion -> PARENSTART condicion PARENEND .
+    (18) exComparadora -> . AND
+    (19) exComparadora -> . OR
+    (20) exComparadora -> . MAYORQUE
+    (21) exComparadora -> . MENORQUE
+    (22) exComparadora -> . MAYORIGUAL
+    (23) exComparadora -> . MENORIGUAL
+    (24) exComparadora -> . IGUALDAD
+    (25) exComparadora -> . DESIGUALDAD
+
+    PARENEND        reduce using rule 13 (condicion -> PARENSTART condicion PARENEND .)
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+    MAYORQUE        shift and go to state 68
+    MENORQUE        shift and go to state 69
+    MAYORIGUAL      shift and go to state 70
+    MENORIGUAL      shift and go to state 71
+    IGUALDAD        shift and go to state 72
+    DESIGUALDAD     shift and go to state 73
+
+    exComparadora                  shift and go to state 89
+
+state 83
+
+    (4) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND
+    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE opIF
+    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE opIF
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (1) sentencias -> . condicionales
+    (2) sentencias -> . inicializacion
+    (3) condicionales -> . opIF
+    (26) inicializacion -> . declaracion
+    (27) inicializacion -> . asignacion
+    (28) inicializacion -> . operaciones
+    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (29) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+    (30) declaracion -> . tipoDato VARIABLE FINSENTENCIA
+    (31) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (32) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
+    (34) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (54) operaciones -> . expresion repOp
+    (55) operaciones -> . expresion
+    (38) tipoDato -> . INT
+    (39) tipoDato -> . FLOAT
+    (40) tipoDato -> . DOUBLE
+    (41) tipoDato -> . STRING
+    (42) tipoDato -> . LONG
+    (43) tipoDato -> . CHAR
+    (44) tipoDato -> . SHORT
+    (45) tipoDato -> . BYTE
+    (46) tipoDato -> . SBYTE
+    (47) tipoDato -> . UINT
+    (48) tipoDato -> . USHORT
+    (49) tipoDato -> . ULONG
+    (58) expresion -> . numero
+    (59) expresion -> . VARIABLE
+    (60) expresion -> . PARENSTART operaciones PARENEND
+    (61) expresion -> . PARENSTART VARIABLE PARENEND
+    (62) expresion -> . PARENSTART numero PARENEND
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+
+    LLAVEEND        shift and go to state 90
+    IF              shift and go to state 8
+    VARIABLE        shift and go to state 11
+    INT             shift and go to state 13
+    FLOAT           shift and go to state 14
+    DOUBLE          shift and go to state 15
+    STRING          shift and go to state 16
+    LONG            shift and go to state 17
+    CHAR            shift and go to state 18
+    SHORT           shift and go to state 19
+    BYTE            shift and go to state 20
+    SBYTE           shift and go to state 21
+    UINT            shift and go to state 22
+    USHORT          shift and go to state 23
+    ULONG           shift and go to state 24
+    PARENSTART      shift and go to state 9
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+
+    opIF                           shift and go to state 4
+    sentencias                     shift and go to state 91
+    condicionales                  shift and go to state 2
+    inicializacion                 shift and go to state 3
+    declaracion                    shift and go to state 5
+    asignacion                     shift and go to state 6
+    operaciones                    shift and go to state 7
+    tipoDato                       shift and go to state 10
+    expresion                      shift and go to state 12
+    numero                         shift and go to state 25
+
+state 84
+
+    (10) condicion -> dato exComparadora dato .
+    (10) condicion -> dato . exComparadora dato
+    (11) condicion -> dato . exComparadora condicion
+    (18) exComparadora -> . AND
+    (19) exComparadora -> . OR
+    (20) exComparadora -> . MAYORQUE
+    (21) exComparadora -> . MENORQUE
+    (22) exComparadora -> . MAYORIGUAL
+    (23) exComparadora -> . MENORIGUAL
+    (24) exComparadora -> . IGUALDAD
+    (25) exComparadora -> . DESIGUALDAD
+
+    PARENEND        reduce using rule 10 (condicion -> dato exComparadora dato .)
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+    MAYORQUE        shift and go to state 68
+    MENORQUE        shift and go to state 69
+    MAYORIGUAL      shift and go to state 70
+    MENORIGUAL      shift and go to state 71
+    IGUALDAD        shift and go to state 72
+    DESIGUALDAD     shift and go to state 73
+
+    exComparadora                  shift and go to state 65
+
+state 85
+
+    (11) condicion -> dato exComparadora condicion .
+
+    PARENEND        reduce using rule 11 (condicion -> dato exComparadora condicion .)
+
+
+state 86
+
+    (35) dato -> VARIABLE .
+    (17) condicion -> VARIABLE .
+
+  ! reduce/reduce conflict for PARENEND resolved using rule 17 (condicion -> VARIABLE .)
+    AND             reduce using rule 35 (dato -> VARIABLE .)
+    OR              reduce using rule 35 (dato -> VARIABLE .)
+    MAYORQUE        reduce using rule 35 (dato -> VARIABLE .)
+    MENORQUE        reduce using rule 35 (dato -> VARIABLE .)
+    MAYORIGUAL      reduce using rule 35 (dato -> VARIABLE .)
+    MENORIGUAL      reduce using rule 35 (dato -> VARIABLE .)
+    IGUALDAD        reduce using rule 35 (dato -> VARIABLE .)
+    DESIGUALDAD     reduce using rule 35 (dato -> VARIABLE .)
+    PARENEND        reduce using rule 17 (condicion -> VARIABLE .)
+
+  ! PARENEND        [ reduce using rule 35 (dato -> VARIABLE .) ]
+
+
+state 87
+
+    (29) declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .
+
+    $end            reduce using rule 29 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
+    LLAVEEND        reduce using rule 29 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
+
+
+state 88
+
+    (31) declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .
+
+    $end            reduce using rule 31 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    LLAVEEND        reduce using rule 31 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+
+
+state 89
+
+    (12) condicion -> PARENSTART condicion PARENEND exComparadora . condicion
+    (10) condicion -> . dato exComparadora dato
+    (11) condicion -> . dato exComparadora condicion
+    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (13) condicion -> . PARENSTART condicion PARENEND
+    (14) condicion -> . boleano
+    (15) condicion -> . NEGACION boleano
+    (16) condicion -> . NEGACION VARIABLE
+    (17) condicion -> . VARIABLE
+    (35) dato -> . VARIABLE
+    (36) dato -> . numero
+    (37) dato -> . CADENA
+    (50) boleano -> . TRUE
+    (51) boleano -> . FALSE
+    (52) numero -> . ENTERO
+    (53) numero -> . DECIMAL
+
+    PARENSTART      shift and go to state 41
+    NEGACION        shift and go to state 45
+    VARIABLE        shift and go to state 46
+    CADENA          shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    ENTERO          shift and go to state 26
+    DECIMAL         shift and go to state 27
+
+    condicion                      shift and go to state 92
+    dato                           shift and go to state 43
+    boleano                        shift and go to state 44
+    numero                         shift and go to state 47
+
+state 90
+
+    (4) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .
+    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE opIF
+    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE LLAVESTART LLAVEEND
+
+    $end            reduce using rule 4 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 4 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
+    ELSE            shift and go to state 93
+
+
+state 91
+
+    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE opIF
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVEEND        shift and go to state 94
+
+
+state 92
+
+    (12) condicion -> PARENSTART condicion PARENEND exComparadora condicion .
+
+    PARENEND        reduce using rule 12 (condicion -> PARENSTART condicion PARENEND exComparadora condicion .)
+
+
+state 93
+
+    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . opIF
+    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . LLAVESTART LLAVEEND
+    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVESTART      shift and go to state 95
+    IF              shift and go to state 8
+
+    opIF                           shift and go to state 96
+
+state 94
+
+    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE opIF
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE LLAVESTART LLAVEEND
+
+    $end            reduce using rule 7 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
+    LLAVEEND        reduce using rule 7 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
+    ELSE            shift and go to state 97
+
+
+state 95
+
+    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART . LLAVEEND
+
+    LLAVEEND        shift and go to state 98
+
+
+state 96
+
+    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .
+
+    $end            reduce using rule 5 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
+    LLAVEEND        reduce using rule 5 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
+
+
+state 97
+
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . opIF
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . LLAVESTART LLAVEEND
+    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVESTART      shift and go to state 99
+    IF              shift and go to state 8
+
+    opIF                           shift and go to state 100
+
+state 98
+
+    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .
+
+    $end            reduce using rule 6 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 6 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
+
+
+state 99
+
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART . LLAVEEND
+
+    LLAVEEND        shift and go to state 101
+
+
+state 100
+
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .
+
+    $end            reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
+    LLAVEEND        reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
+
+
+state 101
+
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .
+
+    $end            reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PARENEND in state 30 resolved as shift
+WARNING: shift/reduce conflict for PARENEND in state 31 resolved as shift
+WARNING: reduce/reduce conflict in state 56 resolved using rule (dato -> VARIABLE)
+WARNING: rejected rule (expresion -> VARIABLE) in state 56
+WARNING: reduce/reduce conflict in state 60 resolved using rule (dato -> numero)
+WARNING: rejected rule (expresion -> numero) in state 60
+WARNING: reduce/reduce conflict in state 86 resolved using rule (condicion -> VARIABLE)
+WARNING: rejected rule (dato -> VARIABLE) in state 86
