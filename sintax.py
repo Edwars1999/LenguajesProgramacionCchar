@@ -14,7 +14,7 @@ def p_sentencias(p):### se agrega las instrucciones del programa
 
 # -- Trabajo de Edwars: Ciclo While y Estructura Listas
 def p_repeticiones(p):
-    '''repeticiones: opWHILE'''
+    '''repeticiones : opWHILE'''
 
 def p_opWhile(p):
     '''opWHILE : WHILE  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND
@@ -72,7 +72,10 @@ def p_diccionario(p):
                    | metodosDic'''
 
 def p_metodosDic(p):
-    '''metodosDic : VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA'''
+    '''metodosDic : VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+                  | VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+                  | VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA'''
+
 
 def p_valorMetDic(p):
     '''valorMetDic : dato

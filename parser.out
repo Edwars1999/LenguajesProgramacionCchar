@@ -5,9 +5,7 @@ Unused terminals:
     ASYNC
     BREAK
     CASE
-    CLEAR
     CONST
-    CONTAINSKEY
     CONTINUE
     DEFAULT
     DO
@@ -26,207 +24,214 @@ Unused terminals:
     THIS
     UNSAFE
     VOID
-    WHILE
 
 Grammar
 
 Rule 0     S' -> sentencias
 Rule 1     sentencias -> condicionales
-Rule 2     sentencias -> inicializacion
-Rule 3     condicionales -> opIF
-Rule 4     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-Rule 5     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-Rule 6     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-Rule 7     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-Rule 8     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-Rule 9     opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
-Rule 10    condicion -> dato exComparadora dato
-Rule 11    condicion -> dato exComparadora condicion
-Rule 12    condicion -> PARENSTART condicion PARENEND exComparadora condicion
-Rule 13    condicion -> PARENSTART condicion PARENEND
-Rule 14    condicion -> boleano
-Rule 15    condicion -> NEGACION boleano
-Rule 16    condicion -> NEGACION VARIABLE
-Rule 17    condicion -> VARIABLE
-Rule 18    exComparadora -> AND
-Rule 19    exComparadora -> OR
-Rule 20    exComparadora -> MAYORQUE
-Rule 21    exComparadora -> MENORQUE
-Rule 22    exComparadora -> MAYORIGUAL
-Rule 23    exComparadora -> MENORIGUAL
-Rule 24    exComparadora -> IGUALDAD
-Rule 25    exComparadora -> DESIGUALDAD
-Rule 26    inicializacion -> declaracion
-Rule 27    inicializacion -> asignacion
-Rule 28    declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
-Rule 29    declaracion -> tipoDato VARIABLE FINSENTENCIA
-Rule 30    declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
-Rule 31    declaracion -> decEstructura
-Rule 32    decEstructura -> diccionario
-Rule 33    diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-Rule 34    diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
-Rule 35    diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-Rule 36    diccionario -> metodosDic
-Rule 37    metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
-Rule 38    valorMetDic -> dato
-Rule 39    valorMetDic -> NEW estructura
-Rule 40    clave -> INT
-Rule 41    clave -> FLOAT
-Rule 42    clave -> DOUBLE
-Rule 43    clave -> STRING
-Rule 44    clave -> LONG
-Rule 45    clave -> CHAR
-Rule 46    clave -> SHORT
-Rule 47    clave -> BYTE
-Rule 48    clave -> SBYTE
-Rule 49    clave -> UINT
-Rule 50    clave -> USHORT
-Rule 51    clave -> ULONG
-Rule 52    valor -> tipoDato
-Rule 53    valor -> estructura
-Rule 54    estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE
-Rule 55    estructura -> LIST MENORQUE valor MAYORQUE
-Rule 56    estructura -> STACK MENORQUE valor MENORQUE
-Rule 57    asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA
-Rule 58    asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA
-Rule 59    asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA
-Rule 60    dato -> VARIABLE
-Rule 61    dato -> numero
-Rule 62    dato -> CADENA
-Rule 63    tipoDato -> INT
-Rule 64    tipoDato -> FLOAT
-Rule 65    tipoDato -> DOUBLE
-Rule 66    tipoDato -> STRING
-Rule 67    tipoDato -> LONG
-Rule 68    tipoDato -> CHAR
-Rule 69    tipoDato -> SHORT
-Rule 70    tipoDato -> BYTE
-Rule 71    tipoDato -> SBYTE
-Rule 72    tipoDato -> UINT
-Rule 73    tipoDato -> USHORT
-Rule 74    tipoDato -> ULONG
-Rule 75    tipoDato -> BOOL
-Rule 76    boleano -> TRUE
-Rule 77    boleano -> FALSE
-Rule 78    numero -> ENTERO
-Rule 79    numero -> DECIMAL
-Rule 80    operaciones -> expresion repOp
-Rule 81    operaciones -> expresion
-Rule 82    repOp -> operador expresion
-Rule 83    repOp -> operador expresion repOp
-Rule 84    expresion -> numero
-Rule 85    expresion -> VARIABLE
-Rule 86    expresion -> PARENSTART operaciones PARENEND
-Rule 87    expresion -> PARENSTART VARIABLE PARENEND
-Rule 88    expresion -> PARENSTART numero PARENEND
-Rule 89    operador -> SUMA
-Rule 90    operador -> RESTA
-Rule 91    operador -> MULTIPLICA
-Rule 92    operador -> DIVISION
-Rule 93    operador -> MODULO
+Rule 2     sentencias -> repeticiones
+Rule 3     sentencias -> inicializacion
+Rule 4     repeticiones -> opWHILE
+Rule 5     opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+Rule 6     opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+Rule 7     condicionales -> opIF
+Rule 8     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+Rule 9     opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+Rule 10    opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+Rule 11    opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+Rule 12    opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+Rule 13    opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+Rule 14    condicion -> dato exComparadora dato
+Rule 15    condicion -> dato exComparadora condicion
+Rule 16    condicion -> PARENSTART condicion PARENEND exComparadora condicion
+Rule 17    condicion -> PARENSTART condicion PARENEND
+Rule 18    condicion -> boleano
+Rule 19    condicion -> NEGACION boleano
+Rule 20    condicion -> NEGACION VARIABLE
+Rule 21    condicion -> VARIABLE
+Rule 22    exComparadora -> AND
+Rule 23    exComparadora -> OR
+Rule 24    exComparadora -> MAYORQUE
+Rule 25    exComparadora -> MENORQUE
+Rule 26    exComparadora -> MAYORIGUAL
+Rule 27    exComparadora -> MENORIGUAL
+Rule 28    exComparadora -> IGUALDAD
+Rule 29    exComparadora -> DESIGUALDAD
+Rule 30    inicializacion -> declaracion
+Rule 31    inicializacion -> asignacion
+Rule 32    declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+Rule 33    declaracion -> tipoDato VARIABLE FINSENTENCIA
+Rule 34    declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+Rule 35    declaracion -> decEstructura
+Rule 36    decEstructura -> diccionario
+Rule 37    diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+Rule 38    diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+Rule 39    diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+Rule 40    diccionario -> metodosDic
+Rule 41    metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+Rule 42    metodosDic -> VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+Rule 43    metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
+Rule 44    valorMetDic -> dato
+Rule 45    valorMetDic -> NEW estructura
+Rule 46    clave -> INT
+Rule 47    clave -> FLOAT
+Rule 48    clave -> DOUBLE
+Rule 49    clave -> STRING
+Rule 50    clave -> LONG
+Rule 51    clave -> CHAR
+Rule 52    clave -> SHORT
+Rule 53    clave -> BYTE
+Rule 54    clave -> SBYTE
+Rule 55    clave -> UINT
+Rule 56    clave -> USHORT
+Rule 57    clave -> ULONG
+Rule 58    valor -> tipoDato
+Rule 59    valor -> estructura
+Rule 60    estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE
+Rule 61    estructura -> LIST MENORQUE valor MAYORQUE
+Rule 62    estructura -> STACK MENORQUE valor MENORQUE
+Rule 63    asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA
+Rule 64    asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA
+Rule 65    asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA
+Rule 66    dato -> VARIABLE
+Rule 67    dato -> numero
+Rule 68    dato -> CADENA
+Rule 69    tipoDato -> INT
+Rule 70    tipoDato -> FLOAT
+Rule 71    tipoDato -> DOUBLE
+Rule 72    tipoDato -> STRING
+Rule 73    tipoDato -> LONG
+Rule 74    tipoDato -> CHAR
+Rule 75    tipoDato -> SHORT
+Rule 76    tipoDato -> BYTE
+Rule 77    tipoDato -> SBYTE
+Rule 78    tipoDato -> UINT
+Rule 79    tipoDato -> USHORT
+Rule 80    tipoDato -> ULONG
+Rule 81    tipoDato -> BOOL
+Rule 82    boleano -> TRUE
+Rule 83    boleano -> FALSE
+Rule 84    numero -> ENTERO
+Rule 85    numero -> DECIMAL
+Rule 86    operaciones -> expresion repOp
+Rule 87    operaciones -> expresion
+Rule 88    repOp -> operador expresion
+Rule 89    repOp -> operador expresion repOp
+Rule 90    expresion -> numero
+Rule 91    expresion -> VARIABLE
+Rule 92    expresion -> PARENSTART operaciones PARENEND
+Rule 93    expresion -> PARENSTART VARIABLE PARENEND
+Rule 94    expresion -> PARENSTART numero PARENEND
+Rule 95    operador -> SUMA
+Rule 96    operador -> RESTA
+Rule 97    operador -> MULTIPLICA
+Rule 98    operador -> DIVISION
+Rule 99    operador -> MODULO
 
 Terminals, with rules where they appear
 
-ADD                  : 37
-AND                  : 18
-ASIGNACION           : 28 30 33 57 58 59
+ADD                  : 41
+AND                  : 22
+ASIGNACION           : 32 34 37 63 64 65
 ASYNC                : 
-BOOL                 : 75
+BOOL                 : 81
 BREAK                : 
-BYTE                 : 47 70
-CADENA               : 62
+BYTE                 : 53 76
+CADENA               : 68
 CASE                 : 
-CHAR                 : 45 68
-CLEAR                : 
-COMA                 : 33 33 34 35 37 54
+CHAR                 : 51 74
+CLEAR                : 42
+COMA                 : 37 37 38 39 41 60
 CONST                : 
-CONTAINSKEY          : 
+CONTAINSKEY          : 43
 CONTINUE             : 
-DECIMAL              : 79
+DECIMAL              : 85
 DEFAULT              : 
-DESIGUALDAD          : 25
-DICTIONARY           : 33 33 34 35 54
-DIVISION             : 92
+DESIGUALDAD          : 29
+DICTIONARY           : 37 37 38 39 60
+DIVISION             : 98
 DO                   : 
-DOUBLE               : 42 65
-ELSE                 : 5 6 8 9
-ENTERO               : 78
+DOUBLE               : 48 71
+ELSE                 : 9 10 12 13
+ENTERO               : 84
 EXTERN               : 
-FALSE                : 77
-FINSENTENCIA         : 28 29 30 33 34 35 37 57 58 59
-FLOAT                : 41 64
+FALSE                : 83
+FINSENTENCIA         : 32 33 34 37 38 39 41 42 43 63 64 65
+FLOAT                : 47 70
 FOR                  : 
 FOREACH              : 
-IF                   : 4 5 6 7 8 9
-IGUALDAD             : 24 35
+IF                   : 8 9 10 11 12 13
+IGUALDAD             : 28 39
 IN                   : 
-INT                  : 40 63
-LIST                 : 55
-LLAVEEND             : 4 5 6 6 7 8 9 9
-LLAVESTART           : 4 5 6 6 7 8 9 9
-LONG                 : 44 67
-MAYORIGUAL           : 22
-MAYORQUE             : 20 33 33 34 35 54 55
-MENORIGUAL           : 23
-MENORQUE             : 21 33 33 34 35 54 55 56 56
-MODULO               : 93
-MULTIPLICA           : 91
-NEGACION             : 15 16
-NEW                  : 33 35 39
+INT                  : 46 69
+LIST                 : 61
+LLAVEEND             : 5 6 8 9 10 10 11 12 13 13
+LLAVESTART           : 5 6 8 9 10 10 11 12 13 13
+LONG                 : 50 73
+MAYORIGUAL           : 26
+MAYORQUE             : 24 37 37 38 39 60 61
+MENORIGUAL           : 27
+MENORQUE             : 25 37 37 38 39 60 61 62 62
+MODULO               : 99
+MULTIPLICA           : 97
+NEGACION             : 19 20
+NEW                  : 37 39 45
 NULL                 : 
-OR                   : 19
-PARENEND             : 4 5 6 7 8 9 12 13 33 35 37 86 87 88
-PARENSTART           : 4 5 6 7 8 9 12 13 33 35 37 86 87 88
+OR                   : 23
+PARENEND             : 5 6 8 9 10 11 12 13 16 17 37 39 41 42 43 92 93 94
+PARENSTART           : 5 6 8 9 10 11 12 13 16 17 37 39 41 42 43 92 93 94
 PRIVATE              : 
 PROTECTED            : 
 PUBLIC               : 
-PUNTO                : 37
-RESTA                : 90
+PUNTO                : 41 42 43
+RESTA                : 96
 RETURN               : 
-SBYTE                : 48 71
-SHORT                : 46 69
+SBYTE                : 54 77
+SHORT                : 52 75
 SPACE                : 
-STACK                : 56
+STACK                : 62
 STATIC               : 
-STRING               : 43 66
-SUMA                 : 89
+STRING               : 49 72
+SUMA                 : 95
 SWITCH               : 
 THIS                 : 
-TRUE                 : 76
-UINT                 : 49 72
-ULONG                : 51 74
+TRUE                 : 82
+UINT                 : 55 78
+ULONG                : 57 80
 UNSAFE               : 
-USHORT               : 50 73
-VARIABLE             : 16 17 28 29 30 33 34 35 37 57 58 59 60 85 87
+USHORT               : 56 79
+VARIABLE             : 20 21 32 33 34 37 38 39 41 42 43 63 64 65 66 91 93
 VOID                 : 
-WHILE                : 
+WHILE                : 5 6
 error                : 
 
 Nonterminals, with rules where they appear
 
-asignacion           : 27
-boleano              : 14 15 58
-clave                : 33 33 34 35 54
-condicion            : 4 5 6 7 8 9 11 12 12 13
+asignacion           : 31
+boleano              : 18 19 64
+clave                : 37 37 38 39 60
+condicion            : 5 6 8 9 10 11 12 13 15 16 16 17
 condicionales        : 1
-dato                 : 10 10 11 28 37 38 57
-decEstructura        : 31
-declaracion          : 26
-diccionario          : 32
-estructura           : 39 53
-exComparadora        : 10 11 12
-expresion            : 80 81 82 83
-inicializacion       : 2
-metodosDic           : 36
-numero               : 61 84 88
-opIF                 : 3 5 8
-operaciones          : 30 59 86
-operador             : 82 83
-repOp                : 80 83
-sentencias           : 7 8 9 0
-tipoDato             : 28 29 30 52
-valor                : 33 33 34 35 54 55 56
-valorMetDic          : 37
+dato                 : 14 14 15 32 41 43 44 63
+decEstructura        : 35
+declaracion          : 30
+diccionario          : 36
+estructura           : 45 59
+exComparadora        : 14 15 16
+expresion            : 86 87 88 89
+inicializacion       : 3
+metodosDic           : 40
+numero               : 67 90 94
+opIF                 : 7 9 12
+opWHILE              : 4
+operaciones          : 34 65 92
+operador             : 88 89
+repOp                : 86 89
+repeticiones         : 2
+sentencias           : 6 11 12 13 0
+tipoDato             : 32 33 34 58
+valor                : 37 37 38 39 60 61 62
+valorMetDic          : 41
 
 Parsing method: LALR
 
@@ -234,70 +239,79 @@ state 0
 
     (0) S' -> . sentencias
     (1) sentencias -> . condicionales
-    (2) sentencias -> . inicializacion
-    (3) condicionales -> . opIF
-    (26) inicializacion -> . declaracion
-    (27) inicializacion -> . asignacion
-    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
-    (28) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
-    (29) declaracion -> . tipoDato VARIABLE FINSENTENCIA
-    (30) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (31) declaracion -> . decEstructura
-    (57) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
-    (58) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
-    (59) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (32) decEstructura -> . diccionario
-    (33) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
-    (35) diccionario -> . VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (36) diccionario -> . metodosDic
-    (37) metodosDic -> . VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (2) sentencias -> . repeticiones
+    (3) sentencias -> . inicializacion
+    (7) condicionales -> . opIF
+    (4) repeticiones -> . opWHILE
+    (30) inicializacion -> . declaracion
+    (31) inicializacion -> . asignacion
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (5) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (32) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) declaracion -> . tipoDato VARIABLE FINSENTENCIA
+    (34) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (35) declaracion -> . decEstructura
+    (63) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
+    (64) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
+    (65) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (36) decEstructura -> . diccionario
+    (37) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (39) diccionario -> . VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (40) diccionario -> . metodosDic
+    (41) metodosDic -> . VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (42) metodosDic -> . VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> . VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
 
-    IF              shift and go to state 7
-    VARIABLE        shift and go to state 9
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 25
+    IF              shift and go to state 9
+    WHILE           shift and go to state 10
+    VARIABLE        shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 28
 
     sentencias                     shift and go to state 1
     condicionales                  shift and go to state 2
-    inicializacion                 shift and go to state 3
-    opIF                           shift and go to state 4
-    declaracion                    shift and go to state 5
-    asignacion                     shift and go to state 6
-    tipoDato                       shift and go to state 8
-    decEstructura                  shift and go to state 10
-    diccionario                    shift and go to state 24
-    metodosDic                     shift and go to state 26
+    repeticiones                   shift and go to state 3
+    inicializacion                 shift and go to state 4
+    opIF                           shift and go to state 5
+    opWHILE                        shift and go to state 6
+    declaracion                    shift and go to state 7
+    asignacion                     shift and go to state 8
+    tipoDato                       shift and go to state 11
+    decEstructura                  shift and go to state 13
+    diccionario                    shift and go to state 27
+    metodosDic                     shift and go to state 29
 
 state 1
 
@@ -315,2236 +329,2503 @@ state 2
 
 state 3
 
-    (2) sentencias -> inicializacion .
+    (2) sentencias -> repeticiones .
 
-    $end            reduce using rule 2 (sentencias -> inicializacion .)
-    LLAVEEND        reduce using rule 2 (sentencias -> inicializacion .)
+    $end            reduce using rule 2 (sentencias -> repeticiones .)
+    LLAVEEND        reduce using rule 2 (sentencias -> repeticiones .)
 
 
 state 4
 
-    (3) condicionales -> opIF .
+    (3) sentencias -> inicializacion .
 
-    $end            reduce using rule 3 (condicionales -> opIF .)
-    LLAVEEND        reduce using rule 3 (condicionales -> opIF .)
+    $end            reduce using rule 3 (sentencias -> inicializacion .)
+    LLAVEEND        reduce using rule 3 (sentencias -> inicializacion .)
 
 
 state 5
 
-    (26) inicializacion -> declaracion .
+    (7) condicionales -> opIF .
 
-    $end            reduce using rule 26 (inicializacion -> declaracion .)
-    LLAVEEND        reduce using rule 26 (inicializacion -> declaracion .)
+    $end            reduce using rule 7 (condicionales -> opIF .)
+    LLAVEEND        reduce using rule 7 (condicionales -> opIF .)
 
 
 state 6
 
-    (27) inicializacion -> asignacion .
+    (4) repeticiones -> opWHILE .
 
-    $end            reduce using rule 27 (inicializacion -> asignacion .)
-    LLAVEEND        reduce using rule 27 (inicializacion -> asignacion .)
+    $end            reduce using rule 4 (repeticiones -> opWHILE .)
+    LLAVEEND        reduce using rule 4 (repeticiones -> opWHILE .)
 
 
 state 7
 
-    (4) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (30) inicializacion -> declaracion .
 
-    PARENSTART      shift and go to state 27
+    $end            reduce using rule 30 (inicializacion -> declaracion .)
+    LLAVEEND        reduce using rule 30 (inicializacion -> declaracion .)
 
 
 state 8
 
-    (28) declaracion -> tipoDato . VARIABLE ASIGNACION dato FINSENTENCIA
-    (29) declaracion -> tipoDato . VARIABLE FINSENTENCIA
-    (30) declaracion -> tipoDato . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (31) inicializacion -> asignacion .
 
-    VARIABLE        shift and go to state 28
+    $end            reduce using rule 31 (inicializacion -> asignacion .)
+    LLAVEEND        reduce using rule 31 (inicializacion -> asignacion .)
 
 
 state 9
 
-    (57) asignacion -> VARIABLE . ASIGNACION dato FINSENTENCIA
-    (58) asignacion -> VARIABLE . ASIGNACION boleano FINSENTENCIA
-    (59) asignacion -> VARIABLE . ASIGNACION operaciones FINSENTENCIA
-    (35) diccionario -> VARIABLE . IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (37) metodosDic -> VARIABLE . PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (8) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> IF . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    ASIGNACION      shift and go to state 29
-    IGUALDAD        shift and go to state 30
-    PUNTO           shift and go to state 31
+    PARENSTART      shift and go to state 30
 
 
 state 10
 
-    (31) declaracion -> decEstructura .
+    (5) opWHILE -> WHILE . PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> WHILE . PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
 
-    $end            reduce using rule 31 (declaracion -> decEstructura .)
-    LLAVEEND        reduce using rule 31 (declaracion -> decEstructura .)
+    PARENSTART      shift and go to state 31
 
 
 state 11
 
-    (63) tipoDato -> INT .
+    (32) declaracion -> tipoDato . VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) declaracion -> tipoDato . VARIABLE FINSENTENCIA
+    (34) declaracion -> tipoDato . VARIABLE ASIGNACION operaciones FINSENTENCIA
 
-    VARIABLE        reduce using rule 63 (tipoDato -> INT .)
-    MAYORQUE        reduce using rule 63 (tipoDato -> INT .)
-    MENORQUE        reduce using rule 63 (tipoDato -> INT .)
+    VARIABLE        shift and go to state 32
 
 
 state 12
 
-    (64) tipoDato -> FLOAT .
+    (63) asignacion -> VARIABLE . ASIGNACION dato FINSENTENCIA
+    (64) asignacion -> VARIABLE . ASIGNACION boleano FINSENTENCIA
+    (65) asignacion -> VARIABLE . ASIGNACION operaciones FINSENTENCIA
+    (39) diccionario -> VARIABLE . IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (41) metodosDic -> VARIABLE . PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (42) metodosDic -> VARIABLE . PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> VARIABLE . PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
 
-    VARIABLE        reduce using rule 64 (tipoDato -> FLOAT .)
-    MAYORQUE        reduce using rule 64 (tipoDato -> FLOAT .)
-    MENORQUE        reduce using rule 64 (tipoDato -> FLOAT .)
+    ASIGNACION      shift and go to state 33
+    IGUALDAD        shift and go to state 34
+    PUNTO           shift and go to state 35
 
 
 state 13
 
-    (65) tipoDato -> DOUBLE .
+    (35) declaracion -> decEstructura .
 
-    VARIABLE        reduce using rule 65 (tipoDato -> DOUBLE .)
-    MAYORQUE        reduce using rule 65 (tipoDato -> DOUBLE .)
-    MENORQUE        reduce using rule 65 (tipoDato -> DOUBLE .)
+    $end            reduce using rule 35 (declaracion -> decEstructura .)
+    LLAVEEND        reduce using rule 35 (declaracion -> decEstructura .)
 
 
 state 14
 
-    (66) tipoDato -> STRING .
+    (69) tipoDato -> INT .
 
-    VARIABLE        reduce using rule 66 (tipoDato -> STRING .)
-    MAYORQUE        reduce using rule 66 (tipoDato -> STRING .)
-    MENORQUE        reduce using rule 66 (tipoDato -> STRING .)
+    VARIABLE        reduce using rule 69 (tipoDato -> INT .)
+    MAYORQUE        reduce using rule 69 (tipoDato -> INT .)
+    MENORQUE        reduce using rule 69 (tipoDato -> INT .)
 
 
 state 15
 
-    (67) tipoDato -> LONG .
+    (70) tipoDato -> FLOAT .
 
-    VARIABLE        reduce using rule 67 (tipoDato -> LONG .)
-    MAYORQUE        reduce using rule 67 (tipoDato -> LONG .)
-    MENORQUE        reduce using rule 67 (tipoDato -> LONG .)
+    VARIABLE        reduce using rule 70 (tipoDato -> FLOAT .)
+    MAYORQUE        reduce using rule 70 (tipoDato -> FLOAT .)
+    MENORQUE        reduce using rule 70 (tipoDato -> FLOAT .)
 
 
 state 16
 
-    (68) tipoDato -> CHAR .
+    (71) tipoDato -> DOUBLE .
 
-    VARIABLE        reduce using rule 68 (tipoDato -> CHAR .)
-    MAYORQUE        reduce using rule 68 (tipoDato -> CHAR .)
-    MENORQUE        reduce using rule 68 (tipoDato -> CHAR .)
+    VARIABLE        reduce using rule 71 (tipoDato -> DOUBLE .)
+    MAYORQUE        reduce using rule 71 (tipoDato -> DOUBLE .)
+    MENORQUE        reduce using rule 71 (tipoDato -> DOUBLE .)
 
 
 state 17
 
-    (69) tipoDato -> SHORT .
+    (72) tipoDato -> STRING .
 
-    VARIABLE        reduce using rule 69 (tipoDato -> SHORT .)
-    MAYORQUE        reduce using rule 69 (tipoDato -> SHORT .)
-    MENORQUE        reduce using rule 69 (tipoDato -> SHORT .)
+    VARIABLE        reduce using rule 72 (tipoDato -> STRING .)
+    MAYORQUE        reduce using rule 72 (tipoDato -> STRING .)
+    MENORQUE        reduce using rule 72 (tipoDato -> STRING .)
 
 
 state 18
 
-    (70) tipoDato -> BYTE .
+    (73) tipoDato -> LONG .
 
-    VARIABLE        reduce using rule 70 (tipoDato -> BYTE .)
-    MAYORQUE        reduce using rule 70 (tipoDato -> BYTE .)
-    MENORQUE        reduce using rule 70 (tipoDato -> BYTE .)
+    VARIABLE        reduce using rule 73 (tipoDato -> LONG .)
+    MAYORQUE        reduce using rule 73 (tipoDato -> LONG .)
+    MENORQUE        reduce using rule 73 (tipoDato -> LONG .)
 
 
 state 19
 
-    (71) tipoDato -> SBYTE .
+    (74) tipoDato -> CHAR .
 
-    VARIABLE        reduce using rule 71 (tipoDato -> SBYTE .)
-    MAYORQUE        reduce using rule 71 (tipoDato -> SBYTE .)
-    MENORQUE        reduce using rule 71 (tipoDato -> SBYTE .)
+    VARIABLE        reduce using rule 74 (tipoDato -> CHAR .)
+    MAYORQUE        reduce using rule 74 (tipoDato -> CHAR .)
+    MENORQUE        reduce using rule 74 (tipoDato -> CHAR .)
 
 
 state 20
 
-    (72) tipoDato -> UINT .
+    (75) tipoDato -> SHORT .
 
-    VARIABLE        reduce using rule 72 (tipoDato -> UINT .)
-    MAYORQUE        reduce using rule 72 (tipoDato -> UINT .)
-    MENORQUE        reduce using rule 72 (tipoDato -> UINT .)
+    VARIABLE        reduce using rule 75 (tipoDato -> SHORT .)
+    MAYORQUE        reduce using rule 75 (tipoDato -> SHORT .)
+    MENORQUE        reduce using rule 75 (tipoDato -> SHORT .)
 
 
 state 21
 
-    (73) tipoDato -> USHORT .
+    (76) tipoDato -> BYTE .
 
-    VARIABLE        reduce using rule 73 (tipoDato -> USHORT .)
-    MAYORQUE        reduce using rule 73 (tipoDato -> USHORT .)
-    MENORQUE        reduce using rule 73 (tipoDato -> USHORT .)
+    VARIABLE        reduce using rule 76 (tipoDato -> BYTE .)
+    MAYORQUE        reduce using rule 76 (tipoDato -> BYTE .)
+    MENORQUE        reduce using rule 76 (tipoDato -> BYTE .)
 
 
 state 22
 
-    (74) tipoDato -> ULONG .
+    (77) tipoDato -> SBYTE .
 
-    VARIABLE        reduce using rule 74 (tipoDato -> ULONG .)
-    MAYORQUE        reduce using rule 74 (tipoDato -> ULONG .)
-    MENORQUE        reduce using rule 74 (tipoDato -> ULONG .)
+    VARIABLE        reduce using rule 77 (tipoDato -> SBYTE .)
+    MAYORQUE        reduce using rule 77 (tipoDato -> SBYTE .)
+    MENORQUE        reduce using rule 77 (tipoDato -> SBYTE .)
 
 
 state 23
 
-    (75) tipoDato -> BOOL .
+    (78) tipoDato -> UINT .
 
-    VARIABLE        reduce using rule 75 (tipoDato -> BOOL .)
-    MAYORQUE        reduce using rule 75 (tipoDato -> BOOL .)
-    MENORQUE        reduce using rule 75 (tipoDato -> BOOL .)
+    VARIABLE        reduce using rule 78 (tipoDato -> UINT .)
+    MAYORQUE        reduce using rule 78 (tipoDato -> UINT .)
+    MENORQUE        reduce using rule 78 (tipoDato -> UINT .)
 
 
 state 24
 
-    (32) decEstructura -> diccionario .
+    (79) tipoDato -> USHORT .
 
-    $end            reduce using rule 32 (decEstructura -> diccionario .)
-    LLAVEEND        reduce using rule 32 (decEstructura -> diccionario .)
+    VARIABLE        reduce using rule 79 (tipoDato -> USHORT .)
+    MAYORQUE        reduce using rule 79 (tipoDato -> USHORT .)
+    MENORQUE        reduce using rule 79 (tipoDato -> USHORT .)
 
 
 state 25
 
-    (33) diccionario -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (80) tipoDato -> ULONG .
 
-    MENORQUE        shift and go to state 32
+    VARIABLE        reduce using rule 80 (tipoDato -> ULONG .)
+    MAYORQUE        reduce using rule 80 (tipoDato -> ULONG .)
+    MENORQUE        reduce using rule 80 (tipoDato -> ULONG .)
 
 
 state 26
 
-    (36) diccionario -> metodosDic .
+    (81) tipoDato -> BOOL .
 
-    $end            reduce using rule 36 (diccionario -> metodosDic .)
-    LLAVEEND        reduce using rule 36 (diccionario -> metodosDic .)
+    VARIABLE        reduce using rule 81 (tipoDato -> BOOL .)
+    MAYORQUE        reduce using rule 81 (tipoDato -> BOOL .)
+    MENORQUE        reduce using rule 81 (tipoDato -> BOOL .)
 
 
 state 27
 
-    (4) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
-    (10) condicion -> . dato exComparadora dato
-    (11) condicion -> . dato exComparadora condicion
-    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
-    (13) condicion -> . PARENSTART condicion PARENEND
-    (14) condicion -> . boleano
-    (15) condicion -> . NEGACION boleano
-    (16) condicion -> . NEGACION VARIABLE
-    (17) condicion -> . VARIABLE
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
+    (36) decEstructura -> diccionario .
 
-    PARENSTART      shift and go to state 33
-    NEGACION        shift and go to state 37
-    VARIABLE        shift and go to state 38
-    CADENA          shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
+    $end            reduce using rule 36 (decEstructura -> diccionario .)
+    LLAVEEND        reduce using rule 36 (decEstructura -> diccionario .)
 
-    condicion                      shift and go to state 34
-    dato                           shift and go to state 35
-    boleano                        shift and go to state 36
-    numero                         shift and go to state 39
 
 state 28
 
-    (28) declaracion -> tipoDato VARIABLE . ASIGNACION dato FINSENTENCIA
-    (29) declaracion -> tipoDato VARIABLE . FINSENTENCIA
-    (30) declaracion -> tipoDato VARIABLE . ASIGNACION operaciones FINSENTENCIA
+    (37) diccionario -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
 
-    ASIGNACION      shift and go to state 45
-    FINSENTENCIA    shift and go to state 46
+    MENORQUE        shift and go to state 36
 
 
 state 29
 
-    (57) asignacion -> VARIABLE ASIGNACION . dato FINSENTENCIA
-    (58) asignacion -> VARIABLE ASIGNACION . boleano FINSENTENCIA
-    (59) asignacion -> VARIABLE ASIGNACION . operaciones FINSENTENCIA
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
-    (80) operaciones -> . expresion repOp
-    (81) operaciones -> . expresion
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
-    (84) expresion -> . numero
-    (85) expresion -> . VARIABLE
-    (86) expresion -> . PARENSTART operaciones PARENEND
-    (87) expresion -> . PARENSTART VARIABLE PARENEND
-    (88) expresion -> . PARENSTART numero PARENEND
+    (40) diccionario -> metodosDic .
 
-    VARIABLE        shift and go to state 47
-    CADENA          shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
-    PARENSTART      shift and go to state 53
+    $end            reduce using rule 40 (diccionario -> metodosDic .)
+    LLAVEEND        reduce using rule 40 (diccionario -> metodosDic .)
 
-    dato                           shift and go to state 48
-    boleano                        shift and go to state 49
-    operaciones                    shift and go to state 50
-    numero                         shift and go to state 51
-    expresion                      shift and go to state 52
 
 state 30
 
-    (35) diccionario -> VARIABLE IGUALDAD . NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (8) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> IF PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (14) condicion -> . dato exComparadora dato
+    (15) condicion -> . dato exComparadora condicion
+    (16) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (17) condicion -> . PARENSTART condicion PARENEND
+    (18) condicion -> . boleano
+    (19) condicion -> . NEGACION boleano
+    (20) condicion -> . NEGACION VARIABLE
+    (21) condicion -> . VARIABLE
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    NEW             shift and go to state 54
+    PARENSTART      shift and go to state 37
+    NEGACION        shift and go to state 41
+    VARIABLE        shift and go to state 42
+    CADENA          shift and go to state 44
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
+    condicion                      shift and go to state 38
+    dato                           shift and go to state 39
+    boleano                        shift and go to state 40
+    numero                         shift and go to state 43
 
 state 31
 
-    (37) metodosDic -> VARIABLE PUNTO . ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (5) opWHILE -> WHILE PARENSTART . condicion PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> WHILE PARENSTART . condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (14) condicion -> . dato exComparadora dato
+    (15) condicion -> . dato exComparadora condicion
+    (16) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (17) condicion -> . PARENSTART condicion PARENEND
+    (18) condicion -> . boleano
+    (19) condicion -> . NEGACION boleano
+    (20) condicion -> . NEGACION VARIABLE
+    (21) condicion -> . VARIABLE
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    ADD             shift and go to state 55
+    PARENSTART      shift and go to state 37
+    NEGACION        shift and go to state 41
+    VARIABLE        shift and go to state 42
+    CADENA          shift and go to state 44
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
+    condicion                      shift and go to state 49
+    dato                           shift and go to state 39
+    boleano                        shift and go to state 40
+    numero                         shift and go to state 43
 
 state 32
 
-    (33) diccionario -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
-    (40) clave -> . INT
-    (41) clave -> . FLOAT
-    (42) clave -> . DOUBLE
-    (43) clave -> . STRING
-    (44) clave -> . LONG
-    (45) clave -> . CHAR
-    (46) clave -> . SHORT
-    (47) clave -> . BYTE
-    (48) clave -> . SBYTE
-    (49) clave -> . UINT
-    (50) clave -> . USHORT
-    (51) clave -> . ULONG
+    (32) declaracion -> tipoDato VARIABLE . ASIGNACION dato FINSENTENCIA
+    (33) declaracion -> tipoDato VARIABLE . FINSENTENCIA
+    (34) declaracion -> tipoDato VARIABLE . ASIGNACION operaciones FINSENTENCIA
 
-    INT             shift and go to state 57
-    FLOAT           shift and go to state 58
-    DOUBLE          shift and go to state 59
-    STRING          shift and go to state 60
-    LONG            shift and go to state 61
-    CHAR            shift and go to state 62
-    SHORT           shift and go to state 63
-    BYTE            shift and go to state 64
-    SBYTE           shift and go to state 65
-    UINT            shift and go to state 66
-    USHORT          shift and go to state 67
-    ULONG           shift and go to state 68
+    ASIGNACION      shift and go to state 50
+    FINSENTENCIA    shift and go to state 51
 
-    clave                          shift and go to state 56
 
 state 33
 
-    (12) condicion -> PARENSTART . condicion PARENEND exComparadora condicion
-    (13) condicion -> PARENSTART . condicion PARENEND
-    (10) condicion -> . dato exComparadora dato
-    (11) condicion -> . dato exComparadora condicion
-    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
-    (13) condicion -> . PARENSTART condicion PARENEND
-    (14) condicion -> . boleano
-    (15) condicion -> . NEGACION boleano
-    (16) condicion -> . NEGACION VARIABLE
-    (17) condicion -> . VARIABLE
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
+    (63) asignacion -> VARIABLE ASIGNACION . dato FINSENTENCIA
+    (64) asignacion -> VARIABLE ASIGNACION . boleano FINSENTENCIA
+    (65) asignacion -> VARIABLE ASIGNACION . operaciones FINSENTENCIA
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+    (86) operaciones -> . expresion repOp
+    (87) operaciones -> . expresion
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
+    (90) expresion -> . numero
+    (91) expresion -> . VARIABLE
+    (92) expresion -> . PARENSTART operaciones PARENEND
+    (93) expresion -> . PARENSTART VARIABLE PARENEND
+    (94) expresion -> . PARENSTART numero PARENEND
 
-    PARENSTART      shift and go to state 33
-    NEGACION        shift and go to state 37
-    VARIABLE        shift and go to state 38
-    CADENA          shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
+    VARIABLE        shift and go to state 52
+    CADENA          shift and go to state 44
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
+    PARENSTART      shift and go to state 58
 
-    condicion                      shift and go to state 69
-    dato                           shift and go to state 35
-    boleano                        shift and go to state 36
-    numero                         shift and go to state 39
+    dato                           shift and go to state 53
+    boleano                        shift and go to state 54
+    operaciones                    shift and go to state 55
+    numero                         shift and go to state 56
+    expresion                      shift and go to state 57
 
 state 34
 
-    (4) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (39) diccionario -> VARIABLE IGUALDAD . NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
 
-    PARENEND        shift and go to state 70
+    NEW             shift and go to state 59
 
 
 state 35
 
-    (10) condicion -> dato . exComparadora dato
-    (11) condicion -> dato . exComparadora condicion
-    (18) exComparadora -> . AND
-    (19) exComparadora -> . OR
-    (20) exComparadora -> . MAYORQUE
-    (21) exComparadora -> . MENORQUE
-    (22) exComparadora -> . MAYORIGUAL
-    (23) exComparadora -> . MENORIGUAL
-    (24) exComparadora -> . IGUALDAD
-    (25) exComparadora -> . DESIGUALDAD
+    (41) metodosDic -> VARIABLE PUNTO . ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (42) metodosDic -> VARIABLE PUNTO . CLEAR PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> VARIABLE PUNTO . CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
 
-    AND             shift and go to state 72
-    OR              shift and go to state 73
-    MAYORQUE        shift and go to state 74
-    MENORQUE        shift and go to state 75
-    MAYORIGUAL      shift and go to state 76
-    MENORIGUAL      shift and go to state 77
-    IGUALDAD        shift and go to state 78
-    DESIGUALDAD     shift and go to state 79
+    ADD             shift and go to state 60
+    CLEAR           shift and go to state 61
+    CONTAINSKEY     shift and go to state 62
 
-    exComparadora                  shift and go to state 71
 
 state 36
 
-    (14) condicion -> boleano .
+    (37) diccionario -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (46) clave -> . INT
+    (47) clave -> . FLOAT
+    (48) clave -> . DOUBLE
+    (49) clave -> . STRING
+    (50) clave -> . LONG
+    (51) clave -> . CHAR
+    (52) clave -> . SHORT
+    (53) clave -> . BYTE
+    (54) clave -> . SBYTE
+    (55) clave -> . UINT
+    (56) clave -> . USHORT
+    (57) clave -> . ULONG
 
-    PARENEND        reduce using rule 14 (condicion -> boleano .)
+    INT             shift and go to state 64
+    FLOAT           shift and go to state 65
+    DOUBLE          shift and go to state 66
+    STRING          shift and go to state 67
+    LONG            shift and go to state 68
+    CHAR            shift and go to state 69
+    SHORT           shift and go to state 70
+    BYTE            shift and go to state 71
+    SBYTE           shift and go to state 72
+    UINT            shift and go to state 73
+    USHORT          shift and go to state 74
+    ULONG           shift and go to state 75
 
+    clave                          shift and go to state 63
 
 state 37
 
-    (15) condicion -> NEGACION . boleano
-    (16) condicion -> NEGACION . VARIABLE
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
+    (16) condicion -> PARENSTART . condicion PARENEND exComparadora condicion
+    (17) condicion -> PARENSTART . condicion PARENEND
+    (14) condicion -> . dato exComparadora dato
+    (15) condicion -> . dato exComparadora condicion
+    (16) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (17) condicion -> . PARENSTART condicion PARENEND
+    (18) condicion -> . boleano
+    (19) condicion -> . NEGACION boleano
+    (20) condicion -> . NEGACION VARIABLE
+    (21) condicion -> . VARIABLE
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    VARIABLE        shift and go to state 81
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARENSTART      shift and go to state 37
+    NEGACION        shift and go to state 41
+    VARIABLE        shift and go to state 42
+    CADENA          shift and go to state 44
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
-    boleano                        shift and go to state 80
+    condicion                      shift and go to state 76
+    dato                           shift and go to state 39
+    boleano                        shift and go to state 40
+    numero                         shift and go to state 43
 
 state 38
 
-    (17) condicion -> VARIABLE .
-    (60) dato -> VARIABLE .
+    (8) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> IF PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    PARENEND        reduce using rule 17 (condicion -> VARIABLE .)
-    AND             reduce using rule 60 (dato -> VARIABLE .)
-    OR              reduce using rule 60 (dato -> VARIABLE .)
-    MAYORQUE        reduce using rule 60 (dato -> VARIABLE .)
-    MENORQUE        reduce using rule 60 (dato -> VARIABLE .)
-    MAYORIGUAL      reduce using rule 60 (dato -> VARIABLE .)
-    MENORIGUAL      reduce using rule 60 (dato -> VARIABLE .)
-    IGUALDAD        reduce using rule 60 (dato -> VARIABLE .)
-    DESIGUALDAD     reduce using rule 60 (dato -> VARIABLE .)
+    PARENEND        shift and go to state 77
 
 
 state 39
 
-    (61) dato -> numero .
+    (14) condicion -> dato . exComparadora dato
+    (15) condicion -> dato . exComparadora condicion
+    (22) exComparadora -> . AND
+    (23) exComparadora -> . OR
+    (24) exComparadora -> . MAYORQUE
+    (25) exComparadora -> . MENORQUE
+    (26) exComparadora -> . MAYORIGUAL
+    (27) exComparadora -> . MENORIGUAL
+    (28) exComparadora -> . IGUALDAD
+    (29) exComparadora -> . DESIGUALDAD
 
-    AND             reduce using rule 61 (dato -> numero .)
-    OR              reduce using rule 61 (dato -> numero .)
-    MAYORQUE        reduce using rule 61 (dato -> numero .)
-    MENORQUE        reduce using rule 61 (dato -> numero .)
-    MAYORIGUAL      reduce using rule 61 (dato -> numero .)
-    MENORIGUAL      reduce using rule 61 (dato -> numero .)
-    IGUALDAD        reduce using rule 61 (dato -> numero .)
-    DESIGUALDAD     reduce using rule 61 (dato -> numero .)
-    PARENEND        reduce using rule 61 (dato -> numero .)
-    COMA            reduce using rule 61 (dato -> numero .)
+    AND             shift and go to state 79
+    OR              shift and go to state 80
+    MAYORQUE        shift and go to state 81
+    MENORQUE        shift and go to state 82
+    MAYORIGUAL      shift and go to state 83
+    MENORIGUAL      shift and go to state 84
+    IGUALDAD        shift and go to state 85
+    DESIGUALDAD     shift and go to state 86
 
+    exComparadora                  shift and go to state 78
 
 state 40
 
-    (62) dato -> CADENA .
+    (18) condicion -> boleano .
 
-    AND             reduce using rule 62 (dato -> CADENA .)
-    OR              reduce using rule 62 (dato -> CADENA .)
-    MAYORQUE        reduce using rule 62 (dato -> CADENA .)
-    MENORQUE        reduce using rule 62 (dato -> CADENA .)
-    MAYORIGUAL      reduce using rule 62 (dato -> CADENA .)
-    MENORIGUAL      reduce using rule 62 (dato -> CADENA .)
-    IGUALDAD        reduce using rule 62 (dato -> CADENA .)
-    DESIGUALDAD     reduce using rule 62 (dato -> CADENA .)
-    FINSENTENCIA    reduce using rule 62 (dato -> CADENA .)
-    PARENEND        reduce using rule 62 (dato -> CADENA .)
-    COMA            reduce using rule 62 (dato -> CADENA .)
+    PARENEND        reduce using rule 18 (condicion -> boleano .)
 
 
 state 41
 
-    (76) boleano -> TRUE .
+    (19) condicion -> NEGACION . boleano
+    (20) condicion -> NEGACION . VARIABLE
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
 
-    PARENEND        reduce using rule 76 (boleano -> TRUE .)
-    FINSENTENCIA    reduce using rule 76 (boleano -> TRUE .)
+    VARIABLE        shift and go to state 88
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
 
+    boleano                        shift and go to state 87
 
 state 42
 
-    (77) boleano -> FALSE .
+    (21) condicion -> VARIABLE .
+    (66) dato -> VARIABLE .
 
-    PARENEND        reduce using rule 77 (boleano -> FALSE .)
-    FINSENTENCIA    reduce using rule 77 (boleano -> FALSE .)
+    PARENEND        reduce using rule 21 (condicion -> VARIABLE .)
+    AND             reduce using rule 66 (dato -> VARIABLE .)
+    OR              reduce using rule 66 (dato -> VARIABLE .)
+    MAYORQUE        reduce using rule 66 (dato -> VARIABLE .)
+    MENORQUE        reduce using rule 66 (dato -> VARIABLE .)
+    MAYORIGUAL      reduce using rule 66 (dato -> VARIABLE .)
+    MENORIGUAL      reduce using rule 66 (dato -> VARIABLE .)
+    IGUALDAD        reduce using rule 66 (dato -> VARIABLE .)
+    DESIGUALDAD     reduce using rule 66 (dato -> VARIABLE .)
 
 
 state 43
 
-    (78) numero -> ENTERO .
+    (67) dato -> numero .
 
-    AND             reduce using rule 78 (numero -> ENTERO .)
-    OR              reduce using rule 78 (numero -> ENTERO .)
-    MAYORQUE        reduce using rule 78 (numero -> ENTERO .)
-    MENORQUE        reduce using rule 78 (numero -> ENTERO .)
-    MAYORIGUAL      reduce using rule 78 (numero -> ENTERO .)
-    MENORIGUAL      reduce using rule 78 (numero -> ENTERO .)
-    IGUALDAD        reduce using rule 78 (numero -> ENTERO .)
-    DESIGUALDAD     reduce using rule 78 (numero -> ENTERO .)
-    FINSENTENCIA    reduce using rule 78 (numero -> ENTERO .)
-    SUMA            reduce using rule 78 (numero -> ENTERO .)
-    RESTA           reduce using rule 78 (numero -> ENTERO .)
-    MULTIPLICA      reduce using rule 78 (numero -> ENTERO .)
-    DIVISION        reduce using rule 78 (numero -> ENTERO .)
-    MODULO          reduce using rule 78 (numero -> ENTERO .)
-    PARENEND        reduce using rule 78 (numero -> ENTERO .)
-    COMA            reduce using rule 78 (numero -> ENTERO .)
+    AND             reduce using rule 67 (dato -> numero .)
+    OR              reduce using rule 67 (dato -> numero .)
+    MAYORQUE        reduce using rule 67 (dato -> numero .)
+    MENORQUE        reduce using rule 67 (dato -> numero .)
+    MAYORIGUAL      reduce using rule 67 (dato -> numero .)
+    MENORIGUAL      reduce using rule 67 (dato -> numero .)
+    IGUALDAD        reduce using rule 67 (dato -> numero .)
+    DESIGUALDAD     reduce using rule 67 (dato -> numero .)
+    PARENEND        reduce using rule 67 (dato -> numero .)
+    COMA            reduce using rule 67 (dato -> numero .)
 
 
 state 44
 
-    (79) numero -> DECIMAL .
+    (68) dato -> CADENA .
 
-    AND             reduce using rule 79 (numero -> DECIMAL .)
-    OR              reduce using rule 79 (numero -> DECIMAL .)
-    MAYORQUE        reduce using rule 79 (numero -> DECIMAL .)
-    MENORQUE        reduce using rule 79 (numero -> DECIMAL .)
-    MAYORIGUAL      reduce using rule 79 (numero -> DECIMAL .)
-    MENORIGUAL      reduce using rule 79 (numero -> DECIMAL .)
-    IGUALDAD        reduce using rule 79 (numero -> DECIMAL .)
-    DESIGUALDAD     reduce using rule 79 (numero -> DECIMAL .)
-    FINSENTENCIA    reduce using rule 79 (numero -> DECIMAL .)
-    SUMA            reduce using rule 79 (numero -> DECIMAL .)
-    RESTA           reduce using rule 79 (numero -> DECIMAL .)
-    MULTIPLICA      reduce using rule 79 (numero -> DECIMAL .)
-    DIVISION        reduce using rule 79 (numero -> DECIMAL .)
-    MODULO          reduce using rule 79 (numero -> DECIMAL .)
-    PARENEND        reduce using rule 79 (numero -> DECIMAL .)
-    COMA            reduce using rule 79 (numero -> DECIMAL .)
+    AND             reduce using rule 68 (dato -> CADENA .)
+    OR              reduce using rule 68 (dato -> CADENA .)
+    MAYORQUE        reduce using rule 68 (dato -> CADENA .)
+    MENORQUE        reduce using rule 68 (dato -> CADENA .)
+    MAYORIGUAL      reduce using rule 68 (dato -> CADENA .)
+    MENORIGUAL      reduce using rule 68 (dato -> CADENA .)
+    IGUALDAD        reduce using rule 68 (dato -> CADENA .)
+    DESIGUALDAD     reduce using rule 68 (dato -> CADENA .)
+    FINSENTENCIA    reduce using rule 68 (dato -> CADENA .)
+    PARENEND        reduce using rule 68 (dato -> CADENA .)
+    COMA            reduce using rule 68 (dato -> CADENA .)
 
 
 state 45
 
-    (28) declaracion -> tipoDato VARIABLE ASIGNACION . dato FINSENTENCIA
-    (30) declaracion -> tipoDato VARIABLE ASIGNACION . operaciones FINSENTENCIA
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (80) operaciones -> . expresion repOp
-    (81) operaciones -> . expresion
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
-    (84) expresion -> . numero
-    (85) expresion -> . VARIABLE
-    (86) expresion -> . PARENSTART operaciones PARENEND
-    (87) expresion -> . PARENSTART VARIABLE PARENEND
-    (88) expresion -> . PARENSTART numero PARENEND
+    (82) boleano -> TRUE .
 
-    VARIABLE        shift and go to state 47
-    CADENA          shift and go to state 40
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
-    PARENSTART      shift and go to state 53
+    PARENEND        reduce using rule 82 (boleano -> TRUE .)
+    FINSENTENCIA    reduce using rule 82 (boleano -> TRUE .)
 
-    dato                           shift and go to state 82
-    operaciones                    shift and go to state 83
-    numero                         shift and go to state 51
-    expresion                      shift and go to state 52
 
 state 46
 
-    (29) declaracion -> tipoDato VARIABLE FINSENTENCIA .
+    (83) boleano -> FALSE .
 
-    $end            reduce using rule 29 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
-    LLAVEEND        reduce using rule 29 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
+    PARENEND        reduce using rule 83 (boleano -> FALSE .)
+    FINSENTENCIA    reduce using rule 83 (boleano -> FALSE .)
 
 
 state 47
 
-    (60) dato -> VARIABLE .
-    (85) expresion -> VARIABLE .
+    (84) numero -> ENTERO .
 
-  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 60 (dato -> VARIABLE .)
-    FINSENTENCIA    reduce using rule 60 (dato -> VARIABLE .)
-    SUMA            reduce using rule 85 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 85 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 85 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 85 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 85 (expresion -> VARIABLE .)
-
-  ! FINSENTENCIA    [ reduce using rule 85 (expresion -> VARIABLE .) ]
+    AND             reduce using rule 84 (numero -> ENTERO .)
+    OR              reduce using rule 84 (numero -> ENTERO .)
+    MAYORQUE        reduce using rule 84 (numero -> ENTERO .)
+    MENORQUE        reduce using rule 84 (numero -> ENTERO .)
+    MAYORIGUAL      reduce using rule 84 (numero -> ENTERO .)
+    MENORIGUAL      reduce using rule 84 (numero -> ENTERO .)
+    IGUALDAD        reduce using rule 84 (numero -> ENTERO .)
+    DESIGUALDAD     reduce using rule 84 (numero -> ENTERO .)
+    FINSENTENCIA    reduce using rule 84 (numero -> ENTERO .)
+    SUMA            reduce using rule 84 (numero -> ENTERO .)
+    RESTA           reduce using rule 84 (numero -> ENTERO .)
+    MULTIPLICA      reduce using rule 84 (numero -> ENTERO .)
+    DIVISION        reduce using rule 84 (numero -> ENTERO .)
+    MODULO          reduce using rule 84 (numero -> ENTERO .)
+    PARENEND        reduce using rule 84 (numero -> ENTERO .)
+    COMA            reduce using rule 84 (numero -> ENTERO .)
 
 
 state 48
 
-    (57) asignacion -> VARIABLE ASIGNACION dato . FINSENTENCIA
+    (85) numero -> DECIMAL .
 
-    FINSENTENCIA    shift and go to state 84
+    AND             reduce using rule 85 (numero -> DECIMAL .)
+    OR              reduce using rule 85 (numero -> DECIMAL .)
+    MAYORQUE        reduce using rule 85 (numero -> DECIMAL .)
+    MENORQUE        reduce using rule 85 (numero -> DECIMAL .)
+    MAYORIGUAL      reduce using rule 85 (numero -> DECIMAL .)
+    MENORIGUAL      reduce using rule 85 (numero -> DECIMAL .)
+    IGUALDAD        reduce using rule 85 (numero -> DECIMAL .)
+    DESIGUALDAD     reduce using rule 85 (numero -> DECIMAL .)
+    FINSENTENCIA    reduce using rule 85 (numero -> DECIMAL .)
+    SUMA            reduce using rule 85 (numero -> DECIMAL .)
+    RESTA           reduce using rule 85 (numero -> DECIMAL .)
+    MULTIPLICA      reduce using rule 85 (numero -> DECIMAL .)
+    DIVISION        reduce using rule 85 (numero -> DECIMAL .)
+    MODULO          reduce using rule 85 (numero -> DECIMAL .)
+    PARENEND        reduce using rule 85 (numero -> DECIMAL .)
+    COMA            reduce using rule 85 (numero -> DECIMAL .)
 
 
 state 49
 
-    (58) asignacion -> VARIABLE ASIGNACION boleano . FINSENTENCIA
+    (5) opWHILE -> WHILE PARENSTART condicion . PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> WHILE PARENSTART condicion . PARENEND LLAVESTART sentencias LLAVEEND
 
-    FINSENTENCIA    shift and go to state 85
+    PARENEND        shift and go to state 89
 
 
 state 50
 
-    (59) asignacion -> VARIABLE ASIGNACION operaciones . FINSENTENCIA
+    (32) declaracion -> tipoDato VARIABLE ASIGNACION . dato FINSENTENCIA
+    (34) declaracion -> tipoDato VARIABLE ASIGNACION . operaciones FINSENTENCIA
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (86) operaciones -> . expresion repOp
+    (87) operaciones -> . expresion
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
+    (90) expresion -> . numero
+    (91) expresion -> . VARIABLE
+    (92) expresion -> . PARENSTART operaciones PARENEND
+    (93) expresion -> . PARENSTART VARIABLE PARENEND
+    (94) expresion -> . PARENSTART numero PARENEND
 
-    FINSENTENCIA    shift and go to state 86
+    VARIABLE        shift and go to state 52
+    CADENA          shift and go to state 44
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
+    PARENSTART      shift and go to state 58
 
+    dato                           shift and go to state 90
+    operaciones                    shift and go to state 91
+    numero                         shift and go to state 56
+    expresion                      shift and go to state 57
 
 state 51
 
-    (61) dato -> numero .
-    (84) expresion -> numero .
+    (33) declaracion -> tipoDato VARIABLE FINSENTENCIA .
 
-  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 61 (dato -> numero .)
-    FINSENTENCIA    reduce using rule 61 (dato -> numero .)
-    SUMA            reduce using rule 84 (expresion -> numero .)
-    RESTA           reduce using rule 84 (expresion -> numero .)
-    MULTIPLICA      reduce using rule 84 (expresion -> numero .)
-    DIVISION        reduce using rule 84 (expresion -> numero .)
-    MODULO          reduce using rule 84 (expresion -> numero .)
-
-  ! FINSENTENCIA    [ reduce using rule 84 (expresion -> numero .) ]
+    $end            reduce using rule 33 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
+    LLAVEEND        reduce using rule 33 (declaracion -> tipoDato VARIABLE FINSENTENCIA .)
 
 
 state 52
 
-    (80) operaciones -> expresion . repOp
-    (81) operaciones -> expresion .
-    (82) repOp -> . operador expresion
-    (83) repOp -> . operador expresion repOp
-    (89) operador -> . SUMA
-    (90) operador -> . RESTA
-    (91) operador -> . MULTIPLICA
-    (92) operador -> . DIVISION
-    (93) operador -> . MODULO
+    (66) dato -> VARIABLE .
+    (91) expresion -> VARIABLE .
 
-    FINSENTENCIA    reduce using rule 81 (operaciones -> expresion .)
-    PARENEND        reduce using rule 81 (operaciones -> expresion .)
-    SUMA            shift and go to state 89
-    RESTA           shift and go to state 90
-    MULTIPLICA      shift and go to state 91
-    DIVISION        shift and go to state 92
-    MODULO          shift and go to state 93
+  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 66 (dato -> VARIABLE .)
+    FINSENTENCIA    reduce using rule 66 (dato -> VARIABLE .)
+    SUMA            reduce using rule 91 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 91 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 91 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 91 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 91 (expresion -> VARIABLE .)
 
-    repOp                          shift and go to state 87
-    operador                       shift and go to state 88
+  ! FINSENTENCIA    [ reduce using rule 91 (expresion -> VARIABLE .) ]
+
 
 state 53
 
-    (86) expresion -> PARENSTART . operaciones PARENEND
-    (87) expresion -> PARENSTART . VARIABLE PARENEND
-    (88) expresion -> PARENSTART . numero PARENEND
-    (80) operaciones -> . expresion repOp
-    (81) operaciones -> . expresion
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
-    (84) expresion -> . numero
-    (85) expresion -> . VARIABLE
-    (86) expresion -> . PARENSTART operaciones PARENEND
-    (87) expresion -> . PARENSTART VARIABLE PARENEND
-    (88) expresion -> . PARENSTART numero PARENEND
+    (63) asignacion -> VARIABLE ASIGNACION dato . FINSENTENCIA
 
-    VARIABLE        shift and go to state 95
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
-    PARENSTART      shift and go to state 53
+    FINSENTENCIA    shift and go to state 92
 
-    operaciones                    shift and go to state 94
-    numero                         shift and go to state 96
-    expresion                      shift and go to state 52
 
 state 54
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW . DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (64) asignacion -> VARIABLE ASIGNACION boleano . FINSENTENCIA
 
-    DICTIONARY      shift and go to state 97
+    FINSENTENCIA    shift and go to state 93
 
 
 state 55
 
-    (37) metodosDic -> VARIABLE PUNTO ADD . PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (65) asignacion -> VARIABLE ASIGNACION operaciones . FINSENTENCIA
 
-    PARENSTART      shift and go to state 98
+    FINSENTENCIA    shift and go to state 94
 
 
 state 56
 
-    (33) diccionario -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (67) dato -> numero .
+    (90) expresion -> numero .
 
-    COMA            shift and go to state 99
+  ! reduce/reduce conflict for FINSENTENCIA resolved using rule 67 (dato -> numero .)
+    FINSENTENCIA    reduce using rule 67 (dato -> numero .)
+    SUMA            reduce using rule 90 (expresion -> numero .)
+    RESTA           reduce using rule 90 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 90 (expresion -> numero .)
+    DIVISION        reduce using rule 90 (expresion -> numero .)
+    MODULO          reduce using rule 90 (expresion -> numero .)
+
+  ! FINSENTENCIA    [ reduce using rule 90 (expresion -> numero .) ]
 
 
 state 57
 
-    (40) clave -> INT .
+    (86) operaciones -> expresion . repOp
+    (87) operaciones -> expresion .
+    (88) repOp -> . operador expresion
+    (89) repOp -> . operador expresion repOp
+    (95) operador -> . SUMA
+    (96) operador -> . RESTA
+    (97) operador -> . MULTIPLICA
+    (98) operador -> . DIVISION
+    (99) operador -> . MODULO
 
-    COMA            reduce using rule 40 (clave -> INT .)
+    FINSENTENCIA    reduce using rule 87 (operaciones -> expresion .)
+    PARENEND        reduce using rule 87 (operaciones -> expresion .)
+    SUMA            shift and go to state 97
+    RESTA           shift and go to state 98
+    MULTIPLICA      shift and go to state 99
+    DIVISION        shift and go to state 100
+    MODULO          shift and go to state 101
 
+    repOp                          shift and go to state 95
+    operador                       shift and go to state 96
 
 state 58
 
-    (41) clave -> FLOAT .
+    (92) expresion -> PARENSTART . operaciones PARENEND
+    (93) expresion -> PARENSTART . VARIABLE PARENEND
+    (94) expresion -> PARENSTART . numero PARENEND
+    (86) operaciones -> . expresion repOp
+    (87) operaciones -> . expresion
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
+    (90) expresion -> . numero
+    (91) expresion -> . VARIABLE
+    (92) expresion -> . PARENSTART operaciones PARENEND
+    (93) expresion -> . PARENSTART VARIABLE PARENEND
+    (94) expresion -> . PARENSTART numero PARENEND
 
-    COMA            reduce using rule 41 (clave -> FLOAT .)
+    VARIABLE        shift and go to state 103
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
+    PARENSTART      shift and go to state 58
 
+    operaciones                    shift and go to state 102
+    numero                         shift and go to state 104
+    expresion                      shift and go to state 57
 
 state 59
 
-    (42) clave -> DOUBLE .
+    (39) diccionario -> VARIABLE IGUALDAD NEW . DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
 
-    COMA            reduce using rule 42 (clave -> DOUBLE .)
+    DICTIONARY      shift and go to state 105
 
 
 state 60
 
-    (43) clave -> STRING .
+    (41) metodosDic -> VARIABLE PUNTO ADD . PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
 
-    COMA            reduce using rule 43 (clave -> STRING .)
+    PARENSTART      shift and go to state 106
 
 
 state 61
 
-    (44) clave -> LONG .
+    (42) metodosDic -> VARIABLE PUNTO CLEAR . PARENSTART PARENEND FINSENTENCIA
 
-    COMA            reduce using rule 44 (clave -> LONG .)
+    PARENSTART      shift and go to state 107
 
 
 state 62
 
-    (45) clave -> CHAR .
+    (43) metodosDic -> VARIABLE PUNTO CONTAINSKEY . PARENSTART dato PARENEND FINSENTENCIA
 
-    COMA            reduce using rule 45 (clave -> CHAR .)
+    PARENSTART      shift and go to state 108
 
 
 state 63
 
-    (46) clave -> SHORT .
+    (37) diccionario -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE VARIABLE FINSENTENCIA
 
-    COMA            reduce using rule 46 (clave -> SHORT .)
+    COMA            shift and go to state 109
 
 
 state 64
 
-    (47) clave -> BYTE .
+    (46) clave -> INT .
 
-    COMA            reduce using rule 47 (clave -> BYTE .)
+    COMA            reduce using rule 46 (clave -> INT .)
 
 
 state 65
 
-    (48) clave -> SBYTE .
+    (47) clave -> FLOAT .
 
-    COMA            reduce using rule 48 (clave -> SBYTE .)
+    COMA            reduce using rule 47 (clave -> FLOAT .)
 
 
 state 66
 
-    (49) clave -> UINT .
+    (48) clave -> DOUBLE .
 
-    COMA            reduce using rule 49 (clave -> UINT .)
+    COMA            reduce using rule 48 (clave -> DOUBLE .)
 
 
 state 67
 
-    (50) clave -> USHORT .
+    (49) clave -> STRING .
 
-    COMA            reduce using rule 50 (clave -> USHORT .)
+    COMA            reduce using rule 49 (clave -> STRING .)
 
 
 state 68
 
-    (51) clave -> ULONG .
+    (50) clave -> LONG .
 
-    COMA            reduce using rule 51 (clave -> ULONG .)
+    COMA            reduce using rule 50 (clave -> LONG .)
 
 
 state 69
 
-    (12) condicion -> PARENSTART condicion . PARENEND exComparadora condicion
-    (13) condicion -> PARENSTART condicion . PARENEND
+    (51) clave -> CHAR .
 
-    PARENEND        shift and go to state 100
+    COMA            reduce using rule 51 (clave -> CHAR .)
 
 
 state 70
 
-    (4) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND
-    (5) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND
-    (8) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (52) clave -> SHORT .
 
-    LLAVESTART      shift and go to state 101
+    COMA            reduce using rule 52 (clave -> SHORT .)
 
 
 state 71
 
-    (10) condicion -> dato exComparadora . dato
-    (11) condicion -> dato exComparadora . condicion
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (10) condicion -> . dato exComparadora dato
-    (11) condicion -> . dato exComparadora condicion
-    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
-    (13) condicion -> . PARENSTART condicion PARENEND
-    (14) condicion -> . boleano
-    (15) condicion -> . NEGACION boleano
-    (16) condicion -> . NEGACION VARIABLE
-    (17) condicion -> . VARIABLE
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
+    (53) clave -> BYTE .
 
-    VARIABLE        shift and go to state 104
-    CADENA          shift and go to state 40
-    PARENSTART      shift and go to state 33
-    NEGACION        shift and go to state 37
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    COMA            reduce using rule 53 (clave -> BYTE .)
 
-    dato                           shift and go to state 102
-    condicion                      shift and go to state 103
-    numero                         shift and go to state 39
-    boleano                        shift and go to state 36
 
 state 72
 
-    (18) exComparadora -> AND .
+    (54) clave -> SBYTE .
 
-    VARIABLE        reduce using rule 18 (exComparadora -> AND .)
-    CADENA          reduce using rule 18 (exComparadora -> AND .)
-    PARENSTART      reduce using rule 18 (exComparadora -> AND .)
-    NEGACION        reduce using rule 18 (exComparadora -> AND .)
-    ENTERO          reduce using rule 18 (exComparadora -> AND .)
-    DECIMAL         reduce using rule 18 (exComparadora -> AND .)
-    TRUE            reduce using rule 18 (exComparadora -> AND .)
-    FALSE           reduce using rule 18 (exComparadora -> AND .)
+    COMA            reduce using rule 54 (clave -> SBYTE .)
 
 
 state 73
 
-    (19) exComparadora -> OR .
+    (55) clave -> UINT .
 
-    VARIABLE        reduce using rule 19 (exComparadora -> OR .)
-    CADENA          reduce using rule 19 (exComparadora -> OR .)
-    PARENSTART      reduce using rule 19 (exComparadora -> OR .)
-    NEGACION        reduce using rule 19 (exComparadora -> OR .)
-    ENTERO          reduce using rule 19 (exComparadora -> OR .)
-    DECIMAL         reduce using rule 19 (exComparadora -> OR .)
-    TRUE            reduce using rule 19 (exComparadora -> OR .)
-    FALSE           reduce using rule 19 (exComparadora -> OR .)
+    COMA            reduce using rule 55 (clave -> UINT .)
 
 
 state 74
 
-    (20) exComparadora -> MAYORQUE .
+    (56) clave -> USHORT .
 
-    VARIABLE        reduce using rule 20 (exComparadora -> MAYORQUE .)
-    CADENA          reduce using rule 20 (exComparadora -> MAYORQUE .)
-    PARENSTART      reduce using rule 20 (exComparadora -> MAYORQUE .)
-    NEGACION        reduce using rule 20 (exComparadora -> MAYORQUE .)
-    ENTERO          reduce using rule 20 (exComparadora -> MAYORQUE .)
-    DECIMAL         reduce using rule 20 (exComparadora -> MAYORQUE .)
-    TRUE            reduce using rule 20 (exComparadora -> MAYORQUE .)
-    FALSE           reduce using rule 20 (exComparadora -> MAYORQUE .)
+    COMA            reduce using rule 56 (clave -> USHORT .)
 
 
 state 75
 
-    (21) exComparadora -> MENORQUE .
+    (57) clave -> ULONG .
 
-    VARIABLE        reduce using rule 21 (exComparadora -> MENORQUE .)
-    CADENA          reduce using rule 21 (exComparadora -> MENORQUE .)
-    PARENSTART      reduce using rule 21 (exComparadora -> MENORQUE .)
-    NEGACION        reduce using rule 21 (exComparadora -> MENORQUE .)
-    ENTERO          reduce using rule 21 (exComparadora -> MENORQUE .)
-    DECIMAL         reduce using rule 21 (exComparadora -> MENORQUE .)
-    TRUE            reduce using rule 21 (exComparadora -> MENORQUE .)
-    FALSE           reduce using rule 21 (exComparadora -> MENORQUE .)
+    COMA            reduce using rule 57 (clave -> ULONG .)
 
 
 state 76
 
-    (22) exComparadora -> MAYORIGUAL .
-
-    VARIABLE        reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    CADENA          reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    PARENSTART      reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    NEGACION        reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    ENTERO          reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    DECIMAL         reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    TRUE            reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-    FALSE           reduce using rule 22 (exComparadora -> MAYORIGUAL .)
-
-
-state 77
-
-    (23) exComparadora -> MENORIGUAL .
-
-    VARIABLE        reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    CADENA          reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    PARENSTART      reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    NEGACION        reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    ENTERO          reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    DECIMAL         reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    TRUE            reduce using rule 23 (exComparadora -> MENORIGUAL .)
-    FALSE           reduce using rule 23 (exComparadora -> MENORIGUAL .)
-
-
-state 78
-
-    (24) exComparadora -> IGUALDAD .
-
-    VARIABLE        reduce using rule 24 (exComparadora -> IGUALDAD .)
-    CADENA          reduce using rule 24 (exComparadora -> IGUALDAD .)
-    PARENSTART      reduce using rule 24 (exComparadora -> IGUALDAD .)
-    NEGACION        reduce using rule 24 (exComparadora -> IGUALDAD .)
-    ENTERO          reduce using rule 24 (exComparadora -> IGUALDAD .)
-    DECIMAL         reduce using rule 24 (exComparadora -> IGUALDAD .)
-    TRUE            reduce using rule 24 (exComparadora -> IGUALDAD .)
-    FALSE           reduce using rule 24 (exComparadora -> IGUALDAD .)
-
-
-state 79
-
-    (25) exComparadora -> DESIGUALDAD .
-
-    VARIABLE        reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    CADENA          reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    PARENSTART      reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    NEGACION        reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    ENTERO          reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    DECIMAL         reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    TRUE            reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-    FALSE           reduce using rule 25 (exComparadora -> DESIGUALDAD .)
-
-
-state 80
-
-    (15) condicion -> NEGACION boleano .
-
-    PARENEND        reduce using rule 15 (condicion -> NEGACION boleano .)
-
-
-state 81
-
-    (16) condicion -> NEGACION VARIABLE .
-
-    PARENEND        reduce using rule 16 (condicion -> NEGACION VARIABLE .)
-
-
-state 82
-
-    (28) declaracion -> tipoDato VARIABLE ASIGNACION dato . FINSENTENCIA
-
-    FINSENTENCIA    shift and go to state 105
-
-
-state 83
-
-    (30) declaracion -> tipoDato VARIABLE ASIGNACION operaciones . FINSENTENCIA
-
-    FINSENTENCIA    shift and go to state 106
-
-
-state 84
-
-    (57) asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .
-
-    $end            reduce using rule 57 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
-    LLAVEEND        reduce using rule 57 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
-
-
-state 85
-
-    (58) asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .
-
-    $end            reduce using rule 58 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
-    LLAVEEND        reduce using rule 58 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
-
-
-state 86
-
-    (59) asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .
-
-    $end            reduce using rule 59 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
-    LLAVEEND        reduce using rule 59 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
-
-
-state 87
-
-    (80) operaciones -> expresion repOp .
-
-    FINSENTENCIA    reduce using rule 80 (operaciones -> expresion repOp .)
-    PARENEND        reduce using rule 80 (operaciones -> expresion repOp .)
-
-
-state 88
-
-    (82) repOp -> operador . expresion
-    (83) repOp -> operador . expresion repOp
-    (84) expresion -> . numero
-    (85) expresion -> . VARIABLE
-    (86) expresion -> . PARENSTART operaciones PARENEND
-    (87) expresion -> . PARENSTART VARIABLE PARENEND
-    (88) expresion -> . PARENSTART numero PARENEND
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
-
-    VARIABLE        shift and go to state 109
-    PARENSTART      shift and go to state 53
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
-
-    expresion                      shift and go to state 107
-    numero                         shift and go to state 108
-
-state 89
-
-    (89) operador -> SUMA .
-
-    VARIABLE        reduce using rule 89 (operador -> SUMA .)
-    PARENSTART      reduce using rule 89 (operador -> SUMA .)
-    ENTERO          reduce using rule 89 (operador -> SUMA .)
-    DECIMAL         reduce using rule 89 (operador -> SUMA .)
-
-
-state 90
-
-    (90) operador -> RESTA .
-
-    VARIABLE        reduce using rule 90 (operador -> RESTA .)
-    PARENSTART      reduce using rule 90 (operador -> RESTA .)
-    ENTERO          reduce using rule 90 (operador -> RESTA .)
-    DECIMAL         reduce using rule 90 (operador -> RESTA .)
-
-
-state 91
-
-    (91) operador -> MULTIPLICA .
-
-    VARIABLE        reduce using rule 91 (operador -> MULTIPLICA .)
-    PARENSTART      reduce using rule 91 (operador -> MULTIPLICA .)
-    ENTERO          reduce using rule 91 (operador -> MULTIPLICA .)
-    DECIMAL         reduce using rule 91 (operador -> MULTIPLICA .)
-
-
-state 92
-
-    (92) operador -> DIVISION .
-
-    VARIABLE        reduce using rule 92 (operador -> DIVISION .)
-    PARENSTART      reduce using rule 92 (operador -> DIVISION .)
-    ENTERO          reduce using rule 92 (operador -> DIVISION .)
-    DECIMAL         reduce using rule 92 (operador -> DIVISION .)
-
-
-state 93
-
-    (93) operador -> MODULO .
-
-    VARIABLE        reduce using rule 93 (operador -> MODULO .)
-    PARENSTART      reduce using rule 93 (operador -> MODULO .)
-    ENTERO          reduce using rule 93 (operador -> MODULO .)
-    DECIMAL         reduce using rule 93 (operador -> MODULO .)
-
-
-state 94
-
-    (86) expresion -> PARENSTART operaciones . PARENEND
+    (16) condicion -> PARENSTART condicion . PARENEND exComparadora condicion
+    (17) condicion -> PARENSTART condicion . PARENEND
 
     PARENEND        shift and go to state 110
 
 
+state 77
+
+    (8) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND
+    (9) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND
+    (12) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> IF PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVESTART      shift and go to state 111
+
+
+state 78
+
+    (14) condicion -> dato exComparadora . dato
+    (15) condicion -> dato exComparadora . condicion
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (14) condicion -> . dato exComparadora dato
+    (15) condicion -> . dato exComparadora condicion
+    (16) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (17) condicion -> . PARENSTART condicion PARENEND
+    (18) condicion -> . boleano
+    (19) condicion -> . NEGACION boleano
+    (20) condicion -> . NEGACION VARIABLE
+    (21) condicion -> . VARIABLE
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+
+    VARIABLE        shift and go to state 114
+    CADENA          shift and go to state 44
+    PARENSTART      shift and go to state 37
+    NEGACION        shift and go to state 41
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+
+    dato                           shift and go to state 112
+    condicion                      shift and go to state 113
+    numero                         shift and go to state 43
+    boleano                        shift and go to state 40
+
+state 79
+
+    (22) exComparadora -> AND .
+
+    VARIABLE        reduce using rule 22 (exComparadora -> AND .)
+    CADENA          reduce using rule 22 (exComparadora -> AND .)
+    PARENSTART      reduce using rule 22 (exComparadora -> AND .)
+    NEGACION        reduce using rule 22 (exComparadora -> AND .)
+    ENTERO          reduce using rule 22 (exComparadora -> AND .)
+    DECIMAL         reduce using rule 22 (exComparadora -> AND .)
+    TRUE            reduce using rule 22 (exComparadora -> AND .)
+    FALSE           reduce using rule 22 (exComparadora -> AND .)
+
+
+state 80
+
+    (23) exComparadora -> OR .
+
+    VARIABLE        reduce using rule 23 (exComparadora -> OR .)
+    CADENA          reduce using rule 23 (exComparadora -> OR .)
+    PARENSTART      reduce using rule 23 (exComparadora -> OR .)
+    NEGACION        reduce using rule 23 (exComparadora -> OR .)
+    ENTERO          reduce using rule 23 (exComparadora -> OR .)
+    DECIMAL         reduce using rule 23 (exComparadora -> OR .)
+    TRUE            reduce using rule 23 (exComparadora -> OR .)
+    FALSE           reduce using rule 23 (exComparadora -> OR .)
+
+
+state 81
+
+    (24) exComparadora -> MAYORQUE .
+
+    VARIABLE        reduce using rule 24 (exComparadora -> MAYORQUE .)
+    CADENA          reduce using rule 24 (exComparadora -> MAYORQUE .)
+    PARENSTART      reduce using rule 24 (exComparadora -> MAYORQUE .)
+    NEGACION        reduce using rule 24 (exComparadora -> MAYORQUE .)
+    ENTERO          reduce using rule 24 (exComparadora -> MAYORQUE .)
+    DECIMAL         reduce using rule 24 (exComparadora -> MAYORQUE .)
+    TRUE            reduce using rule 24 (exComparadora -> MAYORQUE .)
+    FALSE           reduce using rule 24 (exComparadora -> MAYORQUE .)
+
+
+state 82
+
+    (25) exComparadora -> MENORQUE .
+
+    VARIABLE        reduce using rule 25 (exComparadora -> MENORQUE .)
+    CADENA          reduce using rule 25 (exComparadora -> MENORQUE .)
+    PARENSTART      reduce using rule 25 (exComparadora -> MENORQUE .)
+    NEGACION        reduce using rule 25 (exComparadora -> MENORQUE .)
+    ENTERO          reduce using rule 25 (exComparadora -> MENORQUE .)
+    DECIMAL         reduce using rule 25 (exComparadora -> MENORQUE .)
+    TRUE            reduce using rule 25 (exComparadora -> MENORQUE .)
+    FALSE           reduce using rule 25 (exComparadora -> MENORQUE .)
+
+
+state 83
+
+    (26) exComparadora -> MAYORIGUAL .
+
+    VARIABLE        reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    CADENA          reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    PARENSTART      reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    NEGACION        reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    ENTERO          reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    DECIMAL         reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    TRUE            reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+    FALSE           reduce using rule 26 (exComparadora -> MAYORIGUAL .)
+
+
+state 84
+
+    (27) exComparadora -> MENORIGUAL .
+
+    VARIABLE        reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    CADENA          reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    PARENSTART      reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    NEGACION        reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    ENTERO          reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    DECIMAL         reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    TRUE            reduce using rule 27 (exComparadora -> MENORIGUAL .)
+    FALSE           reduce using rule 27 (exComparadora -> MENORIGUAL .)
+
+
+state 85
+
+    (28) exComparadora -> IGUALDAD .
+
+    VARIABLE        reduce using rule 28 (exComparadora -> IGUALDAD .)
+    CADENA          reduce using rule 28 (exComparadora -> IGUALDAD .)
+    PARENSTART      reduce using rule 28 (exComparadora -> IGUALDAD .)
+    NEGACION        reduce using rule 28 (exComparadora -> IGUALDAD .)
+    ENTERO          reduce using rule 28 (exComparadora -> IGUALDAD .)
+    DECIMAL         reduce using rule 28 (exComparadora -> IGUALDAD .)
+    TRUE            reduce using rule 28 (exComparadora -> IGUALDAD .)
+    FALSE           reduce using rule 28 (exComparadora -> IGUALDAD .)
+
+
+state 86
+
+    (29) exComparadora -> DESIGUALDAD .
+
+    VARIABLE        reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    CADENA          reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    PARENSTART      reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    NEGACION        reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    ENTERO          reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    DECIMAL         reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    TRUE            reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+    FALSE           reduce using rule 29 (exComparadora -> DESIGUALDAD .)
+
+
+state 87
+
+    (19) condicion -> NEGACION boleano .
+
+    PARENEND        reduce using rule 19 (condicion -> NEGACION boleano .)
+
+
+state 88
+
+    (20) condicion -> NEGACION VARIABLE .
+
+    PARENEND        reduce using rule 20 (condicion -> NEGACION VARIABLE .)
+
+
+state 89
+
+    (5) opWHILE -> WHILE PARENSTART condicion PARENEND . LLAVESTART LLAVEEND
+    (6) opWHILE -> WHILE PARENSTART condicion PARENEND . LLAVESTART sentencias LLAVEEND
+
+    LLAVESTART      shift and go to state 115
+
+
+state 90
+
+    (32) declaracion -> tipoDato VARIABLE ASIGNACION dato . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 116
+
+
+state 91
+
+    (34) declaracion -> tipoDato VARIABLE ASIGNACION operaciones . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 117
+
+
+state 92
+
+    (63) asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .
+
+    $end            reduce using rule 63 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
+    LLAVEEND        reduce using rule 63 (asignacion -> VARIABLE ASIGNACION dato FINSENTENCIA .)
+
+
+state 93
+
+    (64) asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .
+
+    $end            reduce using rule 64 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
+    LLAVEEND        reduce using rule 64 (asignacion -> VARIABLE ASIGNACION boleano FINSENTENCIA .)
+
+
+state 94
+
+    (65) asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .
+
+    $end            reduce using rule 65 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    LLAVEEND        reduce using rule 65 (asignacion -> VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+
+
 state 95
 
-    (87) expresion -> PARENSTART VARIABLE . PARENEND
-    (85) expresion -> VARIABLE .
+    (86) operaciones -> expresion repOp .
 
-  ! shift/reduce conflict for PARENEND resolved as shift
-    PARENEND        shift and go to state 111
-    SUMA            reduce using rule 85 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 85 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 85 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 85 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 85 (expresion -> VARIABLE .)
-
-  ! PARENEND        [ reduce using rule 85 (expresion -> VARIABLE .) ]
+    FINSENTENCIA    reduce using rule 86 (operaciones -> expresion repOp .)
+    PARENEND        reduce using rule 86 (operaciones -> expresion repOp .)
 
 
 state 96
 
-    (88) expresion -> PARENSTART numero . PARENEND
-    (84) expresion -> numero .
+    (88) repOp -> operador . expresion
+    (89) repOp -> operador . expresion repOp
+    (90) expresion -> . numero
+    (91) expresion -> . VARIABLE
+    (92) expresion -> . PARENSTART operaciones PARENEND
+    (93) expresion -> . PARENSTART VARIABLE PARENEND
+    (94) expresion -> . PARENSTART numero PARENEND
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-  ! shift/reduce conflict for PARENEND resolved as shift
-    PARENEND        shift and go to state 112
-    SUMA            reduce using rule 84 (expresion -> numero .)
-    RESTA           reduce using rule 84 (expresion -> numero .)
-    MULTIPLICA      reduce using rule 84 (expresion -> numero .)
-    DIVISION        reduce using rule 84 (expresion -> numero .)
-    MODULO          reduce using rule 84 (expresion -> numero .)
+    VARIABLE        shift and go to state 120
+    PARENSTART      shift and go to state 58
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
-  ! PARENEND        [ reduce using rule 84 (expresion -> numero .) ]
-
+    expresion                      shift and go to state 118
+    numero                         shift and go to state 119
 
 state 97
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY . MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (95) operador -> SUMA .
 
-    MENORQUE        shift and go to state 113
+    VARIABLE        reduce using rule 95 (operador -> SUMA .)
+    PARENSTART      reduce using rule 95 (operador -> SUMA .)
+    ENTERO          reduce using rule 95 (operador -> SUMA .)
+    DECIMAL         reduce using rule 95 (operador -> SUMA .)
 
 
 state 98
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART . dato COMA valorMetDic PARENEND FINSENTENCIA
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
+    (96) operador -> RESTA .
 
-    VARIABLE        shift and go to state 114
-    CADENA          shift and go to state 40
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
+    VARIABLE        reduce using rule 96 (operador -> RESTA .)
+    PARENSTART      reduce using rule 96 (operador -> RESTA .)
+    ENTERO          reduce using rule 96 (operador -> RESTA .)
+    DECIMAL         reduce using rule 96 (operador -> RESTA .)
 
-    dato                           shift and go to state 115
-    numero                         shift and go to state 39
 
 state 99
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE VARIABLE FINSENTENCIA
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (97) operador -> MULTIPLICA .
 
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    VARIABLE        reduce using rule 97 (operador -> MULTIPLICA .)
+    PARENSTART      reduce using rule 97 (operador -> MULTIPLICA .)
+    ENTERO          reduce using rule 97 (operador -> MULTIPLICA .)
+    DECIMAL         reduce using rule 97 (operador -> MULTIPLICA .)
 
-    valor                          shift and go to state 117
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
 
 state 100
 
-    (12) condicion -> PARENSTART condicion PARENEND . exComparadora condicion
-    (13) condicion -> PARENSTART condicion PARENEND .
-    (18) exComparadora -> . AND
-    (19) exComparadora -> . OR
-    (20) exComparadora -> . MAYORQUE
-    (21) exComparadora -> . MENORQUE
-    (22) exComparadora -> . MAYORIGUAL
-    (23) exComparadora -> . MENORIGUAL
-    (24) exComparadora -> . IGUALDAD
-    (25) exComparadora -> . DESIGUALDAD
+    (98) operador -> DIVISION .
 
-    PARENEND        reduce using rule 13 (condicion -> PARENSTART condicion PARENEND .)
-    AND             shift and go to state 72
-    OR              shift and go to state 73
-    MAYORQUE        shift and go to state 74
-    MENORQUE        shift and go to state 75
-    MAYORIGUAL      shift and go to state 76
-    MENORIGUAL      shift and go to state 77
-    IGUALDAD        shift and go to state 78
-    DESIGUALDAD     shift and go to state 79
+    VARIABLE        reduce using rule 98 (operador -> DIVISION .)
+    PARENSTART      reduce using rule 98 (operador -> DIVISION .)
+    ENTERO          reduce using rule 98 (operador -> DIVISION .)
+    DECIMAL         reduce using rule 98 (operador -> DIVISION .)
 
-    exComparadora                  shift and go to state 122
 
 state 101
 
-    (4) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND
-    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE opIF
-    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND
-    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE opIF
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
-    (1) sentencias -> . condicionales
-    (2) sentencias -> . inicializacion
-    (3) condicionales -> . opIF
-    (26) inicializacion -> . declaracion
-    (27) inicializacion -> . asignacion
-    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
-    (28) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
-    (29) declaracion -> . tipoDato VARIABLE FINSENTENCIA
-    (30) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (31) declaracion -> . decEstructura
-    (57) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
-    (58) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
-    (59) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (32) decEstructura -> . diccionario
-    (33) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
-    (35) diccionario -> . VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (36) diccionario -> . metodosDic
-    (37) metodosDic -> . VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (99) operador -> MODULO .
 
-    LLAVEEND        shift and go to state 123
-    IF              shift and go to state 7
-    VARIABLE        shift and go to state 9
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 25
+    VARIABLE        reduce using rule 99 (operador -> MODULO .)
+    PARENSTART      reduce using rule 99 (operador -> MODULO .)
+    ENTERO          reduce using rule 99 (operador -> MODULO .)
+    DECIMAL         reduce using rule 99 (operador -> MODULO .)
 
-    opIF                           shift and go to state 4
-    sentencias                     shift and go to state 124
-    condicionales                  shift and go to state 2
-    inicializacion                 shift and go to state 3
-    declaracion                    shift and go to state 5
-    asignacion                     shift and go to state 6
-    tipoDato                       shift and go to state 8
-    decEstructura                  shift and go to state 10
-    diccionario                    shift and go to state 24
-    metodosDic                     shift and go to state 26
 
 state 102
 
-    (10) condicion -> dato exComparadora dato .
-    (10) condicion -> dato . exComparadora dato
-    (11) condicion -> dato . exComparadora condicion
-    (18) exComparadora -> . AND
-    (19) exComparadora -> . OR
-    (20) exComparadora -> . MAYORQUE
-    (21) exComparadora -> . MENORQUE
-    (22) exComparadora -> . MAYORIGUAL
-    (23) exComparadora -> . MENORIGUAL
-    (24) exComparadora -> . IGUALDAD
-    (25) exComparadora -> . DESIGUALDAD
+    (92) expresion -> PARENSTART operaciones . PARENEND
 
-    PARENEND        reduce using rule 10 (condicion -> dato exComparadora dato .)
-    AND             shift and go to state 72
-    OR              shift and go to state 73
-    MAYORQUE        shift and go to state 74
-    MENORQUE        shift and go to state 75
-    MAYORIGUAL      shift and go to state 76
-    MENORIGUAL      shift and go to state 77
-    IGUALDAD        shift and go to state 78
-    DESIGUALDAD     shift and go to state 79
+    PARENEND        shift and go to state 121
 
-    exComparadora                  shift and go to state 71
 
 state 103
 
-    (11) condicion -> dato exComparadora condicion .
+    (93) expresion -> PARENSTART VARIABLE . PARENEND
+    (91) expresion -> VARIABLE .
 
-    PARENEND        reduce using rule 11 (condicion -> dato exComparadora condicion .)
+  ! shift/reduce conflict for PARENEND resolved as shift
+    PARENEND        shift and go to state 122
+    SUMA            reduce using rule 91 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 91 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 91 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 91 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 91 (expresion -> VARIABLE .)
+
+  ! PARENEND        [ reduce using rule 91 (expresion -> VARIABLE .) ]
 
 
 state 104
 
-    (60) dato -> VARIABLE .
-    (17) condicion -> VARIABLE .
+    (94) expresion -> PARENSTART numero . PARENEND
+    (90) expresion -> numero .
 
-  ! reduce/reduce conflict for PARENEND resolved using rule 17 (condicion -> VARIABLE .)
-    AND             reduce using rule 60 (dato -> VARIABLE .)
-    OR              reduce using rule 60 (dato -> VARIABLE .)
-    MAYORQUE        reduce using rule 60 (dato -> VARIABLE .)
-    MENORQUE        reduce using rule 60 (dato -> VARIABLE .)
-    MAYORIGUAL      reduce using rule 60 (dato -> VARIABLE .)
-    MENORIGUAL      reduce using rule 60 (dato -> VARIABLE .)
-    IGUALDAD        reduce using rule 60 (dato -> VARIABLE .)
-    DESIGUALDAD     reduce using rule 60 (dato -> VARIABLE .)
-    PARENEND        reduce using rule 17 (condicion -> VARIABLE .)
+  ! shift/reduce conflict for PARENEND resolved as shift
+    PARENEND        shift and go to state 123
+    SUMA            reduce using rule 90 (expresion -> numero .)
+    RESTA           reduce using rule 90 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 90 (expresion -> numero .)
+    DIVISION        reduce using rule 90 (expresion -> numero .)
+    MODULO          reduce using rule 90 (expresion -> numero .)
 
-  ! PARENEND        [ reduce using rule 60 (dato -> VARIABLE .) ]
+  ! PARENEND        [ reduce using rule 90 (expresion -> numero .) ]
 
 
 state 105
 
-    (28) declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY . MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
 
-    $end            reduce using rule 28 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
-    LLAVEEND        reduce using rule 28 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
+    MENORQUE        shift and go to state 124
 
 
 state 106
 
-    (30) declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART . dato COMA valorMetDic PARENEND FINSENTENCIA
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    $end            reduce using rule 30 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
-    LLAVEEND        reduce using rule 30 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    VARIABLE        shift and go to state 125
+    CADENA          shift and go to state 44
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
+    dato                           shift and go to state 126
+    numero                         shift and go to state 43
 
 state 107
 
-    (82) repOp -> operador expresion .
-    (83) repOp -> operador expresion . repOp
-    (82) repOp -> . operador expresion
-    (83) repOp -> . operador expresion repOp
-    (89) operador -> . SUMA
-    (90) operador -> . RESTA
-    (91) operador -> . MULTIPLICA
-    (92) operador -> . DIVISION
-    (93) operador -> . MODULO
+    (42) metodosDic -> VARIABLE PUNTO CLEAR PARENSTART . PARENEND FINSENTENCIA
 
-    FINSENTENCIA    reduce using rule 82 (repOp -> operador expresion .)
-    PARENEND        reduce using rule 82 (repOp -> operador expresion .)
-    SUMA            shift and go to state 89
-    RESTA           shift and go to state 90
-    MULTIPLICA      shift and go to state 91
-    DIVISION        shift and go to state 92
-    MODULO          shift and go to state 93
+    PARENEND        shift and go to state 127
 
-    operador                       shift and go to state 88
-    repOp                          shift and go to state 125
 
 state 108
 
-    (84) expresion -> numero .
+    (43) metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART . dato PARENEND FINSENTENCIA
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    SUMA            reduce using rule 84 (expresion -> numero .)
-    RESTA           reduce using rule 84 (expresion -> numero .)
-    MULTIPLICA      reduce using rule 84 (expresion -> numero .)
-    DIVISION        reduce using rule 84 (expresion -> numero .)
-    MODULO          reduce using rule 84 (expresion -> numero .)
-    FINSENTENCIA    reduce using rule 84 (expresion -> numero .)
-    PARENEND        reduce using rule 84 (expresion -> numero .)
+    VARIABLE        shift and go to state 125
+    CADENA          shift and go to state 44
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
+    dato                           shift and go to state 128
+    numero                         shift and go to state 43
 
 state 109
 
-    (85) expresion -> VARIABLE .
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE VARIABLE FINSENTENCIA
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
 
-    SUMA            reduce using rule 85 (expresion -> VARIABLE .)
-    RESTA           reduce using rule 85 (expresion -> VARIABLE .)
-    MULTIPLICA      reduce using rule 85 (expresion -> VARIABLE .)
-    DIVISION        reduce using rule 85 (expresion -> VARIABLE .)
-    MODULO          reduce using rule 85 (expresion -> VARIABLE .)
-    FINSENTENCIA    reduce using rule 85 (expresion -> VARIABLE .)
-    PARENEND        reduce using rule 85 (expresion -> VARIABLE .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
 
+    valor                          shift and go to state 130
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
 
 state 110
 
-    (86) expresion -> PARENSTART operaciones PARENEND .
+    (16) condicion -> PARENSTART condicion PARENEND . exComparadora condicion
+    (17) condicion -> PARENSTART condicion PARENEND .
+    (22) exComparadora -> . AND
+    (23) exComparadora -> . OR
+    (24) exComparadora -> . MAYORQUE
+    (25) exComparadora -> . MENORQUE
+    (26) exComparadora -> . MAYORIGUAL
+    (27) exComparadora -> . MENORIGUAL
+    (28) exComparadora -> . IGUALDAD
+    (29) exComparadora -> . DESIGUALDAD
 
-    SUMA            reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    RESTA           reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    MULTIPLICA      reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    DIVISION        reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    MODULO          reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    FINSENTENCIA    reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
-    PARENEND        reduce using rule 86 (expresion -> PARENSTART operaciones PARENEND .)
+    PARENEND        reduce using rule 17 (condicion -> PARENSTART condicion PARENEND .)
+    AND             shift and go to state 79
+    OR              shift and go to state 80
+    MAYORQUE        shift and go to state 81
+    MENORQUE        shift and go to state 82
+    MAYORIGUAL      shift and go to state 83
+    MENORIGUAL      shift and go to state 84
+    IGUALDAD        shift and go to state 85
+    DESIGUALDAD     shift and go to state 86
 
+    exComparadora                  shift and go to state 135
 
 state 111
 
-    (87) expresion -> PARENSTART VARIABLE PARENEND .
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE opIF
+    (10) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND
+    (12) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE opIF
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (1) sentencias -> . condicionales
+    (2) sentencias -> . repeticiones
+    (3) sentencias -> . inicializacion
+    (7) condicionales -> . opIF
+    (4) repeticiones -> . opWHILE
+    (30) inicializacion -> . declaracion
+    (31) inicializacion -> . asignacion
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (5) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (32) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) declaracion -> . tipoDato VARIABLE FINSENTENCIA
+    (34) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (35) declaracion -> . decEstructura
+    (63) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
+    (64) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
+    (65) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (36) decEstructura -> . diccionario
+    (37) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (39) diccionario -> . VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (40) diccionario -> . metodosDic
+    (41) metodosDic -> . VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (42) metodosDic -> . VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> . VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
 
-    SUMA            reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    RESTA           reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    MULTIPLICA      reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    DIVISION        reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    MODULO          reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    FINSENTENCIA    reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
-    PARENEND        reduce using rule 87 (expresion -> PARENSTART VARIABLE PARENEND .)
+    LLAVEEND        shift and go to state 136
+    IF              shift and go to state 9
+    WHILE           shift and go to state 10
+    VARIABLE        shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 28
 
+    opIF                           shift and go to state 5
+    sentencias                     shift and go to state 137
+    condicionales                  shift and go to state 2
+    repeticiones                   shift and go to state 3
+    inicializacion                 shift and go to state 4
+    opWHILE                        shift and go to state 6
+    declaracion                    shift and go to state 7
+    asignacion                     shift and go to state 8
+    tipoDato                       shift and go to state 11
+    decEstructura                  shift and go to state 13
+    diccionario                    shift and go to state 27
+    metodosDic                     shift and go to state 29
 
 state 112
 
-    (88) expresion -> PARENSTART numero PARENEND .
+    (14) condicion -> dato exComparadora dato .
+    (14) condicion -> dato . exComparadora dato
+    (15) condicion -> dato . exComparadora condicion
+    (22) exComparadora -> . AND
+    (23) exComparadora -> . OR
+    (24) exComparadora -> . MAYORQUE
+    (25) exComparadora -> . MENORQUE
+    (26) exComparadora -> . MAYORIGUAL
+    (27) exComparadora -> . MENORIGUAL
+    (28) exComparadora -> . IGUALDAD
+    (29) exComparadora -> . DESIGUALDAD
 
-    SUMA            reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    RESTA           reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    MULTIPLICA      reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    DIVISION        reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    MODULO          reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    FINSENTENCIA    reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
-    PARENEND        reduce using rule 88 (expresion -> PARENSTART numero PARENEND .)
+    PARENEND        reduce using rule 14 (condicion -> dato exComparadora dato .)
+    AND             shift and go to state 79
+    OR              shift and go to state 80
+    MAYORQUE        shift and go to state 81
+    MENORQUE        shift and go to state 82
+    MAYORIGUAL      shift and go to state 83
+    MENORIGUAL      shift and go to state 84
+    IGUALDAD        shift and go to state 85
+    DESIGUALDAD     shift and go to state 86
 
+    exComparadora                  shift and go to state 78
 
 state 113
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE . clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (40) clave -> . INT
-    (41) clave -> . FLOAT
-    (42) clave -> . DOUBLE
-    (43) clave -> . STRING
-    (44) clave -> . LONG
-    (45) clave -> . CHAR
-    (46) clave -> . SHORT
-    (47) clave -> . BYTE
-    (48) clave -> . SBYTE
-    (49) clave -> . UINT
-    (50) clave -> . USHORT
-    (51) clave -> . ULONG
+    (15) condicion -> dato exComparadora condicion .
 
-    INT             shift and go to state 57
-    FLOAT           shift and go to state 58
-    DOUBLE          shift and go to state 59
-    STRING          shift and go to state 60
-    LONG            shift and go to state 61
-    CHAR            shift and go to state 62
-    SHORT           shift and go to state 63
-    BYTE            shift and go to state 64
-    SBYTE           shift and go to state 65
-    UINT            shift and go to state 66
-    USHORT          shift and go to state 67
-    ULONG           shift and go to state 68
+    PARENEND        reduce using rule 15 (condicion -> dato exComparadora condicion .)
 
-    clave                          shift and go to state 126
 
 state 114
 
-    (60) dato -> VARIABLE .
+    (66) dato -> VARIABLE .
+    (21) condicion -> VARIABLE .
 
-    COMA            reduce using rule 60 (dato -> VARIABLE .)
-    PARENEND        reduce using rule 60 (dato -> VARIABLE .)
+  ! reduce/reduce conflict for PARENEND resolved using rule 21 (condicion -> VARIABLE .)
+    AND             reduce using rule 66 (dato -> VARIABLE .)
+    OR              reduce using rule 66 (dato -> VARIABLE .)
+    MAYORQUE        reduce using rule 66 (dato -> VARIABLE .)
+    MENORQUE        reduce using rule 66 (dato -> VARIABLE .)
+    MAYORIGUAL      reduce using rule 66 (dato -> VARIABLE .)
+    MENORIGUAL      reduce using rule 66 (dato -> VARIABLE .)
+    IGUALDAD        reduce using rule 66 (dato -> VARIABLE .)
+    DESIGUALDAD     reduce using rule 66 (dato -> VARIABLE .)
+    PARENEND        reduce using rule 21 (condicion -> VARIABLE .)
+
+  ! PARENEND        [ reduce using rule 66 (dato -> VARIABLE .) ]
 
 
 state 115
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato . COMA valorMetDic PARENEND FINSENTENCIA
+    (5) opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART . LLAVEEND
+    (6) opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART . sentencias LLAVEEND
+    (1) sentencias -> . condicionales
+    (2) sentencias -> . repeticiones
+    (3) sentencias -> . inicializacion
+    (7) condicionales -> . opIF
+    (4) repeticiones -> . opWHILE
+    (30) inicializacion -> . declaracion
+    (31) inicializacion -> . asignacion
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (5) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (6) opWHILE -> . WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (32) declaracion -> . tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
+    (33) declaracion -> . tipoDato VARIABLE FINSENTENCIA
+    (34) declaracion -> . tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (35) declaracion -> . decEstructura
+    (63) asignacion -> . VARIABLE ASIGNACION dato FINSENTENCIA
+    (64) asignacion -> . VARIABLE ASIGNACION boleano FINSENTENCIA
+    (65) asignacion -> . VARIABLE ASIGNACION operaciones FINSENTENCIA
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (36) decEstructura -> . diccionario
+    (37) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+    (39) diccionario -> . VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (40) diccionario -> . metodosDic
+    (41) metodosDic -> . VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
+    (42) metodosDic -> . VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> . VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
 
-    COMA            shift and go to state 127
+    LLAVEEND        shift and go to state 138
+    IF              shift and go to state 9
+    WHILE           shift and go to state 10
+    VARIABLE        shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 28
 
+    sentencias                     shift and go to state 139
+    condicionales                  shift and go to state 2
+    repeticiones                   shift and go to state 3
+    inicializacion                 shift and go to state 4
+    opIF                           shift and go to state 5
+    opWHILE                        shift and go to state 6
+    declaracion                    shift and go to state 7
+    asignacion                     shift and go to state 8
+    tipoDato                       shift and go to state 11
+    decEstructura                  shift and go to state 13
+    diccionario                    shift and go to state 27
+    metodosDic                     shift and go to state 29
 
 state 116
 
-    (54) estructura -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE
+    (32) declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .
 
-    MENORQUE        shift and go to state 128
+    $end            reduce using rule 32 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
+    LLAVEEND        reduce using rule 32 (declaracion -> tipoDato VARIABLE ASIGNACION dato FINSENTENCIA .)
 
 
 state 117
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE VARIABLE FINSENTENCIA
+    (34) declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .
 
-    MAYORQUE        shift and go to state 129
+    $end            reduce using rule 34 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
+    LLAVEEND        reduce using rule 34 (declaracion -> tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA .)
 
 
 state 118
 
-    (52) valor -> tipoDato .
+    (88) repOp -> operador expresion .
+    (89) repOp -> operador expresion . repOp
+    (88) repOp -> . operador expresion
+    (89) repOp -> . operador expresion repOp
+    (95) operador -> . SUMA
+    (96) operador -> . RESTA
+    (97) operador -> . MULTIPLICA
+    (98) operador -> . DIVISION
+    (99) operador -> . MODULO
 
-    MAYORQUE        reduce using rule 52 (valor -> tipoDato .)
-    MENORQUE        reduce using rule 52 (valor -> tipoDato .)
+    FINSENTENCIA    reduce using rule 88 (repOp -> operador expresion .)
+    PARENEND        reduce using rule 88 (repOp -> operador expresion .)
+    SUMA            shift and go to state 97
+    RESTA           shift and go to state 98
+    MULTIPLICA      shift and go to state 99
+    DIVISION        shift and go to state 100
+    MODULO          shift and go to state 101
 
+    operador                       shift and go to state 96
+    repOp                          shift and go to state 140
 
 state 119
 
-    (53) valor -> estructura .
+    (90) expresion -> numero .
 
-    MAYORQUE        reduce using rule 53 (valor -> estructura .)
-    MENORQUE        reduce using rule 53 (valor -> estructura .)
+    SUMA            reduce using rule 90 (expresion -> numero .)
+    RESTA           reduce using rule 90 (expresion -> numero .)
+    MULTIPLICA      reduce using rule 90 (expresion -> numero .)
+    DIVISION        reduce using rule 90 (expresion -> numero .)
+    MODULO          reduce using rule 90 (expresion -> numero .)
+    FINSENTENCIA    reduce using rule 90 (expresion -> numero .)
+    PARENEND        reduce using rule 90 (expresion -> numero .)
 
 
 state 120
 
-    (55) estructura -> LIST . MENORQUE valor MAYORQUE
+    (91) expresion -> VARIABLE .
 
-    MENORQUE        shift and go to state 130
+    SUMA            reduce using rule 91 (expresion -> VARIABLE .)
+    RESTA           reduce using rule 91 (expresion -> VARIABLE .)
+    MULTIPLICA      reduce using rule 91 (expresion -> VARIABLE .)
+    DIVISION        reduce using rule 91 (expresion -> VARIABLE .)
+    MODULO          reduce using rule 91 (expresion -> VARIABLE .)
+    FINSENTENCIA    reduce using rule 91 (expresion -> VARIABLE .)
+    PARENEND        reduce using rule 91 (expresion -> VARIABLE .)
 
 
 state 121
 
-    (56) estructura -> STACK . MENORQUE valor MENORQUE
+    (92) expresion -> PARENSTART operaciones PARENEND .
 
-    MENORQUE        shift and go to state 131
+    SUMA            reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    RESTA           reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    MULTIPLICA      reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    DIVISION        reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    MODULO          reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    FINSENTENCIA    reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
+    PARENEND        reduce using rule 92 (expresion -> PARENSTART operaciones PARENEND .)
 
 
 state 122
 
-    (12) condicion -> PARENSTART condicion PARENEND exComparadora . condicion
-    (10) condicion -> . dato exComparadora dato
-    (11) condicion -> . dato exComparadora condicion
-    (12) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
-    (13) condicion -> . PARENSTART condicion PARENEND
-    (14) condicion -> . boleano
-    (15) condicion -> . NEGACION boleano
-    (16) condicion -> . NEGACION VARIABLE
-    (17) condicion -> . VARIABLE
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (76) boleano -> . TRUE
-    (77) boleano -> . FALSE
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
+    (93) expresion -> PARENSTART VARIABLE PARENEND .
 
-    PARENSTART      shift and go to state 33
-    NEGACION        shift and go to state 37
-    VARIABLE        shift and go to state 38
-    CADENA          shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
+    SUMA            reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    RESTA           reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    MULTIPLICA      reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    DIVISION        reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    MODULO          reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    FINSENTENCIA    reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
+    PARENEND        reduce using rule 93 (expresion -> PARENSTART VARIABLE PARENEND .)
 
-    condicion                      shift and go to state 132
-    dato                           shift and go to state 35
-    boleano                        shift and go to state 36
-    numero                         shift and go to state 39
 
 state 123
 
-    (4) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .
-    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE opIF
-    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE LLAVESTART LLAVEEND
+    (94) expresion -> PARENSTART numero PARENEND .
 
-    $end            reduce using rule 4 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
-    LLAVEEND        reduce using rule 4 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
-    ELSE            shift and go to state 133
+    SUMA            reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    RESTA           reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    MULTIPLICA      reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    DIVISION        reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    MODULO          reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    FINSENTENCIA    reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
+    PARENEND        reduce using rule 94 (expresion -> PARENSTART numero PARENEND .)
 
 
 state 124
 
-    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND
-    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE opIF
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE LLAVESTART LLAVEEND
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE . clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (46) clave -> . INT
+    (47) clave -> . FLOAT
+    (48) clave -> . DOUBLE
+    (49) clave -> . STRING
+    (50) clave -> . LONG
+    (51) clave -> . CHAR
+    (52) clave -> . SHORT
+    (53) clave -> . BYTE
+    (54) clave -> . SBYTE
+    (55) clave -> . UINT
+    (56) clave -> . USHORT
+    (57) clave -> . ULONG
 
-    LLAVEEND        shift and go to state 134
+    INT             shift and go to state 64
+    FLOAT           shift and go to state 65
+    DOUBLE          shift and go to state 66
+    STRING          shift and go to state 67
+    LONG            shift and go to state 68
+    CHAR            shift and go to state 69
+    SHORT           shift and go to state 70
+    BYTE            shift and go to state 71
+    SBYTE           shift and go to state 72
+    UINT            shift and go to state 73
+    USHORT          shift and go to state 74
+    ULONG           shift and go to state 75
 
+    clave                          shift and go to state 141
 
 state 125
 
-    (83) repOp -> operador expresion repOp .
+    (66) dato -> VARIABLE .
 
-    FINSENTENCIA    reduce using rule 83 (repOp -> operador expresion repOp .)
-    PARENEND        reduce using rule 83 (repOp -> operador expresion repOp .)
+    COMA            reduce using rule 66 (dato -> VARIABLE .)
+    PARENEND        reduce using rule 66 (dato -> VARIABLE .)
 
 
 state 126
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave . COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato . COMA valorMetDic PARENEND FINSENTENCIA
 
-    COMA            shift and go to state 135
+    COMA            shift and go to state 142
 
 
 state 127
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA . valorMetDic PARENEND FINSENTENCIA
-    (38) valorMetDic -> . dato
-    (39) valorMetDic -> . NEW estructura
-    (60) dato -> . VARIABLE
-    (61) dato -> . numero
-    (62) dato -> . CADENA
-    (78) numero -> . ENTERO
-    (79) numero -> . DECIMAL
+    (42) metodosDic -> VARIABLE PUNTO CLEAR PARENSTART PARENEND . FINSENTENCIA
 
-    NEW             shift and go to state 138
-    VARIABLE        shift and go to state 114
-    CADENA          shift and go to state 40
-    ENTERO          shift and go to state 43
-    DECIMAL         shift and go to state 44
+    FINSENTENCIA    shift and go to state 143
 
-    dato                           shift and go to state 136
-    valorMetDic                    shift and go to state 137
-    numero                         shift and go to state 39
 
 state 128
 
-    (54) estructura -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE
-    (40) clave -> . INT
-    (41) clave -> . FLOAT
-    (42) clave -> . DOUBLE
-    (43) clave -> . STRING
-    (44) clave -> . LONG
-    (45) clave -> . CHAR
-    (46) clave -> . SHORT
-    (47) clave -> . BYTE
-    (48) clave -> . SBYTE
-    (49) clave -> . UINT
-    (50) clave -> . USHORT
-    (51) clave -> . ULONG
+    (43) metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato . PARENEND FINSENTENCIA
 
-    INT             shift and go to state 57
-    FLOAT           shift and go to state 58
-    DOUBLE          shift and go to state 59
-    STRING          shift and go to state 60
-    LONG            shift and go to state 61
-    CHAR            shift and go to state 62
-    SHORT           shift and go to state 63
-    BYTE            shift and go to state 64
-    SBYTE           shift and go to state 65
-    UINT            shift and go to state 66
-    USHORT          shift and go to state 67
-    ULONG           shift and go to state 68
+    PARENEND        shift and go to state 144
 
-    clave                          shift and go to state 139
 
 state 129
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE . VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE . VARIABLE FINSENTENCIA
+    (60) estructura -> DICTIONARY . MENORQUE clave COMA valor MAYORQUE
 
-    VARIABLE        shift and go to state 140
+    MENORQUE        shift and go to state 145
 
 
 state 130
 
-    (55) estructura -> LIST MENORQUE . valor MAYORQUE
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE VARIABLE FINSENTENCIA
 
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    MAYORQUE        shift and go to state 146
 
-    valor                          shift and go to state 141
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
 
 state 131
 
-    (56) estructura -> STACK MENORQUE . valor MENORQUE
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (58) valor -> tipoDato .
 
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    MAYORQUE        reduce using rule 58 (valor -> tipoDato .)
+    MENORQUE        reduce using rule 58 (valor -> tipoDato .)
 
-    valor                          shift and go to state 142
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
 
 state 132
 
-    (12) condicion -> PARENSTART condicion PARENEND exComparadora condicion .
+    (59) valor -> estructura .
 
-    PARENEND        reduce using rule 12 (condicion -> PARENSTART condicion PARENEND exComparadora condicion .)
+    MAYORQUE        reduce using rule 59 (valor -> estructura .)
+    MENORQUE        reduce using rule 59 (valor -> estructura .)
 
 
 state 133
 
-    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . opIF
-    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . LLAVESTART LLAVEEND
-    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (61) estructura -> LIST . MENORQUE valor MAYORQUE
 
-    LLAVESTART      shift and go to state 143
-    IF              shift and go to state 7
+    MENORQUE        shift and go to state 147
 
-    opIF                           shift and go to state 144
 
 state 134
 
-    (7) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .
-    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE opIF
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE LLAVESTART LLAVEEND
+    (62) estructura -> STACK . MENORQUE valor MENORQUE
 
-    $end            reduce using rule 7 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
-    LLAVEEND        reduce using rule 7 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
-    ELSE            shift and go to state 145
+    MENORQUE        shift and go to state 148
 
 
 state 135
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA . valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (16) condicion -> PARENSTART condicion PARENEND exComparadora . condicion
+    (14) condicion -> . dato exComparadora dato
+    (15) condicion -> . dato exComparadora condicion
+    (16) condicion -> . PARENSTART condicion PARENEND exComparadora condicion
+    (17) condicion -> . PARENSTART condicion PARENEND
+    (18) condicion -> . boleano
+    (19) condicion -> . NEGACION boleano
+    (20) condicion -> . NEGACION VARIABLE
+    (21) condicion -> . VARIABLE
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (82) boleano -> . TRUE
+    (83) boleano -> . FALSE
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    PARENSTART      shift and go to state 37
+    NEGACION        shift and go to state 41
+    VARIABLE        shift and go to state 42
+    CADENA          shift and go to state 44
+    TRUE            shift and go to state 45
+    FALSE           shift and go to state 46
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
-    valor                          shift and go to state 146
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
+    condicion                      shift and go to state 149
+    dato                           shift and go to state 39
+    boleano                        shift and go to state 40
+    numero                         shift and go to state 43
 
 state 136
 
-    (38) valorMetDic -> dato .
+    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE opIF
+    (10) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND . ELSE LLAVESTART LLAVEEND
 
-    PARENEND        reduce using rule 38 (valorMetDic -> dato .)
+    $end            reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
+    ELSE            shift and go to state 150
 
 
 state 137
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic . PARENEND FINSENTENCIA
+    (11) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND
+    (12) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE opIF
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    PARENEND        shift and go to state 147
+    LLAVEEND        shift and go to state 151
 
 
 state 138
 
-    (39) valorMetDic -> NEW . estructura
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (5) opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND .
 
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    $end            reduce using rule 5 (opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 5 (opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART LLAVEEND .)
 
-    estructura                     shift and go to state 148
 
 state 139
 
-    (54) estructura -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE
+    (6) opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART sentencias . LLAVEEND
 
-    COMA            shift and go to state 149
+    LLAVEEND        shift and go to state 152
 
 
 state 140
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE . ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (34) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE . FINSENTENCIA
+    (89) repOp -> operador expresion repOp .
 
-    ASIGNACION      shift and go to state 150
-    FINSENTENCIA    shift and go to state 151
+    FINSENTENCIA    reduce using rule 89 (repOp -> operador expresion repOp .)
+    PARENEND        reduce using rule 89 (repOp -> operador expresion repOp .)
 
 
 state 141
 
-    (55) estructura -> LIST MENORQUE valor . MAYORQUE
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave . COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
 
-    MAYORQUE        shift and go to state 152
+    COMA            shift and go to state 153
 
 
 state 142
 
-    (56) estructura -> STACK MENORQUE valor . MENORQUE
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA . valorMetDic PARENEND FINSENTENCIA
+    (44) valorMetDic -> . dato
+    (45) valorMetDic -> . NEW estructura
+    (66) dato -> . VARIABLE
+    (67) dato -> . numero
+    (68) dato -> . CADENA
+    (84) numero -> . ENTERO
+    (85) numero -> . DECIMAL
 
-    MENORQUE        shift and go to state 153
+    NEW             shift and go to state 156
+    VARIABLE        shift and go to state 125
+    CADENA          shift and go to state 44
+    ENTERO          shift and go to state 47
+    DECIMAL         shift and go to state 48
 
+    dato                           shift and go to state 154
+    valorMetDic                    shift and go to state 155
+    numero                         shift and go to state 43
 
 state 143
 
-    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART . LLAVEEND
+    (42) metodosDic -> VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA .
 
-    LLAVEEND        shift and go to state 154
+    $end            reduce using rule 42 (metodosDic -> VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA .)
+    LLAVEEND        reduce using rule 42 (metodosDic -> VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA .)
 
 
 state 144
 
-    (5) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .
+    (43) metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND . FINSENTENCIA
 
-    $end            reduce using rule 5 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
-    LLAVEEND        reduce using rule 5 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
+    FINSENTENCIA    shift and go to state 157
 
 
 state 145
 
-    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . opIF
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . LLAVESTART LLAVEEND
-    (4) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
-    (5) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
-    (6) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
-    (7) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
-    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
-    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+    (60) estructura -> DICTIONARY MENORQUE . clave COMA valor MAYORQUE
+    (46) clave -> . INT
+    (47) clave -> . FLOAT
+    (48) clave -> . DOUBLE
+    (49) clave -> . STRING
+    (50) clave -> . LONG
+    (51) clave -> . CHAR
+    (52) clave -> . SHORT
+    (53) clave -> . BYTE
+    (54) clave -> . SBYTE
+    (55) clave -> . UINT
+    (56) clave -> . USHORT
+    (57) clave -> . ULONG
 
-    LLAVESTART      shift and go to state 155
-    IF              shift and go to state 7
+    INT             shift and go to state 64
+    FLOAT           shift and go to state 65
+    DOUBLE          shift and go to state 66
+    STRING          shift and go to state 67
+    LONG            shift and go to state 68
+    CHAR            shift and go to state 69
+    SHORT           shift and go to state 70
+    BYTE            shift and go to state 71
+    SBYTE           shift and go to state 72
+    UINT            shift and go to state 73
+    USHORT          shift and go to state 74
+    ULONG           shift and go to state 75
 
-    opIF                           shift and go to state 156
+    clave                          shift and go to state 158
 
 state 146
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor . MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE . VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE . VARIABLE FINSENTENCIA
 
-    MAYORQUE        shift and go to state 157
+    VARIABLE        shift and go to state 159
 
 
 state 147
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND . FINSENTENCIA
+    (61) estructura -> LIST MENORQUE . valor MAYORQUE
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
 
-    FINSENTENCIA    shift and go to state 158
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
 
+    valor                          shift and go to state 160
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
 
 state 148
 
-    (39) valorMetDic -> NEW estructura .
+    (62) estructura -> STACK MENORQUE . valor MENORQUE
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
 
-    PARENEND        reduce using rule 39 (valorMetDic -> NEW estructura .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
 
+    valor                          shift and go to state 161
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
 
 state 149
 
-    (54) estructura -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
+    (16) condicion -> PARENSTART condicion PARENEND exComparadora condicion .
 
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
+    PARENEND        reduce using rule 16 (condicion -> PARENSTART condicion PARENEND exComparadora condicion .)
 
-    valor                          shift and go to state 159
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
 
 state 150
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION . NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . opIF
+    (10) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE . LLAVESTART LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
 
-    NEW             shift and go to state 160
+    LLAVESTART      shift and go to state 162
+    IF              shift and go to state 9
 
+    opIF                           shift and go to state 163
 
 state 151
 
-    (34) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .
+    (11) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .
+    (12) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE opIF
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND . ELSE LLAVESTART LLAVEEND
 
-    $end            reduce using rule 34 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .)
-    LLAVEEND        reduce using rule 34 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .)
+    $end            reduce using rule 11 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
+    LLAVEEND        reduce using rule 11 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
+    ELSE            shift and go to state 164
 
 
 state 152
 
-    (55) estructura -> LIST MENORQUE valor MAYORQUE .
+    (6) opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .
 
-    MAYORQUE        reduce using rule 55 (estructura -> LIST MENORQUE valor MAYORQUE .)
-    MENORQUE        reduce using rule 55 (estructura -> LIST MENORQUE valor MAYORQUE .)
-    PARENEND        reduce using rule 55 (estructura -> LIST MENORQUE valor MAYORQUE .)
+    $end            reduce using rule 6 (opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
+    LLAVEEND        reduce using rule 6 (opWHILE -> WHILE PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND .)
 
 
 state 153
 
-    (56) estructura -> STACK MENORQUE valor MENORQUE .
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA . valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
 
-    MAYORQUE        reduce using rule 56 (estructura -> STACK MENORQUE valor MENORQUE .)
-    MENORQUE        reduce using rule 56 (estructura -> STACK MENORQUE valor MENORQUE .)
-    PARENEND        reduce using rule 56 (estructura -> STACK MENORQUE valor MENORQUE .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
 
+    valor                          shift and go to state 165
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
 
 state 154
 
-    (6) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .
+    (44) valorMetDic -> dato .
 
-    $end            reduce using rule 6 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
-    LLAVEEND        reduce using rule 6 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
+    PARENEND        reduce using rule 44 (valorMetDic -> dato .)
 
 
 state 155
 
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART . LLAVEEND
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic . PARENEND FINSENTENCIA
 
-    LLAVEEND        shift and go to state 161
+    PARENEND        shift and go to state 166
 
 
 state 156
 
-    (8) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .
+    (45) valorMetDic -> NEW . estructura
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
 
-    $end            reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
-    LLAVEEND        reduce using rule 8 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
 
+    estructura                     shift and go to state 167
 
 state 157
 
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE . PARENSTART PARENEND FINSENTENCIA
+    (43) metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA .
 
-    PARENSTART      shift and go to state 162
+    $end            reduce using rule 43 (metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA .)
+    LLAVEEND        reduce using rule 43 (metodosDic -> VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA .)
 
 
 state 158
 
-    (37) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .
+    (60) estructura -> DICTIONARY MENORQUE clave . COMA valor MAYORQUE
 
-    $end            reduce using rule 37 (metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .)
-    LLAVEEND        reduce using rule 37 (metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .)
+    COMA            shift and go to state 168
 
 
 state 159
 
-    (54) estructura -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE . ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (38) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE . FINSENTENCIA
 
-    MAYORQUE        shift and go to state 163
+    ASIGNACION      shift and go to state 169
+    FINSENTENCIA    shift and go to state 170
 
 
 state 160
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW . DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-
-    DICTIONARY      shift and go to state 164
-
-
-state 161
-
-    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .
-
-    $end            reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
-    LLAVEEND        reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
-
-
-state 162
-
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART . PARENEND FINSENTENCIA
-
-    PARENEND        shift and go to state 165
-
-
-state 163
-
-    (54) estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .
-
-    MAYORQUE        reduce using rule 54 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
-    MENORQUE        reduce using rule 54 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
-    PARENEND        reduce using rule 54 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
-
-
-state 164
-
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY . MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-
-    MENORQUE        shift and go to state 166
-
-
-state 165
-
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND . FINSENTENCIA
-
-    FINSENTENCIA    shift and go to state 167
-
-
-state 166
-
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE . clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (40) clave -> . INT
-    (41) clave -> . FLOAT
-    (42) clave -> . DOUBLE
-    (43) clave -> . STRING
-    (44) clave -> . LONG
-    (45) clave -> . CHAR
-    (46) clave -> . SHORT
-    (47) clave -> . BYTE
-    (48) clave -> . SBYTE
-    (49) clave -> . UINT
-    (50) clave -> . USHORT
-    (51) clave -> . ULONG
-
-    INT             shift and go to state 57
-    FLOAT           shift and go to state 58
-    DOUBLE          shift and go to state 59
-    STRING          shift and go to state 60
-    LONG            shift and go to state 61
-    CHAR            shift and go to state 62
-    SHORT           shift and go to state 63
-    BYTE            shift and go to state 64
-    SBYTE           shift and go to state 65
-    UINT            shift and go to state 66
-    USHORT          shift and go to state 67
-    ULONG           shift and go to state 68
-
-    clave                          shift and go to state 168
-
-state 167
-
-    (35) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .
-
-    $end            reduce using rule 35 (diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
-    LLAVEEND        reduce using rule 35 (diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
-
-
-state 168
-
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave . COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-
-    COMA            shift and go to state 169
-
-
-state 169
-
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA . valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
-    (52) valor -> . tipoDato
-    (53) valor -> . estructura
-    (63) tipoDato -> . INT
-    (64) tipoDato -> . FLOAT
-    (65) tipoDato -> . DOUBLE
-    (66) tipoDato -> . STRING
-    (67) tipoDato -> . LONG
-    (68) tipoDato -> . CHAR
-    (69) tipoDato -> . SHORT
-    (70) tipoDato -> . BYTE
-    (71) tipoDato -> . SBYTE
-    (72) tipoDato -> . UINT
-    (73) tipoDato -> . USHORT
-    (74) tipoDato -> . ULONG
-    (75) tipoDato -> . BOOL
-    (54) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
-    (55) estructura -> . LIST MENORQUE valor MAYORQUE
-    (56) estructura -> . STACK MENORQUE valor MENORQUE
-
-    INT             shift and go to state 11
-    FLOAT           shift and go to state 12
-    DOUBLE          shift and go to state 13
-    STRING          shift and go to state 14
-    LONG            shift and go to state 15
-    CHAR            shift and go to state 16
-    SHORT           shift and go to state 17
-    BYTE            shift and go to state 18
-    SBYTE           shift and go to state 19
-    UINT            shift and go to state 20
-    USHORT          shift and go to state 21
-    ULONG           shift and go to state 22
-    BOOL            shift and go to state 23
-    DICTIONARY      shift and go to state 116
-    LIST            shift and go to state 120
-    STACK           shift and go to state 121
-
-    valor                          shift and go to state 170
-    tipoDato                       shift and go to state 118
-    estructura                     shift and go to state 119
-
-state 170
-
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor . MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (61) estructura -> LIST MENORQUE valor . MAYORQUE
 
     MAYORQUE        shift and go to state 171
 
 
+state 161
+
+    (62) estructura -> STACK MENORQUE valor . MENORQUE
+
+    MENORQUE        shift and go to state 172
+
+
+state 162
+
+    (10) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART . LLAVEEND
+
+    LLAVEEND        shift and go to state 173
+
+
+state 163
+
+    (9) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .
+
+    $end            reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
+    LLAVEEND        reduce using rule 9 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF .)
+
+
+state 164
+
+    (12) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . opIF
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE . LLAVESTART LLAVEEND
+    (8) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+    (9) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE opIF
+    (10) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND
+    (11) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND
+    (12) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF
+    (13) opIF -> . IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND
+
+    LLAVESTART      shift and go to state 174
+    IF              shift and go to state 9
+
+    opIF                           shift and go to state 175
+
+state 165
+
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor . MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    MAYORQUE        shift and go to state 176
+
+
+state 166
+
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 177
+
+
+state 167
+
+    (45) valorMetDic -> NEW estructura .
+
+    PARENEND        reduce using rule 45 (valorMetDic -> NEW estructura .)
+
+
+state 168
+
+    (60) estructura -> DICTIONARY MENORQUE clave COMA . valor MAYORQUE
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
+
+    valor                          shift and go to state 178
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
+
+state 169
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION . NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    NEW             shift and go to state 179
+
+
+state 170
+
+    (38) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .
+
+    $end            reduce using rule 38 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .)
+    LLAVEEND        reduce using rule 38 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA .)
+
+
 state 171
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE . PARENSTART PARENEND FINSENTENCIA
+    (61) estructura -> LIST MENORQUE valor MAYORQUE .
 
-    PARENSTART      shift and go to state 172
+    MAYORQUE        reduce using rule 61 (estructura -> LIST MENORQUE valor MAYORQUE .)
+    MENORQUE        reduce using rule 61 (estructura -> LIST MENORQUE valor MAYORQUE .)
+    PARENEND        reduce using rule 61 (estructura -> LIST MENORQUE valor MAYORQUE .)
 
 
 state 172
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART . PARENEND FINSENTENCIA
+    (62) estructura -> STACK MENORQUE valor MENORQUE .
 
-    PARENEND        shift and go to state 173
+    MAYORQUE        reduce using rule 62 (estructura -> STACK MENORQUE valor MENORQUE .)
+    MENORQUE        reduce using rule 62 (estructura -> STACK MENORQUE valor MENORQUE .)
+    PARENEND        reduce using rule 62 (estructura -> STACK MENORQUE valor MENORQUE .)
 
 
 state 173
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND . FINSENTENCIA
+    (10) opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .
 
-    FINSENTENCIA    shift and go to state 174
+    $end            reduce using rule 10 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 10 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART LLAVEEND ELSE LLAVESTART LLAVEEND .)
 
 
 state 174
 
-    (33) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART . LLAVEEND
 
-    $end            reduce using rule 33 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
-    LLAVEEND        reduce using rule 33 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
+    LLAVEEND        shift and go to state 180
+
+
+state 175
+
+    (12) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .
+
+    $end            reduce using rule 12 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
+    LLAVEEND        reduce using rule 12 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE opIF .)
+
+
+state 176
+
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE . PARENSTART PARENEND FINSENTENCIA
+
+    PARENSTART      shift and go to state 181
+
+
+state 177
+
+    (41) metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .
+
+    $end            reduce using rule 41 (metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .)
+    LLAVEEND        reduce using rule 41 (metodosDic -> VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA .)
+
+
+state 178
+
+    (60) estructura -> DICTIONARY MENORQUE clave COMA valor . MAYORQUE
+
+    MAYORQUE        shift and go to state 182
+
+
+state 179
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW . DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    DICTIONARY      shift and go to state 183
+
+
+state 180
+
+    (13) opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .
+
+    $end            reduce using rule 13 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
+    LLAVEEND        reduce using rule 13 (opIF -> IF PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND ELSE LLAVESTART LLAVEEND .)
+
+
+state 181
+
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART . PARENEND FINSENTENCIA
+
+    PARENEND        shift and go to state 184
+
+
+state 182
+
+    (60) estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .
+
+    MAYORQUE        reduce using rule 60 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
+    MENORQUE        reduce using rule 60 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
+    PARENEND        reduce using rule 60 (estructura -> DICTIONARY MENORQUE clave COMA valor MAYORQUE .)
+
+
+state 183
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY . MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    MENORQUE        shift and go to state 185
+
+
+state 184
+
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 186
+
+
+state 185
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE . clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (46) clave -> . INT
+    (47) clave -> . FLOAT
+    (48) clave -> . DOUBLE
+    (49) clave -> . STRING
+    (50) clave -> . LONG
+    (51) clave -> . CHAR
+    (52) clave -> . SHORT
+    (53) clave -> . BYTE
+    (54) clave -> . SBYTE
+    (55) clave -> . UINT
+    (56) clave -> . USHORT
+    (57) clave -> . ULONG
+
+    INT             shift and go to state 64
+    FLOAT           shift and go to state 65
+    DOUBLE          shift and go to state 66
+    STRING          shift and go to state 67
+    LONG            shift and go to state 68
+    CHAR            shift and go to state 69
+    SHORT           shift and go to state 70
+    BYTE            shift and go to state 71
+    SBYTE           shift and go to state 72
+    UINT            shift and go to state 73
+    USHORT          shift and go to state 74
+    ULONG           shift and go to state 75
+
+    clave                          shift and go to state 187
+
+state 186
+
+    (39) diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .
+
+    $end            reduce using rule 39 (diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
+    LLAVEEND        reduce using rule 39 (diccionario -> VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
+
+
+state 187
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave . COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    COMA            shift and go to state 188
+
+
+state 188
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA . valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+    (58) valor -> . tipoDato
+    (59) valor -> . estructura
+    (69) tipoDato -> . INT
+    (70) tipoDato -> . FLOAT
+    (71) tipoDato -> . DOUBLE
+    (72) tipoDato -> . STRING
+    (73) tipoDato -> . LONG
+    (74) tipoDato -> . CHAR
+    (75) tipoDato -> . SHORT
+    (76) tipoDato -> . BYTE
+    (77) tipoDato -> . SBYTE
+    (78) tipoDato -> . UINT
+    (79) tipoDato -> . USHORT
+    (80) tipoDato -> . ULONG
+    (81) tipoDato -> . BOOL
+    (60) estructura -> . DICTIONARY MENORQUE clave COMA valor MAYORQUE
+    (61) estructura -> . LIST MENORQUE valor MAYORQUE
+    (62) estructura -> . STACK MENORQUE valor MENORQUE
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    DOUBLE          shift and go to state 16
+    STRING          shift and go to state 17
+    LONG            shift and go to state 18
+    CHAR            shift and go to state 19
+    SHORT           shift and go to state 20
+    BYTE            shift and go to state 21
+    SBYTE           shift and go to state 22
+    UINT            shift and go to state 23
+    USHORT          shift and go to state 24
+    ULONG           shift and go to state 25
+    BOOL            shift and go to state 26
+    DICTIONARY      shift and go to state 129
+    LIST            shift and go to state 133
+    STACK           shift and go to state 134
+
+    valor                          shift and go to state 189
+    tipoDato                       shift and go to state 131
+    estructura                     shift and go to state 132
+
+state 189
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor . MAYORQUE PARENSTART PARENEND FINSENTENCIA
+
+    MAYORQUE        shift and go to state 190
+
+
+state 190
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE . PARENSTART PARENEND FINSENTENCIA
+
+    PARENSTART      shift and go to state 191
+
+
+state 191
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART . PARENEND FINSENTENCIA
+
+    PARENEND        shift and go to state 192
+
+
+state 192
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND . FINSENTENCIA
+
+    FINSENTENCIA    shift and go to state 193
+
+
+state 193
+
+    (37) diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .
+
+    $end            reduce using rule 37 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
+    LLAVEEND        reduce using rule 37 (diccionario -> DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PARENEND in state 95 resolved as shift
-WARNING: shift/reduce conflict for PARENEND in state 96 resolved as shift
-WARNING: reduce/reduce conflict in state 47 resolved using rule (dato -> VARIABLE)
-WARNING: rejected rule (expresion -> VARIABLE) in state 47
-WARNING: reduce/reduce conflict in state 51 resolved using rule (dato -> numero)
-WARNING: rejected rule (expresion -> numero) in state 51
-WARNING: reduce/reduce conflict in state 104 resolved using rule (condicion -> VARIABLE)
-WARNING: rejected rule (dato -> VARIABLE) in state 104
+WARNING: shift/reduce conflict for PARENEND in state 103 resolved as shift
+WARNING: shift/reduce conflict for PARENEND in state 104 resolved as shift
+WARNING: reduce/reduce conflict in state 52 resolved using rule (dato -> VARIABLE)
+WARNING: rejected rule (expresion -> VARIABLE) in state 52
+WARNING: reduce/reduce conflict in state 56 resolved using rule (dato -> numero)
+WARNING: rejected rule (expresion -> numero) in state 56
+WARNING: reduce/reduce conflict in state 114 resolved using rule (condicion -> VARIABLE)
+WARNING: rejected rule (dato -> VARIABLE) in state 114
