@@ -28,7 +28,10 @@ tokens = [
     'MODULO',
     'AND',
     'OR',
-    'NEGACION'
+    'NEGACION',
+    'COMA',
+    'SPACE',
+    'PUNTO'
 ]
 
 
@@ -56,9 +59,19 @@ t_MODULO        = r'\%'
 t_AND           = r'&&'
 t_OR            = r'\|\|'
 t_NEGACION      = r'\!'
+t_COMA          = r'\,'
+t_SPACE         = r'\s+'
+t_PUNTO         = R'\.'
 
 
 reserved = {
+    'add' : 'ADD',
+    'clear' : 'CLEAR',
+    'ContainsKey' : 'CONTAINSKEY', 
+    'List' : 'LIST',
+    'Stack': 'STACK',
+    'new': 'NEW',
+    'Dictionary' : 'DICTIONARY',
     'if' : 'IF',
     'else' : 'ELSE',
     'while' : 'WHILE',

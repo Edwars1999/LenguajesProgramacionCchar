@@ -45,13 +45,52 @@ def p_exComparadora(p):
 
 def p_inicializacion(p):
     '''inicializacion : declaracion
-                      | asignacion
-                      | operaciones'''
+                      | asignacion'''
 
 def p_declaracion(p):
     '''declaracion : tipoDato VARIABLE ASIGNACION dato FINSENTENCIA
                    | tipoDato VARIABLE FINSENTENCIA
-                   | tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA'''
+                   | tipoDato VARIABLE ASIGNACION operaciones FINSENTENCIA
+                   | decEstructura'''
+
+def p_decEstructura(p):
+    '''decEstructura : diccionario'''
+
+def p_diccionario(p):
+    '''diccionario : DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+                   | DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
+                   | VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+                   | metodosDic'''
+
+def p_metodosDic(p):
+    '''metodosDic : VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA'''
+
+def p_valorMetDic(p):
+    '''valorMetDic : dato
+                   | NEW estructura'''
+
+def p_clave(p):
+    '''clave : INT
+                | FLOAT
+                | DOUBLE
+                | STRING
+                | LONG
+                | CHAR
+                | SHORT
+                | BYTE
+                | SBYTE
+                | UINT
+                | USHORT
+                | ULONG'''
+
+def p_valor(p):
+    '''valor : tipoDato
+             | estructura'''
+
+def p_estructura(p):
+    '''estructura :  DICTIONARY MENORQUE clave COMA valor MAYORQUE 
+                  |  LIST MENORQUE valor MAYORQUE
+                  |  STACK MENORQUE valor MENORQUE  '''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE ASIGNACION dato FINSENTENCIA
@@ -77,6 +116,7 @@ def p_tipoDato(p):
                 | USHORT
                 | ULONG
                 | BOOL'''
+
             
 def p_boleano(p):
     '''boleano : TRUE
