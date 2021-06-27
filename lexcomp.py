@@ -32,7 +32,6 @@ tokens = [
 
 
 # Reglas de expresiones regulares para tokens simples
-t_VARIABLE      = r'^[a-zA-Z]\w*'
 t_ENTERO        = r'\-?\d+'
 t_DECIMAL       = r'\-?\d+\.\d+'
 t_IGUALDAD      = r'=='
@@ -43,7 +42,7 @@ t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
 t_FINSENTENCIA  = r';'
-t_CADENA        = r'^".*\"$'
+t_CADENA        = r'".*"$'
 t_LLAVESTART    = r'\{'
 t_LLAVEEND      = r'\}'
 t_PARENSTART    = r'\('
@@ -51,7 +50,7 @@ t_PARENEND      = r'\)'
 t_SUMA          = r'\+'
 t_RESTA         = r'\-'
 t_MULTIPLICA    = r'\*'
-t_DIVISION      = r'/'
+t_DIVISION      = r'\/'
 t_MODULO        = r'\%'
 t_AND           = r'&&'
 t_OR            = r'\|\|'
@@ -102,7 +101,7 @@ reserved = {
 
 tokens = tokens + list(reserved.values())
 
-def t_ID(t):
+def t_VARIABLE(t):
      r'[a-zA-Z_]\w*'
      t.type = reserved.get(t.value, 'VARIABLE')    # Check for reserved words
      return t
@@ -144,8 +143,9 @@ def getTokens(lexer):
         print(tok)
 
 line = " "
-
-while line != "" :
-    line = input(">>")
-    lexer.input(line);
-    getTokens(lexer)
+#
+#while line != "" :
+#   line = input(">>")
+#   lexer.input(line);
+#   getTokens(lexer)
+#
