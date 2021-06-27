@@ -7,10 +7,19 @@ import ply.yacc as yacc
 from lexcomp import tokens
  ###----AQUI COMIENZA EL TRABAJO DE JORGE----###
 def p_sentencias(p):### se agrega las instrucciones del programa
-    '''sentencias : condicionales 
+    '''sentencias : condicionales
+                  | repeticiones
                   | inicializacion '''
 
 
+# -- Trabajo de Edwars: Ciclo While y Estructura Listas
+def p_repeticiones(p):
+    '''repeticiones: opWHILE'''
+
+def p_opWhile(p):
+    '''opWHILE : WHILE  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND
+               | WHILE  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND '''
+# -- Fin de trabajo hecho por Edwars --
 
 def p_condicionales(p):
     '''condicionales : opIF'''
