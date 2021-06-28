@@ -61,16 +61,16 @@ t_OR            = r'\|\|'
 t_NEGACION      = r'\!'
 t_COMA          = r'\,'
 t_SPACE         = r'\s+'
-t_PUNTO         = R'\.'
+t_PUNTO         = r'\.'
 
 
 reserved = {
     'add' : 'ADD',
     'clear' : 'CLEAR',
+    'remove': 'REMOVE',
     'ContainsKey' : 'CONTAINSKEY', 
     'List' : 'LIST',
     'Stack': 'STACK',
-    'new': 'NEW',
     'Dictionary' : 'DICTIONARY',
     'if' : 'IF',
     'else' : 'ELSE',
@@ -90,9 +90,6 @@ reserved = {
     'continue': 'CONTINUE',
     'const': 'CONST',
     'default': 'DEFAULT',
-    'do': 'DO',
-    'for': 'FOR',
-    'foreach': 'FOREACH',
     'in': 'IN',
     'long': 'LONG',
     'new': 'NEW',

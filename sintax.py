@@ -5,6 +5,7 @@ import ply.yacc as yacc
 # Get the token map from the lexer.  This is required.
 
 from lexcomp import tokens
+
  ###----AQUI COMIENZA EL TRABAJO DE JORGE----###
 def p_sentencias(p):### se agrega las instrucciones del programa
     '''sentencias : condicionales
@@ -12,14 +13,16 @@ def p_sentencias(p):### se agrega las instrucciones del programa
                   | inicializacion '''
 
 
-# -- Trabajo de Edwars: Ciclo While y Estructura Listas
+# ------- Trabajo de Edwars: Ciclo While ------
 def p_repeticiones(p):
     '''repeticiones : opWHILE'''
 
 def p_opWhile(p):
     '''opWHILE : WHILE  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND
                | WHILE  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND '''
-# -- Fin de trabajo hecho por Edwars --
+# -------- Fin de trabajo hecho por Edwars -------
+
+
 
 def p_condicionales(p):
     '''condicionales : opIF'''
@@ -63,22 +66,42 @@ def p_declaracion(p):
                    | decEstructura'''
 
 def p_decEstructura(p):
-    '''decEstructura : diccionario'''
+    '''decEstructura : diccionario
+                     | lista'''
+
+
+
+# ------- Trabajo de Edwars: Estructura Lista y funciones: add, remove, clear ------
+def p_lista(p):
+    '''lista : LIST MENORQUE valor MAYORQUE VARIABLE ASIGNACION NEW LIST MENORQUE valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+             | LIST MENORQUE valor MAYORQUE VARIABLE FINSENTENCIA
+             | VARIABLE ASIGNACION NEW LIST MENORQUE valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+             | metodosLista'''
+
+def p_metodosLista(p):
+    '''metodosLista : VARIABLE PUNTO ADD PARENSTART valorEstructuras PARENEND FINSENTENCIA
+                    | VARIABLE PUNTO REMOVE PARENSTART dato PARENEND FINSENTENCIA
+                    | metodoClear'''
+# -------- Fin de trabajo hecho por Edwars -------
+
+
 
 def p_diccionario(p):
     '''diccionario : DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
                    | DICTIONARY MENORQUE clave COMA valor MAYORQUE VARIABLE FINSENTENCIA
-                   | VARIABLE IGUALDAD NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+                   | VARIABLE ASIGNACION NEW DICTIONARY MENORQUE clave COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
                    | metodosDic'''
 
 def p_metodosDic(p):
-    '''metodosDic : VARIABLE PUNTO ADD PARENSTART dato COMA valorMetDic PARENEND FINSENTENCIA
-                  | VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA
-                  | VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA'''
+    '''metodosDic : VARIABLE PUNTO ADD PARENSTART dato COMA valorEstructuras PARENEND FINSENTENCIA
+                  | VARIABLE PUNTO CONTAINSKEY PARENSTART dato PARENEND FINSENTENCIA
+                  | metodoClear'''
 
+def p_metodoClear(p):
+    'metodoClear : VARIABLE PUNTO CLEAR PARENSTART PARENEND FINSENTENCIA'
 
-def p_valorMetDic(p):
-    '''valorMetDic : dato
+def p_valorEstructuras(p):
+    '''valorEstructuras : dato
                    | NEW estructura'''
 
 def p_clave(p):
