@@ -10,8 +10,18 @@ from lexcomp import tokens
 def p_sentencias(p):### se agrega las instrucciones del programa
     '''sentencias : condicionales
                   | repeticiones
-                  | inicializacion '''
-
+                  | inicializacion
+                  | selecciones'''
+# ------- Trabajo de Luis: Switch ------
+def p_selecciones(p):
+    '''selecciones : opSWITCH'''
+def p_opSwitch(p):
+    '''opSWITCH : SWITCH PARENSTART dato PARENEND LLAVESTART cases DEFAULT DOSPUNTOS sentencias BREAK FINSENTENCIA LLAVEEND
+                |'''
+def p_cases(p):
+    '''cases : CASE dato DOSPUNTOS sentencias BREAK FINSENTENCIA
+            | CASE dato DOSPUNTOS sentencias BREAK FINSENTENCIA cases'''
+# -------- Fin de trabajo hecho por Luis -------
 
 # ------- Trabajo de Edwars: Ciclo While ------
 def p_repeticiones(p):
@@ -67,10 +77,21 @@ def p_declaracion(p):
 
 def p_decEstructura(p):
     '''decEstructura : diccionario
-                     | lista'''
+                     | lista
+                     | pila'''
 
+#------- Trabajo de Luis: Estructura Pila y funciones: pop, peek, clear ------
+def p_pila(p):
+    '''pila : STACK MENORQUE valor MAYORQUE VARIABLE ASIGNACION NEW STACK MENORQUE valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+            | STACK MENORQUE valor MAYORQUE VARIABLE FINSENTENCIA
+            | VARIABLE ASIGNACION NEW STACK MENORQUE valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
+            | metodosPila'''
 
-
+def p_metodosPila(p):
+    '''metodosPila : VARIABLE PUNTO PEEK PARENSTART PARENEND FINSENTENCIA
+                    | VARIABLE PUNTO POP PARENSTART PARENEND FINSENTENCIA
+                    | metodoClear'''
+# -------- Fin de trabajo hecho por Luis -------
 # ------- Trabajo de Edwars: Estructura Lista y funciones: add, remove, clear ------
 def p_lista(p):
     '''lista : LIST MENORQUE valor MAYORQUE VARIABLE ASIGNACION NEW LIST MENORQUE valor MAYORQUE PARENSTART PARENEND FINSENTENCIA

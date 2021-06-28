@@ -31,7 +31,8 @@ tokens = [
     'NEGACION',
     'COMA',
     'SPACE',
-    'PUNTO'
+    'PUNTO',
+    'DOSPUNTOS'
 ]
 
 
@@ -45,6 +46,7 @@ t_MAYORIGUAL    = r'>='
 t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
+t_DOSPUNTOS = r':'
 t_FINSENTENCIA  = r';'
 t_CADENA        = r'".*"$'
 t_LLAVESTART    = r'\{'
@@ -67,6 +69,8 @@ t_PUNTO         = r'\.'
 reserved = {
     'add' : 'ADD',
     'clear' : 'CLEAR',
+    'peek' : 'PEEK',
+    'pop' : 'POP',
     'remove': 'REMOVE',
     'ContainsKey' : 'CONTAINSKEY', 
     'List' : 'LIST',
