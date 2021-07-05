@@ -17,6 +17,7 @@ tokens = [
     'MENORQUE',
     'FINSENTENCIA',
     'CADENA',
+    'CARACTER',
     'LLAVESTART',
     'LLAVEEND',
     'PARENSTART',
@@ -46,9 +47,10 @@ t_MAYORIGUAL    = r'>='
 t_MENORIGUAL    = r'<='
 t_MAYORQUE      = r'>'
 t_MENORQUE      = r'<'
-t_DOSPUNTOS = r':'
+t_DOSPUNTOS     = r':'
 t_FINSENTENCIA  = r';'
-t_CADENA        = r'".*"$'
+t_CADENA        = r'".*"'
+t_CARACTER      = r'\'.\''
 t_LLAVESTART    = r'\{'
 t_LLAVEEND      = r'\}'
 t_PARENSTART    = r'\('
@@ -67,52 +69,44 @@ t_PUNTO         = r'\.'
 
 
 reserved = {
-    'add' : 'ADD',
-    'clear' : 'CLEAR',
-    'peek' : 'PEEK',
-    'pop' : 'POP',
-    'remove': 'REMOVE',
-    'ContainsKey' : 'CONTAINSKEY', 
-    'List' : 'LIST',
-    'Stack': 'STACK',
-    'Dictionary' : 'DICTIONARY',
-    'if' : 'IF',
-    'else' : 'ELSE',
-    'while' : 'WHILE',
-    'string' : 'STRING',
-    'int' : 'INT',
-    'switch' : 'SWITCH',
-    'double' : 'DOUBLE',
-    'float' : 'FLOAT',
-    'true'  : 'TRUE',
-    'false' : 'FALSE',
-    'break': 'BREAK',
-    'bool': 'BOOL',
-    'byte': 'BYTE',
-    'case': 'CASE',
-    'char': 'CHAR',
-    'continue': 'CONTINUE',
-    'const': 'CONST',
-    'default': 'DEFAULT',
-    'in': 'IN',
-    'long': 'LONG',
-    'new': 'NEW',
-    'null': 'NULL',
-    'return': 'RETURN',
-    'sbyte': 'SBYTE',
-    'short': 'SHORT',
-    'this': 'THIS',
-    'uint': 'UINT',
-    'ulong': 'ULONG',
-    'ushort': 'USHORT',
-    'public': 'PUBLIC',
-    'private': 'PRIVATE',
-    'protected': 'PROTECTED',
-    'void': 'VOID',
-    'static': 'STATIC',
-    'async': 'ASYNC',
-    'unsafe': 'UNSAFE',
-    'extern': 'EXTERN'
+    'add'           : 'ADD',
+    'clear'         : 'CLEAR',
+    'peek'          : 'PEEK',
+    'pop'           : 'POP',
+    'remove'        : 'REMOVE',
+    'ContainsKey'   : 'CONTAINSKEY',
+    'List'          : 'LIST',
+    'Stack'         : 'STACK',
+    'Dictionary'    : 'DICTIONARY',
+    'if'            : 'IF',
+    'else'          : 'ELSE',
+    'while'         : 'WHILE',
+    'string'        : 'STRING',
+    'int'           : 'INT',
+    'switch'        : 'SWITCH',
+    'double'        : 'DOUBLE',
+    'true'          : 'TRUE',
+    'false'         : 'FALSE',
+    'break'         : 'BREAK',
+    'bool'          : 'BOOL',
+    'case'          : 'CASE',
+    'char'          : 'CHAR',
+    'continue'      : 'CONTINUE',
+    'const'         : 'CONST',
+    'default'       : 'DEFAULT',
+    'in'            : 'IN',
+    'new'           : 'NEW',
+    'null'          : 'NULL',
+    'return'        : 'RETURN',
+    'this'          : 'THIS',
+    'public'        : 'PUBLIC',
+    'private'       : 'PRIVATE',
+    'protected'     : 'PROTECTED',
+    'void'          : 'VOID',
+    'static'        : 'STATIC',
+    'async'         : 'ASYNC',
+    'unsafe'        : 'UNSAFE',
+    'extern'        : 'EXTERN'
 }
 
 tokens = tokens + list(reserved.values())
@@ -159,9 +153,9 @@ def getTokens(lexer):
         print(tok)
 
 line = " "
-#
+
+#Prueba en consola
 #while line != "" :
 #   line = input(">>")
 #   lexer.input(line);
 #   getTokens(lexer)
-#
