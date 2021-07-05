@@ -372,6 +372,8 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
+
+#-----------------------------------ALGORITMO DE PRUEBA: COMPONENTE SINTACTICO------------------------------------------
 archivo = open("pruebaSintactico.txt")
 for linea in archivo:
     try:
@@ -394,3 +396,5 @@ for linea in archivo:
     result = parser.parse(s)
     print(result)
 """
+
+#-----------------------------------------------------------------------------------------------------------------------

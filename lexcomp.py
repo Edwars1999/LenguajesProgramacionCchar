@@ -154,15 +154,17 @@ def getTokens(lexer):
 
 line = " "
 
-#Prueba Archivo
 
-archivo = open("pruebaLexico.txt")
+#-----------------------------------ALGORITMO DE PRUEBA: COMPONENTE LÉXICO----------------------------------------------
+
+#Prueba con archivo
+'''archivo = open("pruebaLexico.txt")
 for linea in archivo:
     print(">>" + linea)
     lexer.input(linea)
     getTokens(lexer)
     if len(linea) == 0:
-        break
+        break'''
 
 
 #Prueba en consola
@@ -171,3 +173,5 @@ for linea in archivo:
    lexer.input(line);
    getTokens(lexer)
 """
+
+#-----------------------------------------------------------------------------------------------------------------------
