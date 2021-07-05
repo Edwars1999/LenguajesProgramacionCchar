@@ -146,8 +146,8 @@ def p_repeticiones(p):
 
 
 def p_opWhile(p):
-    '''opWHILE : WHILE  PARENSTART condicion PARENEND LLAVESTART  LLAVEEND
-               | WHILE  PARENSTART condicion PARENEND LLAVESTART  sentencias LLAVEEND '''
+    '''opWHILE : WHILE  PARENSTART condicion PARENEND LLAVESTART LLAVEEND
+               | WHILE  PARENSTART condicion PARENEND LLAVESTART sentencias LLAVEEND '''
 
 
 def p_condicionales(p):
