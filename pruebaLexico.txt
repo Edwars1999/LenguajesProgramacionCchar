@@ -1,0 +1,34 @@
+int var = 3;
+int var;
+double var = 2.0;
+double var;
+string var = "hola";
+string var;
+char var = 'c';
+char var;
+bool var = true;
+bool var;
+
+int var = 3+3;
+int var = 3--3;
+double var = 1.0 + 4.1;
+double var = 3.0 - 2.1;
+double var = 3/3;
+double var = 3*3;
+double var = 3%3;
+
+switch(var){case var1: int var1 = 3; break; default: int var1=2; break;}
+if(2==10){int var =3;}else{}
+while((3<9)||(4>9)&&(4<8)){int var =3;}
+
+Stack<int> var = new Stack<int>();
+var.peek();
+var.clear();
+var.pop();
+
+List<int> var = new List<int>();
+var.remove(2.0);
+
+Dictionary<int,int> var = new Dictionary<int,int>();
+var.add(2,3);
+var.ContainsKey(2);
