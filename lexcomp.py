@@ -123,7 +123,7 @@ def t_newline(t):
 
 
 # Permite ignorar si en la cadena existen espacios vacíos o tabulaciones
-t_ignore = ' \t'
+t_ignore = ' \t\n'
 
 
 # Permite pasar los comentarios
@@ -154,8 +154,24 @@ def getTokens(lexer):
 
 line = " "
 
+
+#-----------------------------------ALGORITMO DE PRUEBA: COMPONENTE LÉXICO----------------------------------------------
+
+#Prueba con archivo
+'''archivo = open("pruebaLexico.txt")
+for linea in archivo:
+    print(">>" + linea)
+    lexer.input(linea)
+    getTokens(lexer)
+    if len(linea) == 0:
+        break'''
+
+
 #Prueba en consola
-#while line != "" :
-#   line = input(">>")
-#   lexer.input(line);
-#   getTokens(lexer)
+"""while line != "" :
+   line = input(">>")
+   lexer.input(line);
+   getTokens(lexer)
+"""
+
+#-----------------------------------------------------------------------------------------------------------------------

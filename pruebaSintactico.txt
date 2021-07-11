@@ -1,0 +1,121 @@
+int var = 3;
+int var;
+double var = 2.0;
+double var;
+string var = "hola";
+string var;
+char var = 'c';
+char var;
+bool var = true;
+bool var;
+
+int var = 3+3;
+int var = 3--3;
+double var = 1.0 + 4.1;
+double var = 3.0 - 2.1;
+double var = 3/3;
+double var = 3*3;
+double var = 3%3;
+
+string var = "hola" + "mundo";
+
+switch(var){case var1: int var1 = 3; break; default: int var1=2; break;}
+switch(var){case var1: int var1 = 3; break; case var2: int var2 = 3; break; default: int var1=2; break;}
+
+while(3>9){}
+while((3!=9)&&(4>=9)){int var =3;}
+while((3<=9)||(4==9)){int var =3;}
+while((3<9)||(4>9)&&(4<8)){int var =3;}
+
+if(true){}
+if(2<10){}else{}
+if(2==10){int var =3;}else{}
+
+Stack<int> var = new Stack<int>();
+Stack<double> var = new Stack<double>();
+Stack<char> var = new Stack<char>();
+Stack<string> var = new Stack<string>();
+Stack<int> var;
+Stack<double> var;
+Stack<char> var;
+Stack<string> var;
+var.peek();
+var.clear();
+var.pop();
+var = new Stack<int>();
+var = new Stack<string>();
+var = new Stack<double>();
+var = new Stack<char>();
+
+List<int> var = new List<int>();
+List<double> var = new List<double>();
+List<char> var = new List<char>();
+List<string> var = new List<string>();
+List<int> var;
+List<double> var;
+List<char> var;
+List<string> var;
+var.add(2);
+var.add(2.0);
+var.add('c');
+var.add("hola");
+valor.remove(2);
+var.remove(2.0);
+var.remove('c');
+var.remove("hola");
+var.clear();
+
+var = new List<int>();
+var = new List<string>();
+var = new List<double>();
+var = new List<char>();
+
+Dictionary<int,int> var = new Dictionary<int,int>();
+Dictionary<int,double> var = new Dictionary<int,double>();
+Dictionary<int,char> var = new Dictionary<int,char>();
+Dictionary<int,string> var = new Dictionary<int,string>();
+
+Dictionary<double,int> var = new Dictionary<double,int>();
+Dictionary<double,double> var = new Dictionary<double,double>();
+Dictionary<double,char> var = new Dictionary<double,char>();
+Dictionary<double,string> var = new Dictionary<double,string>();
+
+Dictionary<char,int> var = new Dictionary<char,int>();
+Dictionary<char,double> var = new Dictionary<char,double>();
+Dictionary<char,char> var = new Dictionary<char,char>();
+Dictionary<char,string> var = new Dictionary<char,string>();
+
+Dictionary<string,int> var = new Dictionary<string,int>();
+Dictionary<string,double> var = new Dictionary<string,double>();
+Dictionary<string,char> var = new Dictionary<string,char>();
+Dictionary<string,string> var = new Dictionary<string,string>();
+
+Dictionary<int,int> var;
+Dictionary<int,double> var;
+Dictionary<int,char> var;
+Dictionary<int,string> var;
+
+Dictionary<double,int> var;
+Dictionary<double,double> var;
+Dictionary<double,char> var;
+Dictionary<double,string> var;
+
+Dictionary<char,int> var;
+Dictionary<char,double> var;
+Dictionary<char,char> var;
+Dictionary<char,string> var;
+
+Dictionary<string,int> var;
+Dictionary<string,double> var;
+Dictionary<string,char> var;
+Dictionary<string,string> var;
+
+var = new Dictionary<int,int>();
+var = new Dictionary<string,int>();
+var = new Dictionary<char,int>();
+var = new Dictionary<double,int>();
+
+var.add(2,3);
+var.ContainsKey(2);
+var.clear();
+
