@@ -278,7 +278,7 @@ def p_diccionarioClaveEntera(p):
                    | DICTIONARY MENORQUE INT COMA valor MAYORQUE VARIABLE FINSENTENCIA
                    | VARIABLE ASIGNACION NEW DICTIONARY MENORQUE INT COMA valor MAYORQUE PARENSTART PARENEND FINSENTENCIA
                    '''
-    #print(p[5][0])
+    #print(p[5])
     #if(len(p) >= 18):
     #    if(p[5] == p[14]):
     #        raise SyntaxError
