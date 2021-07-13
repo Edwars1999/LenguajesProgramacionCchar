@@ -146,11 +146,14 @@ lexer = lex.lex()
 
 # Compara con las tokens
 def getTokens(lexer):
+    variable = ''
     while True:
         tok = lexer.token()
         if not tok:
             break  # No existen más entradas
         print(tok)
+        variable += str(tok) + '\n'
+    return variable
 
 line = " "
 
@@ -158,13 +161,29 @@ line = " "
 #-----------------------------------ALGORITMO DE PRUEBA: COMPONENTE LÉXICO----------------------------------------------
 
 #Prueba con archivo
-'''archivo = open("pruebaLexico.txt")
+'''
+archivo = open("pruebaLexico.txt")
 for linea in archivo:
     print(">>" + linea)
     lexer.input(linea)
     getTokens(lexer)
     if len(linea) == 0:
-        break'''
+        break
+'''
+
+#Prueba Interfaz
+def pruebaInt(codigo):
+    txt = codigo.split('\n')
+    variable = ''
+    for linea in txt:
+        print(">>" + linea)
+        lexer.input(linea)
+        variable += '>>' + linea + '\n'
+        variable += getTokens(lexer)
+        if len(linea) == 0:
+            break
+    return variable
+
 
 
 #Prueba en consola

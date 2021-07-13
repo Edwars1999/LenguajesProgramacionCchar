@@ -366,6 +366,7 @@ def p_estructura(p):
 # Manejo de errores
 def p_error(p):
     print("Su sentencia no es aceptada por C#!")
+    return "Su sentencia no es aceptada por C#!"
 
 
 
@@ -374,7 +375,7 @@ parser = yacc.yacc()
 
 
 #-----------------------------------ALGORITMO DE PRUEBA: COMPONENTE SINTACTICO------------------------------------------
-archivo = open("pruebaSintactico.txt")
+'''archivo = open("pruebaSintactico.txt")
 for linea in archivo:
     try:
         s = linea.rstrip('\n')
@@ -384,8 +385,26 @@ for linea in archivo:
     if not s:
         continue
     result = parser.parse(s)
-    print(result)
+    print(result)'''
 
+
+def pruebaInt(codigo):  
+    txt = codigo.split('\n')
+    variable = ''
+    for linea in txt:
+        try:
+            s = linea.rstrip('\n')
+            variable += "> " + s + '\n'
+            print("> " + s)
+        except EOFError:
+            break
+        if not s:
+            continue
+        result = parser.parse(s)
+        #print(len(result))
+        variable += str(result) + '\n'
+        print(result)
+    return variable
 
 """while True:
     try:
