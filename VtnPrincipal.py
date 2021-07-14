@@ -16,9 +16,9 @@ class Principal(QWidget):
 
     def obtenerTexto(self):
         self.texto = self.ventana.textEdit_1.toPlainText()
-        self.salidaLex = '------------------------ANALISIS LEXICO------------------------------\n ' + lexcomp.pruebaInt(self.texto)
+        self.salidaLex = '------------------------ANALISIS LEXICO----------------------------\n ' + lexcomp.pruebaInt(self.texto)
         self.ventana.textEdit_2.setText(self.salidaLex)
-        self.salidaSin = '------------------------ANALISIS SINTAXIS--------------------------------\n' + sintax.pruebaInt(self.texto)
+        self.salidaSin = '----------------------ANALISIS SINTACTICO--------------------------\n' + sintax.pruebaInt(self.texto)
         self.ventana.textEdit_3.setText(self.salidaSin)
 
 if __name__ == "__main__":

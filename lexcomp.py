@@ -112,7 +112,7 @@ reserved = {
 tokens = tokens + list(reserved.values())
 
 def t_VARIABLE(t):
-     r'[a-zA-Z_]\w*'
+     r'^[a-zA-Z_]\w*'
      t.type = reserved.get(t.value, 'VARIABLE')    # Check for reserved words
      return t
 
