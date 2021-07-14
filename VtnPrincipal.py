@@ -21,10 +21,11 @@ class Principal(QWidget):
         self.salidaSin = '------------------------ANALISIS SINTAXIS--------------------------------\n' + sintax.pruebaInt(self.texto)
         self.ventana.textEdit_3.setText(self.salidaSin)
 
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ventana = Principal()
+    ventana.show()
+    app.exec_()
+    del(app)
+    sys.exit(app.exec_())
 
-app = QApplication(sys.argv)
-ventana = Principal()
-ventana.show()
-app.exec_()
-del(app)
-sys.exit(app.exec_())

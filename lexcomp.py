@@ -135,6 +135,8 @@ def t_COMMENT(t):
 # Regla de manejo de errores
 def t_error(t):
     print("Elemento no válido: '%s'" % t.value[0])
+    global aux
+    aux = "Elemento no válido: '%s'" % t.value[0]
     t.lexer.skip(1)
 
 
@@ -147,11 +149,15 @@ lexer = lex.lex()
 # Compara con las tokens
 def getTokens(lexer):
     variable = ''
+    global aux
+    aux = ''
     while True:
         tok = lexer.token()
         if not tok:
             break  # No existen más entradas
         print(tok)
+        if(len(aux)!=0):
+            variable += aux + '\n'
         variable += str(tok) + '\n'
     return variable
 
