@@ -180,8 +180,8 @@ def pruebaInt(codigo):
         lexer.input(linea)
         variable += '>>' + linea + '\n'
         variable += getTokens(lexer)
-        if len(linea) == 0:
-            break
+        #if len(linea) == 0:
+         #   break
     return variable
 
 

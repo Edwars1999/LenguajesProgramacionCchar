@@ -362,11 +362,15 @@ def p_estructura(p):
                   |  STACK MENORQUE valor MENORQUE  '''
 
 #-----------------------------------------------------------------------------------------------------------------------
-
+#global var 
+#var = False
 # Manejo de errores
 def p_error(p):
     print("Su sentencia no es aceptada por C#!")
-    return "Su sentencia no es aceptada por C#!"
+    global var
+    var = True
+    #variable += 'Su sentencia no es aceptada por C#!'
+    #return "Su sentencia no es aceptada por C#!"
 
 
 
@@ -390,7 +394,9 @@ for linea in archivo:
 
 def pruebaInt(codigo):  
     txt = codigo.split('\n')
-    variable = ''
+    global var
+    var = False
+    variable = '' 
     for linea in txt:
         try:
             s = linea.rstrip('\n')
@@ -401,6 +407,9 @@ def pruebaInt(codigo):
         if not s:
             continue
         result = parser.parse(s)
+        if(var):
+            variable += 'Su sentencia no es aceptada por C#!\n'
+            var = False
         #print(len(result))
         variable += str(result) + '\n'
         print(result)
