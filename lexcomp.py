@@ -38,8 +38,8 @@ tokens = [
 
 
 # Reglas de expresiones regulares para tokens simples
-t_ENTERO        = r'\-?\d+'
-t_DECIMAL       = r'\-?\d+\.\d+'
+t_ENTERO        = r'\d+'
+t_DECIMAL       = r'\d+\.\d+'
 t_IGUALDAD      = r'=='
 t_DESIGUALDAD   = r'!='
 t_ASIGNACION    = r'='

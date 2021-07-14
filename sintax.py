@@ -26,7 +26,9 @@ def p_boleano(p):
 
 def p_numero(p):
     '''numero : ENTERO
-              | DECIMAL'''
+              | DECIMAL
+              | RESTA ENTERO
+              | RESTA DECIMAL'''
 #-----------------------------------------------------------------------------------------------------------------------
 
 
